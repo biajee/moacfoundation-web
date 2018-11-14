@@ -1,0 +1,67 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em><a href="{:U('District/add')}"  data-rel="dialog" data-options='{"width":"480","height":"265"}'><i class="fa fa-plus"></i>增加地区</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+            <div class="treeview">
+                <div id="subnode-0">
+                <volist name="list" id="item">
+                <div class="node" id="node-{$item.id}" data-value='{$item|json_encode}'>
+                    <div class="line"><div class="title">{$item.level|str_repeat='　　',###}<if condition="$item.level lt 3"><a href="javascript:;" class="act-expand" title="点击刷新子类型"><i class="fa fa-plus-square-o"></i></a></if> [{$item.id}]{$item.title}</div><div class="action">&nbsp;<if condition="$item.level lt 3"><a href="{:U('District/add')}?upid={$item.id}" class="act-add" data-rel="dialog" data-options='{"width":"480","height":"265"}'><i class="fa fa-plus"></i>增加{$levellist[$item['level']+1]['title']}</a>&nbsp;&nbsp;</if><a href="{:U('District/edit')}?id={$item.id}" class="act-edit"  data-rel="dialog" data-rel="dialog" data-options='{"width":"480","height":"265"}'><i class="fa fa-edit"></i>编辑</a>&nbsp;&nbsp;<a href="javascript:;" class="act-delete"><i class="fa fa-remove"></i>删除</a></div></div>
+                    <div id="subnode-{$item.id}"></div>
+                </div>
+                </volist>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</block>
+<block name="script">
+
+    <script type="text/javascript">
+        var indexPage = $.extend(basePage,{
+            view: null,
+            onInit: function() {
+                var myThis = this;
+                this.view = $('.treeview');
+                this.view.on('click', '.act-expand', function(event){
+                    var data = myThis.getData(this);
+                    myThis.loadNodes(data.id);
+                });
+                this.view.on('click', '.act-delete', function(event){
+                    var data = myThis.getData(this);
+                    myThis.delNode(data.id);
+                });
+                $('.btn-addbrand').click(function(){
+                    myThis.addNode(0);
+                });
+            },
+            getData: function(obj) {
+                var $node = $(obj).parent().parent().parent();
+                var data = $node.data('value');
+                return data;
+            },
+            loadNodes: function(upid) {
+                var myThis = this;
+                var url = "{:U('District/tree')}?pid=" + upid;
+                $.get(url, function(res){
+                    myThis.view.find('#subnode-' + upid).html(res);
+                });
+            },
+            delNode: function(id) {
+                var myThis = this;
+                if (!window.confirm('确实要删除吗?'))
+                    return;
+                var url = "{:U('District/delete')}?id=" + id;
+                $.get(url, function(res){
+                    myThis.view.find('#node-' + id).remove();
+                });
+            }
+        });
+        function onResult(code, data) {
+            indexPage.loadNodes(data.upid);
+        }
+    </script>
+</block>

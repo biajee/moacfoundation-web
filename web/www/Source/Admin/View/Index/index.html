@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="copyright" content="qq:365102010" />
+    <title>{$pageTitle}</title>
+    <link href="__LIB__/awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="__CSS__/index.css" rel="stylesheet" type="text/css" />
+    <script src="__LIB__/jquery-1.8.2.min.js"></script>
+</head>
+
+<body id="index">
+    <div class="mainframe">
+        <div class="pagetop">
+            <div class="header">
+                <div class="logo"><img src="__IMG__/toplogo.png" /></div>
+                <div class="topnav">
+                    <div class="avatar"><img src="__IMG__/avatar.png" /></div>
+                    <div class="info">
+                        <h4>{$admininfo.username}</h4>
+                        <p><a href="{:U('/')}" target="_blank">前台</a> | <a href="{:U('Auth/logout')}">退出</a></p>
+                    </div>
+                </div>
+                <div class="mainnav">
+                    <ul>
+                        <volist name="menu" id="v">
+                            <notempty name="v.access">
+                                <li>
+                                    <a hidefocus="true" href="{$v.link|U}" target="f_main"><i class="fa fa-{$v.icon}"></i><br/>{$v.title}</a>
+                                </li>
+                            </notempty>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="pagemid">
+            <div class="pageleft">
+                <div class="sidenav">
+                    <volist name="menu" id="v">
+                        <notempty name="v.access">
+                            <dl>
+                                <dt>
+                                    <h3>
+                                        <i class="fa fa-{$v.icon}"></i>{$v.title}</h3>
+                                </dt>
+                                <dd>
+                                    <ul>
+                                        <volist name="v.submenu" id="v2">
+                                            <notempty name="v2.access">
+                                                <li>
+                                                    <a href="{$v2.link|U}" target="f_main" title="{$v2.title}"><i class="fa fa-<empty name="v2.icon">list<else/>{$v2.icon}</empty>"></i>{$v2.title}</a>
+                                                </li>
+                                            </notempty>
+                                        </volist>
+                                    </ul>
+                            </dl>
+                        </notempty>
+                    </volist>
+                    <div class="collapse">
+                        <a href="javascript:;" title="收起">&nbsp;</a>
+                    </div>
+                </div>
+            </div>
+            <div class="pageright">
+                <iframe name="f_main" id="f_main" width="100%" height="100%" scrolling="no" frameborder="0" src="{:U('Home/index')}"></iframe>
+            </div>
+        </div>
+        <div class="pagebottom">
+            <div class="statusbar">
+                <span class="luna"></span>
+                <span class="support">技术支持：{:C('SOFT_SUPPORT')}</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        var mainFrame = {
+    getLuna: function() {
+    	var today= new Date();
+    	var weeks = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+    	var year = today.getFullYear();
+    	var month = today.getMonth()+1;
+    	var day = today.getDate();
+    	var weekday = today.getDay();
+    	var week = weeks[weekday];
+    	var str = year + '年' + month + '月' + day + '日 ' + week;
+    	return str;
+    },
+	getStatus: function() {
+
+	},
+    layout: function() {
+        var winHeight = $(window).height();
+        var winWidth = $(window).width();
+        var topHeight = $('.pagetop').height();
+        var bottomHeight = $('.pagebottom').height();
+        var leftWidth = $('.pageleft').width();
+        var midHeight = winHeight - topHeight - bottomHeight;
+        $('.pagemid').height(midHeight);
+        $('.pageleft').height(midHeight);
+        $('.pageright').css({width:winWidth-leftWidth, height:midHeight});
+        var ltHeight = $('.sidenav dt').height();
+        var ecHeight = $('.sidenav .collapse').height();
+        $('.sidenav dd').css({height: midHeight-ltHeight-ecHeight, overflow:'auto'});
+
+    },
+    init: function() {
+        var myThis = this;
+        $('.statusbar .luna').html(this.getLuna());
+        $('.mainnav li:eq(0)').addClass('active');
+        $('.sidenav dl:eq(0)').show();
+        $('.mainnav li').click(function(){
+            var $this = $(this);
+            var index = $('.mainnav li').index($this);
+
+            $('.mainnav li.active').removeClass('active');
+            $this.addClass('active');
+            $('.sidenav dl:visible').hide();
+            $('.sidenav dl').eq(index).show();
+        });
+        $('.sidenav li').click(function(){
+            $('.sidenav li').removeClass('active');
+            $(this).addClass('active');
+        });
+        $('.sidenav .collapse').click(function(){
+            var minWidth = 48;
+            var maxWidth = 180;
+            var winWidth = $(window).width();
+            var linkClass = "closed"
+            var $this = $(this);
+            var $link = $this.find('a');
+            if ($link.hasClass(linkClass)) {
+                $link.removeClass(linkClass);
+                $link.attr('title','收起');
+                $('.pageleft').width(maxWidth);
+                $('.pageright').width(winWidth-maxWidth);
+
+            } else {
+                $link.addClass(linkClass);
+                $link.attr('title','展开');
+                $('.pageleft').width(minWidth);
+                $('.pageright').width(winWidth-minWidth);
+            }
+        });
+        $(window).resize(function(){
+            myThis.layout();
+        });
+        myThis.layout();
+		myThis.getStatus();
+    }
+};
+$(function() {
+   mainFrame.init();
+
+});
+    </script>
+</body>
+
+</html>

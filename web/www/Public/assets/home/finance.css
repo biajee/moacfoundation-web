@@ -1,0 +1,23 @@
+.jr{height:720px;background:url(images/finance/financebg.png) no-repeat center top;}
+.jr_blank150{height:150px;text-align:center;line-height:100px;font-size:20px;color:#333}
+.jr_blank50{height:50px;text-align:center;line-height:80px;font-size:20px;color:#333;}
+.jr_blank60{height:60px;text-align:center;line-height:45px;font-size:20px;color:#333}
+.jr_blank80{height:80px;text-align:center;line-height:80px;font-size:20px;color:#333}
+.jr_btn{width:550px;height:100px;margin:0 auto;}
+.jr_btn ul{width:550px;float:left}
+.jr_btn ul li{width:110px;height:100px;line-height:100px;float:left;text-align:center}
+.jr_btn ul li a{width:70px;height:100px;display:inline-block;background-image:url(images/finance/finance_btn.png)}
+.jr_btnfkgx a{background-position:-9px 0}
+.jr_btnfkgx a:hover{background-position:-1px -126px;margin-top:-13px;}
+
+.jr_btncdll a{background-position:-128px 0}
+.jr_btncdll a:hover{background-position:-123px -126px;margin-top:-13px;}
+
+.jr_btnaqfx a{background-position:-249px 0}
+.jr_btnaqfx a:hover{background-position:-245px -126px;margin-top:-13px;}
+
+.jr_btnfbkj a{background-position:-369px 0}
+.jr_btnfbkj a:hover{background-position:-363px -126px;margin-top:-13px;}
+
+.jr_btnzsfw a{background-position:-610px 0}
+.jr_btnzsfw a:hover{background-position:-607px -126px;margin-top:-13px;}

@@ -1,0 +1,75 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('List/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('List/update')}" onsubmit="return checkForm(this)">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="hash" value="{$data.hash}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th><em>*</em>名称：</th><td><input type="text" class="edit" id="title" name="title" size="80" maxlength="50" value="{$data.title}" /> </td></tr>
+             <tr><th>标识：</th><td><input type="text" class="edit" name="code" size="50" maxlength="50" value="{$data.code}" /></td></tr>
+            <tr><th>类型：</th><td><select name="model">
+                <volist name="modelList" id="vo">
+                    <option value="{$key}" <if condition="$key eq $data['model']">selected</if> >{$vo}</option>
+                </volist>
+            </select> </td></tr>
+            <tr><th>排序：</th><td><input type="text" class="edit" name="sortno" size="50" maxlength="50" value="{$data.sortno}" /></td></tr>
+            <tr><th>说明：</th><td><input type="text" class="edit" id="memo" name="memo" size="80" maxlength="100" value="{$data.memo}" /> </td></tr>
+            <tr><th>列表项：</th><td>
+                <table class="minortable itemlist" style="width:100%;">
+                    <thead>
+                    <tr><th style="width:40px">编号</th><th style="width:100px">名称</th><th style="width:60px">标识</th><th>附加参数</th><th style="width:50px">排序</th><th style="width:50px;">操作</th></tr>
+                    </thead>
+                    <tbody>
+                    <volist name="itemList" id="vo">
+                        <tr><td><input type="hidden" name="items[{$i}][id]" value="{$vo.id}" /><input type="text" class="edit" name="items[{$i}][key]" value="{$vo.key}" size="6" /></td><td><input type="text" class="edit" name="items[{$i}][title]" size="20" value="{$vo.title}" /></td><td><input type="text" class="edit" name="items[{$i}][code]" size="20" value="{$vo.code}" /></td><td><input type="text" class="edit" name="items[{$i}][param]" size="48" value="{$vo.param}" style="width:98%" /></td><td><input type="text" class="edit" name="items[{$i}][sortno]" size="4" value="{$vo.sortno}" /></td><td><lable><input type="checkbox" name="items[{$i}][del]" value="1" /> 删除</lable></td></tr>
+                    </volist>
+                    <tr><td><input type="hidden" name="newitems[0][id]" value="" /><input type="text" class="edit" name="newitems[0][key]" value="" size="6" /></td><td><input type="text" class="edit" name="newitems[0][title]" size="20" value="" /></td><td><input type="text" class="edit" name="newitems[0][code]" size="20" value="" /></td><td><input type="text" class="edit" name="newitems[0][param]" size="48" value="" style="width:98%" /></td><td><input type="text" class="edit" name="newitems[0][sortno]" size="4" value="0" /></td><td><a href="javascript:;" class="delline">删除</a></td></tr>
+
+                    </tbody>
+                </table>
+                <p><a href="javascript:;" class="addline"><i class="fa fa-plus"></i> 增加列表项</a></p>
+            </td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script type="text/plain" id="itemtpl">
+    <tr><td><input type="hidden" name="newitems[{index}][id]" value="" /><input type="text" class="edit" name="newitems[{index}][key]" value="" size="6" /></td><td><input type="text" class="edit" name="newitems[{index}][title]" size="20" value="" /></td><td><input type="text" class="edit" name="newitems[{index}][code]" size="20" value="" /></td><td><input type="text" class="edit" name="newitems[{index}][param]" size="48" value="" style="width:98%" /></td><td><input type="text" class="edit" name="newitems[{index}][sortno]" size="4" value="0" /></td><td><a href="javascript:;" class="delline">删除</a></td></tr>
+</script>
+<script>
+var mainPage = $.extend(basePage, {
+    itemIndex: 0,
+    onInit: function() {
+        var myThis = this;
+        var hash = '{$data.hash}';
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            {ele:'input[name=title]',datatype:'*', nullmsg:'请输入名称'},
+        ]);
+        //增加
+        $('.addline').click(function(){
+            myThis.itemIndex ++;
+            var htm = $('#itemtpl').text();
+            htm = htm.replace(/\{index}/g, myThis.itemIndex);
+            $('.itemlist tbody').append(htm);
+        });
+        $('.itemlist tbody').on('click', '.delline', function(){
+            $(this).parent().parent().remove();
+        });
+    }
+});
+</script>
+</block>

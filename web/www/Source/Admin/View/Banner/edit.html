@@ -1,0 +1,70 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Banner/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Banner/update')}">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="hash" value="{$data.hash}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th><em class="required">*</em>banner名称：</th><td><input type="text" class="edit" name="title" value="{$data.title}" size="50" maxlength="100" /> </td></tr>
+            <tr><th>排序：</th><td><input type="text" class="edit" name="sortno" size="8" maxlength="16" value="{$data.sortno}" /></td></tr>
+        	<tr><th>banner图片：</th><td><input type="text" class="edit" id="image" name="image" size="50" maxlength="250" value="{$data.image}" /> <input type="button" id="uploadButton" value="上传图片" /></td></tr>
+        	<tr><th>图片链接：</th><td><input type="text" class="edit" name="url" size="50" maxlength="" value="{$data.url}" /></td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+
+</block>
+<block name="script">
+<script src="__LIB__/kindeditor/kindeditor.js"></script>
+<script src="__LIB__/kindeditor/lang/zh-CN.js"></script>
+<script>
+$.extend(basePage,{
+    onInit: function() {
+        var editor;
+        var uploadbutton;
+        var K = KindEditor;
+        editor = K.create('#content', {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            urlType:'absolute',
+            uploadJson : "{:U('Misc/upload?hash='.$data['hash'])}",
+        });
+        uploadbutton = K.uploadbutton({
+            button : K('#uploadButton')[0],
+            fieldName : 'imgFile',
+            url : "{:U('Misc/upload?dir=image&hash='.$data['hash'])}",
+            afterUpload : function(data){
+                if (data.error==1)
+                    alert("上传错误:"+data.message);
+                else {
+                    $("#image").val(data.url);
+                }
+            },
+        });
+        uploadbutton.fileBox.change(function(e) {
+            uploadbutton.submit();
+        });
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            {ele:'input[name=title]',datatype:'*', nullmsg:'请输入栏目名称'},
+            {ele:'input[name=sortno]',datatype:'n', nullmsg:'请输入排序值', errormsg:'必须为整数'},
+            {ele:'input[name=image]',datatype:'*', nullmsg:'请上传banner图', errormsg:'必须上传图片'},
+        ]);
+
+    }
+
+});
+</script>
+</block>

@@ -1,0 +1,26 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-wrench"></i>供货商管理</h3><em><a href="{:U('Supplier/add')}"><i class="fa fa-plus"></i>增加</a></em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-body">
+            <div class="panel">名称：<input type="text" class="edit" name="keyword" value="{$Think.get.keyword}" />&nbsp;&nbsp;<button type="submit" class="button button-gray"><i class="fa fa-search"></i>搜索</button></div>
+            <form method="post" action="{:U('Supplier/batch')}">
+            <table class="listtable">
+                <tr><th style="width:60px;">编号</th><th style="width:100px;">名称</th><th style="width:80px">联系人</th><th style="width:150px;">电话</th><th style="width:150px;">手机号</th><th style="width:120px;">Email</th><th style="width:100px;">增加时间</th><th>操作</th></tr>
+                <tbody>
+                <volist name="list" id="vo">
+                <tr><td><label><input type="checkbox" name="id[]" value="{$vo.uid}" /> {$vo.id}</label></td><td>{$vo.title}</td><td>{$vo.contact}</td><td>{$vo.phone}</td><td>{$vo.mobile}</td><td>{$vo.email}</td><td>{$vo.addtime|date='Y-m-d',###}</td><td><a href="{:U('Supplier/edit?id='.$vo['id'])}"><i class="fa fa-edit"></i>修改</a>&nbsp;&nbsp;<a href="{:U('Supplier/delete?id='.$vo['id'])}"><i class="fa fa-remove"></i>删除</a></td></tr>
+                </volist>
+                <empty name="list">
+                <tr><td colspan="8"><p class="center">暂无信息</p></td></tr>
+                </empty>
+                </tbody>
+                <tfoot>
+                <tr><td><label><input type="checkbox" data-action="selectall" /> 全选</label>&nbsp;&nbsp;</td><td colspan="7">&nbsp;<label><input type="radio" name="op" value="delete" /> 删除</label>&nbsp;&nbsp;<button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button></td></tr>
+                </tfoot>
+            </table>
+            </form>
+            <div class="pages">{$multi}</div>
+        </div>
+    </div>
+</block>

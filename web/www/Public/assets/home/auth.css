@@ -1,0 +1,74 @@
+body { background-color:#fff; }
+.header { height:120px; background-color:#fff; border-bottom:solid 1px #d8d8d8; }
+    .header .section { height:120px; }
+    .header .logo { position:absolute; left:0; bottom:15px; width:150px;height:80px;}
+    .header .logo img { width:150px; height:80px; }
+    .header .phone{ position:absolute; left: 150px; bottom:15px; width:240px;height:80px; }
+    .header .phone img { width:240px; height:80px; }
+    .header .mydo { position:absolute; right:0; bottom:15px; height:25px; line-height:25px; text-align:right; }
+.section { width:800px; }
+.footer { background:none; border-top:solid 1px #d0d0d0;height:125px }
+.footnav  { width:800px; margin:0 auto; padding:20px 0; border-top:none; text-align:center; }
+.footnav a { display:inline-block; padding:0 20px; color:inherit;  line-height:32px; border-left:solid 1px #ccc; text-align:center; zoom:1; }
+.footnav a.first { border:none;}
+.footer .copyright { color:inherit; text-align:center;  line-height:24px; }
+.footer .copyright p{width:100%;text-align:center}
+.footer .copyright p a{color:inherit; }
+.main { padding:30px 0; font-size:12px;min-height:550px }
+.sidearea { float:left; width:445px; }
+.mainarea { float:right; width:345px; }
+.sidebox { border:solid 1px #d0d0d0; height:340px; }
+.mainbox { height:340px; background-color:#fff; border:solid 1px #d0d0d0; }
+    .mainbox-hd li { float:left; width:170px; border-left:solid 1px #d8d8d8; border-bottom:solid 1px #d8d8d8; font-size:14px; line-height:36px; text-align:center; }
+    .mainbox-hd li a { display:block; }
+    .mainbox-hd li.first { border-left:none; }
+    .mainbox-hd li.current { border-bottom:none; }
+    .mainbox-hd li.current a { font-weight:bold; }
+    .mainbox-bd { padding:0 20px; }
+    .mainbox-ft { padding:0 20px; line-height:60px; text-align:left; }
+    .mainbox-ft a { color:#01a0e9; }
+.formbox { width:440px; margin:0 auto;  }
+.formbox input { vertical-align:middle; }
+.formtable { width:440px; }
+    .formtable th,
+    .formtable td { padding:5px 0; line-height:30px; }
+    .formtable th { padding:5px; text-align:right; }
+    .formtable td.buttons { padding:20px 0; }
+.edit { height:30px; border:solid 1px #d0d0d0; text-indent:5px; }
+span.edit { display:inline-block; zoom:1; }
+.edit:focus { border-color:#d0111b; }
+.btn-sms { display:inline-block; width:106px; height:30px; border:solid 1px #d0d0d0; font-size:12px; text-align:center; vertical-align:middle; cursor:pointer; }
+.btn-sms:hover { background-color:#d0111b; border-color:#d0111b; color:#fff; }
+.btn-login { width:195px; height:30px; background:#d0111b; border:none; color:#fff; text-align:center; }
+.brokerregister .guide { float:left; width:350px; }
+.brokerregister .form { float:right; width:405px; }
+.borkerregister .form .formtable { width:395px; }
+.iselect .text { height:30px; line-height:30px; }
+
+/*.message { width:480px; margin:150px auto; text-align:center; }
+    .message .title { color:#d0111b; font-weight:bold; font-size:16px; line-height:50px; }
+    .message .info { line-height:32px; }
+    .message .info strong { color:#0079cb; }
+    .message .link { line-height:48px; }
+    */
+.dlg-smscode { width:500px; height:auto; color:#fff; }
+.dlg-smscode .form { line-height:60px; font-size:18px; }
+.dlg-smscode .action { line-height:60px; }
+.dlg-smscode .edit { width:auto; height:36px; border:solid 1px #fcfcfc; text-indent:10px; }
+.dlg-smscode img { height:36px; }
+.dlg-smscode .button { width:350px; height:36px; border:solid 1px #d0111b; margin-left:82px; color:#fff; line-height:32px; background:#d0111b; font-size:18px; text-align:center; vertical-align:middle; }
+
+.crumbs h2 { color:#d0111b; font-size:14px; font-weight:bold; line-height:32px; }
+.tabs li { float:left; width:150px; line-height:32px; text-align:center; }
+.tabs li i { display:inline-block; width:16px; height:16px; margin-right:3px; background:url(images/auth/icons.png) no-repeat left top; vertical-align:middle; zoom:1; }
+.tabs li .byaccount i { background-position:left top; }
+.tabs li.current .byaccount i { background-position:right top; }
+.tabs li .bymobile i { background-position:left bottom; }
+.tabs li.current .bymobile i { background-position:right bottom; }
+.tabs li.current a { color:#d0111b; }
+.hline { height:10px; line-height:10px; margin-bottom:10px; border-bottom:solid 1px #d0d0d0; }
+.updatepage .login { width:280px; text-align:right; }
+.updatepage .login a { color:#3399ff; }
+
+
+

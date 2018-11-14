@@ -1,0 +1,113 @@
+<extend name="Public:base"/>
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em>
+    <!--<a href="{:U('Trade/add')}"><i class="fa fa-plus"></i>增加</a>&nbsp;&nbsp;--></em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+            <div class="panel">
+                <form method="get" action="{:U('Trade/index')}">
+                    <table class="searchtable">
+                        <tbody>
+                        <tr>
+                            <th>名称：</th>
+                            <td><input type="text" name="title" class="edit" value="{:I('title')}"/></td>
+                            <th>交易号：</th>
+                            <td><input type="text" name="tradeno" class="edit" value="{:I('tradeno')}"/></td>
+                            <th>状态：</th>
+                            <td>
+                                <select name="status">
+                                    <option value="">选择</option>
+                                    <volist name="statusList" id="vo">
+                                        <option value="{$key}" <if condition="$key eq $_GET['status']">selected</if> >{$vo.title}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>会员ID：</th>
+                            <td><input type="text" name="uid" class="edit" value="{:I('uid')}"/></td>
+                            <th>会员名：</th>
+                            <td><input type="text" name="username" class="edit" value="{:I('username')}" size="36" placeholder="用户名/手机号/Email/昵称"/></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>排序：</th>
+                            <td>
+                                <select name="order">
+                                    <volist name="orderList" id="vo">
+                                        <option value="{$vo.value}" <if condition="$Think.get.order eq $vo['value']">selected</if>>{$vo.text}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                            <td colspan="4">
+                                <button type="reset" class="button button-gray">重 置</button>
+                                <button class="button" type="submit"><i class="fa fa-search"></i> 搜 索</button>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </form>
+            </div>
+            <form method="post" action="{:U('Trade/batch')}">
+                <table class="listtable">
+                    <tbody>
+                    <tr>
+                        <th style="width:80px;">编号</th>
+                        <th style="width:80px">交易号</th>
+                        <th style="width:120px;">交易类型</th>
+                        <th style="width:100px;">需求方</th>
+                        <th style="width:60px">服务方</th>
+                        <th style="width:120px">名称</th>
+                        <th style="width:80px">截止日期</th>
+                        <th style="width:60px">价格</th>
+                        <th style="width:100px">状态</th>
+                        <th style="width:120px;">发布时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <volist name="list" id="item">
+                        <tr>
+                            <td><label><input type="checkbox" name="id[]" value="{$item.id}"/> {$item.id}</label></td>
+                            <td>{$item.tradeno}</td>
+                            <td>
+                                <if condition="$item.tradetype eq 'buy'">需求
+                                    <else/>
+                                    服务
+                                </if>
+                            </td>
+                            <td>{$item.buyername}</td>
+                            <td>{$item.sellername}</td>
+                            <td>{$item.title}</td>
+                            <td>{$item.expire|date='Y-m-d',###}</td>
+                            <td>{$item.amount}</td>
+                            <td>{$item.statusstr}</td>
+                            <td>{$item.addtime|date='Y-m-d H:i',###}</td>
+                            <td>&nbsp;<a href="{:U('Trade/detail?id='.$item['id'])}"><i
+                                    class="fa fa-list-alt"></i>查看</a>&nbsp;&nbsp;
+                                <notempty name="perview.delete"><a
+                                    href="{:U('Trade/delete?id='.$item['id'])}" data-rel="delete"><i
+                                    class="fa fa-remove"></i>删除</a></notempty></td>
+                        </tr>
+                    </volist>
+                    <empty name="list">
+                        <tr>
+                            <td colspan="12" class="nodata">暂无数据</td>
+                        </tr>
+                    </empty>
+                    </tbody>
+                    <tfoot>
+                    <!--<tr>
+                        <td><label><input type="checkbox" data-rel="selectall"/> 全选</label>&nbsp;&nbsp;</td>
+                        <td colspan="11"><label><input type="radio" name="op" value="delete"/> 锁定</label>&nbsp;&nbsp;
+                            <button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button>
+                        </td>
+                    </tr>-->
+                    </tfoot>
+                </table>
+            </form>
+            <div class="pages">{$multi}</div>
+        </div>
+    </div>
+
+</block>

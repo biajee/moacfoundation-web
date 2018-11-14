@@ -1,0 +1,33 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em><!--<a href="{:U('Adminlog/add')}"><i class="fa fa-plus"></i>增加</a>&nbsp;&nbsp;--></em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+            <div class="panel"><form method="get" action="{:U('Adminlog/index')}">
+
+                名称：<input type="text" name="title" class="edit" value="{:I('title')}" />&nbsp;&nbsp;会员名称：<input type="text" name="username" class="edit" value="{:I('username')}" />&nbsp;&nbsp;操作：<select name="optype">
+                <option value="">选择</option>
+                <volist name="optypeList" id="vo">
+                    <option value="{$vo.key}" <if condition="$vo['key'] eq $_GET['optype']">selected</if> >{$vo.title}</option>
+                </volist>
+            </select>&nbsp;&nbsp;<button type="submit" class="button button-gray"><i class="fa fa-search"></i>搜索</button></form></div>
+        <form method="post" action="{:U('Adminlog/batch')}">
+        <table class="listtable">
+            <tbody>
+            <tr><th style="width:80px;">编号</th><th style="width:100px;">管理员</th><th style="width:100px;">模块</th><th>标题</th><th style="width:120px">备注</th><th style="width:120px;">记录时间</th><th>操作</th></tr>
+            <volist name="list" id="item">
+            <tr><td><label><input type="checkbox" name="id[]" value="{$item.id}" /> {$item.id}</label></td><td>{$item.admname}</td><td>{$item.modulename}</td><td>[{$item.optypename}] {$item.itemtitle}</td><td>{$item.memo}</td><td>{$item.addtime|date='Y-m-d H:i',###}</td><td>&nbsp;<a href="{:U('Adminlog/delete?id='.$item['id'])}" data-rel="delete"><i class="fa fa-remove"></i>删除</a></td></tr>
+            </volist>
+            <empty name="list">
+                <tr><td colspan="7" class="nodata">暂无数据</td> </tr>
+            </empty>
+            </tbody>
+            <tfoot><tr><td><label><input type="checkbox" data-rel="selectall" /> 全选</label>&nbsp;&nbsp;</td><td colspan="6"><label><input type="radio" name="op" value="check" checked /> 审核</label>&nbsp;&nbsp;<label><input type="radio" name="op" value="delete" /> 删除</label>&nbsp;&nbsp;<button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button></td></tr></tfoot>
+        </table>
+        </form>
+        <div class="pages">{$multi}</div>
+        </div>
+    </div>
+    
+</block>

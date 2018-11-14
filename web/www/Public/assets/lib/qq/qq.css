@@ -1,0 +1,45 @@
+.qqbox {
+	z-index: 99; right: 0px; width: 178px; position: absolute; top: 40px;
+	opacity:0.9;
+}
+.qqbox .press {
+	right: 0px; width: 33px;height: 158px; cursor: pointer; border-top-style: none; border-right-style: none; border-left-style: none; position: absolute;  border-bottom-style: none
+}
+.qqbox .qlist {
+	left: 0px; width: 145px; position: absolute
+}
+.qqbox .qlist .t {
+	background: url(qq_listbg.gif) no-repeat left 0px;
+	font-size: 1px; width: 145px; height: 32px
+}
+.qqbox .qlist .t h2 {
+	 font: bold 12px/32px "宋体";color: #fff; height: 32px; text-align: center;
+}
+.qqbox .qlist .b {
+	background:url(qq_listbg.gif) no-repeat right bottom;
+	font-size: 1px;width: 145px; height: 6px;
+}
+.qqbox .qlist .con {
+	 margin: 0px auto;
+	 background: url(qq_listbg.gif) repeat-y -155px 0px;
+	 overflow:hidden;
+}
+
+.qqbox .qlist .con ul {
+	margin:10px 10px;margin-bottom:4px;
+}
+.qqbox .qlist .con ul li {
+	padding-right: 0px; 
+	padding-left: 8px; 
+	background: #ffffff; 
+	padding-bottom: 0px; 
+	padding-top: 5px; 
+	height: 25px;
+	line-height:25px;
+	vertical-align:middle;
+	border-bottom:solid 1px #C9E0ED;
+}
+.qqbox .qlist .con ul li a {line-height:25px;}
+.qqbox .qlist .con ul li.odd {
+	background: #fff
+}

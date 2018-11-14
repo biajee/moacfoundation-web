@@ -1,0 +1,193 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Goods/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+            <form id="mainform" method="post" action="{:U('Goods/update')}" onsubmit="return checkForm(this)">
+                <input type="hidden" name="id" value="{$data.id}" />
+                <input type="hidden" name="hash" value="{$data.hash}" />
+                <table class="formtable">
+                    <tbody>
+                        <tr><th style="width:120px;">供货商：</th><td><select name="supid"><option value="0">请选择</option>
+                            <volist name="supplier" id="vo">
+                             <option value="{$vo.id}" <if condition="$vo['id'] eq $data['supid']">selected</if>>{$vo.title}</option>
+                         </volist>
+                     </select></td></tr>
+                     <tr><th>适用车型：</th><td><span class="selgroup">品牌<select name="forbrand" data-value="{$data.forbrand}"></select> 子品牌<select name="forbrand2" data-value="{$data.forbrand2}"></select> 排量<select name="forvb"  data-value="{$data.forvb}"></select> 年份<select name="foryear" data-value="{$data.foryear}"></select></span></td>
+                     </tr>
+                     <tr><th>出厂编码：</th><td><input type="text" class="edit" name="faccode" value="{$data.faccode}" size="50" maxlength="50" /> <em class="required">*</em></td></tr>
+                     <tr><th>OE编码：</th><td><textarea class="memo" name="oecode" cols="50" rows="4">{$data.oecode}</textarea></td></tr>
+                     <tr><th>电流：</th><td><input type="text" class="edit" name="current" size="50" maxlength="100" value="{$data.current}" /></td></tr>
+                     <tr><th>电压：</th><td><input type="text" class="edit" name="voltage" size="50" maxlength="100" value="{$data.voltage}" /></td></tr>
+                     <tr><th>开路：</th><td><input type="text" class="edit" id="opencoil" name="image" size="50" maxlength="200" value="{$data.opencoil}" /></td></tr>
+                     <tr><th>电阻：</th><td><input type="text" class="edit" name="resistance" size="20" maxlength="20" value="{$data.resistance}" /></td></tr>
+                     <tr><th>电感：</th><td><input type="text" class="edit" name="inductance" size="50" maxlength="20" value="{$data.inductance}" /></td></tr>
+                     <tr><th>脉宽：</th><td><input type="text" class="edit" name="pulsewidth" size="50" maxlength="50" value="{$data.pulsewidth}" /></td></tr>
+                     <tr><th>火花能量：</th><td><input type="text" class="edit" name="sparkenergy" size="50" maxlength="100" value="{$data.sparkenergy}" /></td></tr>
+                     <tr><th>耐温：</th><td><input type="text" class="edit" name="temperature" size="50" maxlength="100" value="{$data.temperature}" /></td></tr>
+                     <tr><th>寿命：</th><td><input type="text" class="edit" id="lifetime" name="image" size="50" maxlength="200" value="{$data.lifetime}" /></td></tr>
+                     <tr><th>数量：</th><td><input type="text" class="edit" name="number" size="20" maxlength="20" value="{$data.number}" /> <span class="gray">格式: 2014-10-23 12:02:12</span></td></tr>
+                     <tr><th>单价：</th><td><input type="text" class="edit" name="price" size="50" maxlength="20" value="{$data.price}" /><span class="gray">该栏目包含的关键字，用于SEO</span></td></tr>
+                     <tr><th>交货期：</th><td><input type="text" class="edit" name="delivery" size="50" maxlength="50" value="{$data.delivery}" /><span class="gray">简短描述，用于SEO</span></td></tr>
+                     <tr><th>产品图片：</th><td><input type="hidden" class="edit" id="images" name="images" size="50" maxlength="100" value="{$data.images}" />
+                         <div class="preview" id="pre-images"></div><input type="button" id="uploadButton" value="上传图片" /></td></tr>
+                         <tr><th>安装尺寸：</th><td><div class="preview" id="pre-inssize"></div><input type="hidden" class="edit" id="inssize" name="inssize" size="50" maxlength="100" value="{$data.inssize}" /> <input type="button" id="uploadButton2" value="上传图片" /></td></tr>
+                         <tr><th>详细说明：</th><td><textarea class="memo" id="content" name="content" cols="112" rows="8">{$data.content}</textarea></td></tr>
+                     </tbody>
+                     <tfoot>
+                        <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script src="__LIB__/kindeditor/kindeditor.js"></script>
+<script src="__LIB__/kindeditor/lang/zh-CN.js"></script>
+<script>
+var mainPage = $.extend(basePage,{
+    editor:null,
+    onInit: function() {
+        var hash = '{$data.hash}';
+        var editor;
+        var uploadbutton;
+        var K = KindEditor;
+        editor = K.create('#content', {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            urlType:'absolute',
+            uploadJson : "{:U('Misc/upload?hash='.$data['hash'])}"
+        });
+        this.editor = editor;
+        uploadbutton = K.uploadbutton({
+            button : K('#uploadButton')[0],
+            fieldName : 'imgFile',
+            url : "{:U('Misc/upload?dir=image&hash='.$data['hash'])}",
+            afterUpload : function(data){
+                if (data.error==1)
+                    alert("上传错误:"+data.message);
+                else {
+                    $("#image").val(data.url);
+                }
+            }
+        });
+        uploadbutton.fileBox.change(function(e) {
+            uploadbutton.submit();
+        });
+        uploadbutton2 = K.uploadbutton({
+            button : K('#uploadButton2')[0],
+            fieldName : 'imgFile',
+            url : "{:U('Misc/upload?dir=image&hash='.$data['hash'])}",
+            afterUpload : function(data){
+                if (data.error==1)
+                    alert("上传错误:"+res.message);
+                else {
+                    var txt = $("#images").val();
+                    if (txt!='')
+                        txt += ',';
+                    txt += data.url;
+                    $("#images").val(txt);
+                    var html = '<li><img src="' + data.url + '" /><p><a href="javascript:;" onclick="mainPage.setDefaultImage(\'' + data.url + '\')" >默认</a> <a href="javascript:;" onclick="mainPage.insertImage(\'' + data.url + '\')" >插入</a></p></li>'
+                    $(html).appendTo($('#pre-images ul'));
+                }
+            }
+        });
+        uploadbutton2.fileBox.change(function(e) {
+            uploadbutton2.submit();
+        });
+        this.initPreview('images');
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            {ele:'input[name=title]',datatype:'*3-50', nullmsg:'请输入标题'}
+        ]);
+    },
+    initPreview: function(id) {
+        var images = $('#'+id).val();
+        var arr = null;
+        var htm = "";
+        if (images!='') {
+            arr = images.split(',');
+            for(i=0;i<arr.length;i++) {
+                htm += '<li><img src="' + arr[i] + '" /><p><a href="javascript:;" onclick="mainPage.setDefaultImage(\''+arr[i]+'\')">默认</a> <a href="javascript:;" onclick="mainPage.insertImage(\''+arr[i]+'\')">插入</a></p></li>';
+            }
+            $('#pre-' + id).html(htm);
+        }
+    },
+    setDefaultImage: function(url) {
+        $('#image').val(url);
+    },
+    insertImage: function(path){
+        this.editor.insertHtml('<img src="'+path+'"/>');
+    },
+    initSelGroup: function() {
+        <if condition="$carinfo">
+        var carinfo = {$carinfo|json_encode};
+        <else/>
+        var carinfo = [];
+        </if>
+        var carinfolen = carinfo.length;
+        var brand = '{$data.brand}';
+        var brand2 = '{$data.brand2}';
+        var $group = $('.selgroup select');
+        var cnt = $group.size();
+        var txt = '';
+        var upid = 0;
+        var lastupid = 0;
+        var $sel = null;
+        var val = '';
+        var index = 0;
+        for(i=0;i<cnt;i++) {
+            txt = '<option value="">选择</option>';
+            $sel = $group.eq(i);
+            val = $sel.data('value');
+            //插入列表
+            for(j=0;j<carinfolen;j++) {
+                if (carinfo[j].upid==upid) {
+                    lastupid = -1;
+                    txt += '<option value="' + carinfo[j].title + '" data-id="' + carinfo[j].id + '" ';
+                    if (val==carinfo[j].title) {
+                        txt += ' selected';
+                        lastupid = carinfo[j].id;
+                    }
+                    txt += '>' + carinfo[j].title + '</option>';
+                }
+            }
+            upid = lastupid;
+            $sel.html(txt);
+            $sel.change(function(){
+                var k = 0;
+                var $this = $(this);
+                index = $group.index($this);
+                opt = this.options[this.selectedIndex];
+                if (opt.value=='')
+                    return;
+                upid = $(opt).data('id');
+                for(k=index+1;k<cnt;k++) {
+                    var $obj = $group.eq(k);
+                    val = $obj.data('value');
+                    txt = '<option value="">选择</option>';
+                    for(j=0;j<carinfolen;j++) {
+                        if (carinfo[j].upid==upid) {
+                            lastupid = -1;
+                            txt += '<option value="' + carinfo[j].title + '" data-id="' + carinfo[j].id + '" ';
+                            if (val==carinfo[j].title) {
+                                txt += ' selected';
+                                lastupid = carinfo[j].id;
+                            }
+                            txt += '>' + carinfo[j].title + '</option>';
+                        }
+                    }
+                    upid = lastupid;
+                    $obj.html(txt);
+                }
+            });
+        }
+    }
+});
+</script>
+</block>

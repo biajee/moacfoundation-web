@@ -1,0 +1,20 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-wrench"></i>缓存管理</h3><em><a href="{:U('Cache/refresh')}"><i class="fa fa-refresh"></i>刷新全部缓存</a></em></block>
+<block name="content">
+<form method="post" action="{:U('Cache/batch')}">
+    <input type="hidden" name="type" value="{$type.id}" />
+    <div class="modbox">
+        <div class="modbox-body">
+            <table class="listtable">
+                <tr><th style="width:60px;">选择</th><th style="width:300px;">项目</th><th>说明</th></tr>
+                <tbody>
+                <volist name="list" id="vo">
+                <tr><td><label><input type="checkbox" name="id[]" value="{$key}" /> {$i}</label></td><td>{$vo.title}</td>{$vo.desc}<td></td></tr>
+                </volist>
+                </tbody>
+                <tfoot><tr><td><label><input type="checkbox" data-action="selectall" /> 全选</label></td><td colspan="2">&nbsp;&nbsp;<button type="submit" class="button"><i class="fa fa-refresh"></i>刷新缓存</button></td></tr></tfoot>
+            </table>
+        </div>
+    </div>
+</form>
+</block>

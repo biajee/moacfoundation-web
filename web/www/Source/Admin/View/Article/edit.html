@@ -1,0 +1,157 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Article/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Article/update')}">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="hash" value="{$data.hash}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th style="width:120px;">栏目：</th><td><select name="catid"><option value="0">顶级栏目</option>
+            <volist name="typetree" id="vo">
+            <option value="{$vo.id}" <eq name="data.catid" value="$vo.id"> selected=""</eq>>{$vo.level|str_repeat='　',###}　├{$vo.title}</option>
+            </volist>
+            </select></td>
+            </tr>
+            <tr><th><em class="required">*</em>标题：</th><td><input type="text" class="edit" name="title" value="{$data.title}" size="50" maxlength="50" /></td></tr>
+           <!--<tr><th>副标题：</th><td><input type="text" class="edit" name="subtitle" value="{$data.subtitle}" size="50" maxlength="50" /></td></tr>-->
+        	<tr><th>来源：</th><td><input type="text" class="edit" name="source" size="50" maxlength="100" value="{$data.source}" /></td></tr>
+        	<!--<tr><th>编辑：</th><td><input type="text" class="edit" name="author" size="50" maxlength="100" value="{$data.author}" /></td></tr>-->
+        	<tr><th>链接地址：</th><td><input type="text" class="edit" name="link" size="50" maxlength="100" value="{$data.link}" /></td></tr>
+        	<tr><th>链接参数：</th><td><input type="text" class="edit" name="linkparam" size="50" maxlength="100" value="{$data.linkparam}" /></td></tr>
+            <tr><th>发布时间：</th><td><input type="text" class="edit" name="addtime" size="20" maxlength="20" value="{$data.addtime|date='Y-m-d H:i:s',###}" /> <span class="gray">格式: 2014-10-23 12:02:12</span></td></tr>
+            <!--<tr><th>关联版块：</th><td><input type="text" class="edit" name="asszone" value="{$data.asszone}" size="50" maxlength="50" /> <a class="button button-gray" href="{:U('Building/zone')}" data-rel="dialog">选择</a></td></tr>
+            <tr><th>关联楼盘：</th><td><input type="text" class="edit" name="assbuilding" value="{$data.assbuilding}" size="50" maxlength="50" /> <a class="button button-gray" href="{:U('Building/select')}" data-rel="dialog">选择</a></td></tr>
+            <tr><th>关联开发商：</th><td><input type="text" class="edit" name="assdeveloper" value="{$data.assdeveloper}" size="50" maxlength="50" /> <a class="button button-gray" href="{:U('Building/developer')}" data-rel="dialog">选择</a></td></tr>
+           --> <!--<tr><th>SEO关键字：</th><td><input type="text" class="edit" name="seokey" size="50" maxlength="20" value="{$data.seokey}" /><span class="gray">不超过50字</span></td></tr>
+            <tr><th>SEO描述：</th><td><input type="text" class="edit" name="seodesc" size="50" maxlength="50" value="{$data.seodesc}" /><span class="gray">不超过50字</span></td></tr>-->
+            <notempty name="perview.promo">
+            <tr><th>排序值：</th><td><input type="text" class="edit" name="sortno" size="50" maxlength="100" value="{$data.sortno}" /></td></tr>
+            <!--<tr><th>点赞数：</th><td><input type="text" class="edit" name="praisenum" size="50" maxlength="100" value="{$data.praisenum}" /></td></tr>
+            <tr><th>分享数：</th><td><input type="text" class="edit" name="sharenum" size="50" maxlength="100" value="{$data.sharenum}" /></td></tr>-->
+            <tr><th>其他选项：</th><td><label><input type="checkbox" name="isgood" value="1" <eq name="data.isgood" value="1"> checked</eq> /> 推荐</label> <label><input type="checkbox" name="ishot" value="1" <eq name="data.ishot" value="1"> checked</eq> /> 热门</label></td></tr>
+            </notempty>
+            <!--<tr><th>关联栏目：</th><td>
+                <volist name="typetree" id="vo">
+                    <if condition="$vo.upid eq 0">
+                    <label><input type="checkbox" name="relation[]" value="{$vo.id}" <if condition="strpos($data['relation'],','.$vo['id'].',')!==FALSE">checked</if> /> {$vo.title}</label>&nbsp;
+                    </if>
+                </volist>
+            </td></tr>-->
+            <tr><th>浏览数：</th><td><input type="text" class="edit" name="viewnum" size="50" maxlength="100" value="{$data.viewnum}" /></td></tr>
+            <tr><th>文章简介：</th><td><textarea class="memo" name="memo" cols="112" rows="3">{$data.memo}</textarea><p class="gray">不超过500字</p></td></tr>
+        	<tr><th>默认图片：</th><td><input type="text" class="edit" id="image" name="image" size="50" maxlength="200" value="{$data.image}" /> <input type="button" id="uploadButton" value="上传图片" /></td></tr>
+            <tr><th>附加图片：</th><td><input type="hidden" class="edit" id="images" name="images" size="50" maxlength="100" value="{$data.images}" />
+            <div class="preview clearfix" id="pre-images"><ul><li></li>
+            </ul></div>
+            <div class="preview-upload"><input type="button" id="uploadButton2" value="上传图片" /></div></td></tr>
+            <tr><th>详细内容：</th><td><textarea class="memo" id="content" name="content" cols="112" rows="8">{$data.content}</textarea></td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script src="__LIB__/kindeditor/kindeditor.js"></script>
+<script src="__LIB__/kindeditor/lang/zh-CN.js"></script>
+<link rel="stylesheet" href="__LIB__/kindeditor/themes/default/default.css" />
+<script>
+var mainPage = $.extend(basePage,{
+    editor:null,
+    onInit: function() {
+        var hash = '{$data.hash}';
+        var editor;
+        var uploadbutton, uploadbutton2;
+        var K = KindEditor;
+        editor = K.create('#content', {
+            filterMode: false,
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            urlType:'absolute',
+            uploadJson : "{:U('Misc/upload?hash='.$data['hash'])}"
+        });
+        this.editor = editor;
+        uploadbutton = K.uploadbutton({
+            button : K('#uploadButton')[0],
+            fieldName : 'imgFile',
+            url : "{:U('Misc/upload?dir=image&hash='.$data['hash'])}",
+            afterUpload : function(data){
+                if (data.error==1)
+                    alert("上传错误:" + data.message);
+                else {
+                    $("#image").val(data.url);
+                }
+            }
+        });
+        uploadbutton.fileBox.change(function(e) {
+            uploadbutton.submit();
+        });
+        uploadbutton2 = K.uploadbutton({
+            button : K('#uploadButton2')[0],
+            fieldName : 'imgFile',
+            url : "{:U('Misc/upload?dir=image&hash='.$data['hash'])}",
+            afterUpload : function(data){
+                if (data.error==1)
+                    alert("上传错误:" + data.message);
+                else {
+                    var txt = $("#images").val();
+                    if (txt!='')
+                        txt += ',';
+                    txt += data.url;
+                    $("#images").val(txt);
+                    var html = '<li><img src="' + data.url + '" /><p><a href="javascript:;" onclick="mainPage.setDefaultImage(\'' + data.url + '\')" >默认</a> <a href="javascript:;" onclick="mainPage.insertImage(\'' + data.url + '\')" >插入</a></p></li>'
+                    $(html).appendTo($('#pre-images ul'));
+                }
+            }
+        });
+        uploadbutton2.fileBox.change(function(e) {
+            uploadbutton2.submit();
+        });
+        this.initPreview('images');
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            {ele:'input[name=title]',datatype:'*3-50', nullmsg:'请输入标题'}
+        ]);
+    },
+    initPreview: function(id) {
+        var images = $('#'+id).val();
+        var arr = null;
+        var htm = "";
+        if (images!='') {
+            arr = images.split(',');
+            for(i=0;i<arr.length;i++) {
+                htm += '<li><img src="' + arr[i] + '" /><p><a href="javascript:;" onclick="mainPage.setDefaultImage(\''+arr[i]+'\')">默认</a> <a href="javascript:;" onclick="mainPage.insertImage(\''+arr[i]+'\')">插入</a></p></li>';
+            }
+            $('#pre-' + id).html(htm);
+        }
+    },
+    setDefaultImage: function(url) {
+        $('#image').val(url);
+    },
+    insertImage: function(path){
+        this.editor.insertHtml('<img src="'+path+'"/>');
+    }
+});
+    function onBuildingSelect(data) {
+        $.freebox.close();
+        $('[name=assbuilding]').val(data.title);
+    }
+    function onZoneSelect(data) {
+        $.freebox.close();
+        $('[name=asszone]').val(data);
+    }
+    function onDeveloperSelect(data) {
+        $.freebox.close();
+        $('[name=assdeveloper]').val(data.subtitle);
+    }
+</script>
+</block>

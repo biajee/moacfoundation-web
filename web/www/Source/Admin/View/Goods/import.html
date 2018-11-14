@@ -1,0 +1,101 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Goods/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;<a href="__LIB__/doc/import.xls"><i class="fa fa-download"></i>下载模板</a></em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Goods/import')}" enctype="multipart/form-data" onsubmit="return checkForm(this)">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="hash" value="{$data.hash}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th style="width:120px;">供货商：</th><td><select name="supid"><option value="0">请选择</option>
+            <volist name="supplier" id="vo">
+            	<option value="{$vo.id}" <if condition="$vo['id'] eq $data['supid']">selected</if>>{$vo.title}</option>
+            </volist>
+            </select></td></tr>
+            <tr><th>适用车型：</th><td><span class="selgroup">品牌<select name="forbrand" data-value="{$data.forbrand}"></select> 子品牌<select name="forbrand2" data-value="{$data.forbrand2}"></select> 排量<select name="forvb"  data-value="{$data.forvb}"></select> 年份<select name="foryear" data-value="{$data.foryear}"></select></span> 暂不支持从文件导入该信息</td>
+            </tr>
+        	<tr><th>选择文件：</th><td><input type="file" class="edit" name="file" size="50" maxlength="200" /><span>仅支持 .xls</span></td></tr>
+            </tbody>
+        </table>
+        <div class="buttons"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></div>
+        </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script>
+<if condition="$carinfo">
+	var carinfo = {$carinfo|json_encode};
+<else/>
+	var carinfo = [];
+</if>
+var carinfolen = carinfo.length;
+var brand = '{$data.brand}';
+var brand2 = '{$data.brand2}';
+function initSelGroup() {
+	var $group = $('.selgroup select');
+	var cnt = $group.size();
+	var txt = '';
+	var upid = 0;
+	var lastupid = 0;
+	var $sel = null;
+	var val = '';
+	var index = 0;
+	for(i=0;i<cnt;i++) {
+		txt = '<option value="">选择</option>';
+		$sel = $group.eq(i);
+		val = $sel.data('value');
+		//插入列表
+		for(j=0;j<carinfolen;j++) {
+			if (carinfo[j].upid==upid) {
+				lastupid = -1;
+				txt += '<option value="' + carinfo[j].title + '" data-id="' + carinfo[j].id + '" ';
+				if (val==carinfo[j].title) {
+					txt += ' selected';
+					lastupid = carinfo[j].id;
+				}
+				txt += '>' + carinfo[j].title + '</option>';
+			}
+		}
+		upid = lastupid;
+		$sel.html(txt);
+		$sel.change(function(){
+			var k = 0;
+			var $this = $(this);
+			index = $group.index($this);
+			opt = this.options[this.selectedIndex];
+			if (opt.value=='') 
+				return;
+			upid = $(opt).data('id');
+			for(k=index+1;k<cnt;k++) {
+				var $obj = $group.eq(k);
+				val = $obj.data('value');
+				txt = '<option value="">选择</option>';
+				for(j=0;j<carinfolen;j++) {
+					if (carinfo[j].upid==upid) {
+						lastupid = -1;
+						txt += '<option value="' + carinfo[j].title + '" data-id="' + carinfo[j].id + '" ';
+						if (val==carinfo[j].title) {
+							txt += ' selected';
+							lastupid = carinfo[j].id;
+						}
+						txt += '>' + carinfo[j].title + '</option>';
+					}
+				}
+				upid = lastupid;
+				$obj.html(txt);
+			}
+		});
+	}
+}
+$(function(){
+	initSelGroup();
+});
+function checkForm(f) {
+  
+    return true;
+}
+</script>
+</block>

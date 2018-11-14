@@ -1,0 +1,30 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Question/qa')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <table class="formtable">
+        	<div style="font-size: 18px; text-align: center;">
+        		{$info_title}
+        	</div><hr />
+        	<div style="font-size: 18px; text-align: center;">
+        		填卷人：{$name}
+        	</div><hr />
+            <tbody>
+            	<volist name="list" id="vo">
+            		<tr>
+		            	<th style="width:300px;">{$vo.title}：</th>
+		            	<td>{$vo.answer}</td>
+		            </tr>
+            	</volist>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        </div>
+    </div>
+</block>
+<block name="script">
+</block>

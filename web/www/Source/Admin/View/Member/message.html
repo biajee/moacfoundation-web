@@ -1,0 +1,22 @@
+<extend name="Public:dialog" />
+<block name="content">
+    <div class="freebox">
+        <div class="freebox-head"><h3><i class="fa fa-edit"></i>聊天</h3><em><a href="javascript:;" class="close"><i class="fa fa-close"></i></a></em></div>
+        <div class="freebox-body">
+            <table class="listtable">
+                <thead>
+                <tr><th>编号</th><th style="width:120px">时间</th><th>发送</th><th>接收</th><th>消息</th></tr>
+                </thead>
+                <tbody>
+                <volist name="list" id="item">
+                    <tr><td>{$item.id}</td><td>{$item.addtime|date='Y-m-d H:i:s',###}</td><td>{$item.fromname}</td><td>{$item.toname}</td><td>{$item.content}</td></tr>
+                </volist>
+
+                </tbody>
+            </table>
+            <div class="pages">{$multi}</div>
+        </div>
+    </div>
+</block>
+<block name="script">
+</block>

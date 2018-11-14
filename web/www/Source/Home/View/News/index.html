@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>媒体报道 | 海外帮科技</title>
+		<meta name="description" content="" />
+		<meta name="keywords" content="媒体报道" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="http://www.yitutech.com/statics/yitu/js/jquery.min.js"></script>
+		<link rel="stylesheet" href="http://www.yitutech.com/statics/yitu/css/style.css">
+		<link rel="stylesheet" href="__ROOT__/assets/home/style.css">
+	</head>
+
+	<body class="column-5">
+		<div class="navbar">
+			<div class="container">
+				<div class="navbar-header animated fadeInDown">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+     <span class="glyphicon"></span>
+     </button>
+					<a href="/" title="海外帮科技" class="navbar-brand">Hiwibang</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="/" title="海外帮科技">首页</a>
+						</li>
+						<li>
+							<a href="{:U('Intro/index')}">关于我们</a>
+						</li>
+						<li class=' dropdown'>
+							<a href="{:U('News/index')}" class="core">媒体报道<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="{:U('News/index')}?module=service" title="新闻资讯">新闻资讯</a>
+								</li>
+								<li>
+									<a href="{:U('News/index')}?module=news" title="服务资讯">服务资讯</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="{:U('Case/index')}">客户案例</a>
+						</li>
+						<li>
+							<a href="{:U('Partner/index')}">合作伙伴</a>
+						</li>
+						<li>
+							<a href="{:U('Contact/index')}">联系我们</a>
+						</li>
+						<script>
+							document.write('<script src="/index.php?g=Member&a=Loginjs"><' + '/script>');
+						</script>
+						<!--<li class="language">
+							<a href="/en/" class="en active">English</a>
+						</li>-->
+					</ul>
+
+				</div>
+			</div>
+			<div id="progress"></div>
+		</div>
+		<div class="animated fadeInUp banner">
+			<div id="stars"></div>
+			<div id="magic"></div>
+			<div class="container">
+				<div class="col-md-4 pull-right">
+					<div class="row"><img src="http://www.yitutech.com/statics/yitu/images/icon/news.png" alt="媒体报道" class="animated fadeInRight column-t"></div>
+				</div>
+			</div>
+		</div>
+		<div class="animated fadeInLeft">
+			<div class="mbt">
+				<ul class="article-list">
+					<volist name="list" id="vo">
+					<li>
+						<div class="container">
+							<div class="col-md-4 pubtime">
+								<span class="date">{$vo.addtime|date="Y-m-d",###}</span>
+								<!--<span class="year">2018</span>-->
+							</div>
+							<div class="col-md-6 txt">
+								<h5><a href="{:U('News/details')}?id={$vo.id}" title='{$vo.title}' target="_blank">{$vo.title}</a></h5>
+								<!--<p>近年来，响应公安部关于平安中国的建设方针和省委省政府落实智慧警务的相关要求，永州市公安局紧紧围绕“平安永州、智慧永州”的战略目标，积极探索适合永州的社会治安综合治理模式，主动拥抱人工智能、大数据、云计算，引领社会治安防控体系转型升级。7月31日，永州市人像识别应用高峰论坛顺利召开，本次研讨会以“分享永州人像系统经验 探索智慧公安新态势”为主题，来自公安部刑侦局、公安部物证鉴定中心...</p>-->
+							</div>
+						</div>
+					</li>
+					</volist>
+				</ul>
+				<div class="container">
+					<div class="paginator clearfix">
+						<!--<span class="all">共有83条信息</span><span class="pageindex">1/7</span><span class="current">1</span>
+						<a href="http://www.yitutech.com/news/index_2.html">2</a>
+						<a href="http://www.yitutech.com/news/index_3.html">3</a>
+						<a href="http://www.yitutech.com/news/index_4.html">4</a>
+						<a href="http://www.yitutech.com/news/index_5.html">5</a>
+						<a href="http://www.yitutech.com/news/index_6.html">6</a>
+						<a href="http://www.yitutech.com/news/index_7.html">7 </a>
+						<a href="http://www.yitutech.com/news/index_2.html">Next</a>
+						<a href="http://www.yitutech.com/news/index_7.html">&raquo;</a>-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="animated fadeInUp footer">
+			<div class="container">
+				<div class="row">
+					<div class="clearfix abuot-row">
+						<!--<div class="col-md-1 col-xs-6">
+							<div class="row">
+								<h2>关于我们</h2>
+								<a href="{:U('Intro/index')}">关于我们</a>
+								<a href="{:U('News/index')}">媒体报道</a>
+								<a href="{:U('Contact/index')}">联系我们</a>
+							</div>
+						</div>
+						<div class="col-md-1 mrl40  col-xs-6">
+							<div class="row">
+								<h2>客户案例</h2>
+								<a href="http://www.yitutech.com/case/">智能安防</a>
+								<a href="http://www.yitutech.com/case/">金融</a>
+								<a href="http://www.yitutech.com/case/">民生</a>
+							</div>
+						</div>-->
+						<div class="col-md-4  col-xs-12">
+							<div class="row">
+								<h2>联系我们</h2>
+								<p><span>天津：</span>天津市和平区荣业大街与福安大街交口万兆科贸产业大厦B座1301
+									<br> 电话：+86 13821530757
+									<br> 邮箱：info@hiwibang.com</p>
+							</div>
+						</div>
+						<!--<div class="col-md-3  col-xs-12">
+							<div class="row">
+								<h2>商务合作</h2>
+								<p><span>商务合作：</span>marketing@yitu-inc.com<br> 010 - 5624 9590</p>
+								<p><span>媒体采访：</span>media@yitu-inc.com</p>
+								<p><span>投递简历：</span>hr@yitu-inc.com </p>
+							</div>
+						</div>-->
+						<!--<div class="col-md-2">
+							<div class="row">
+								<div class="text-right"><span><h2>关注我们</h2><img src="http://www.yitutech.com/statics/yitu/images/erweim-2.png"></span></div>
+							</div>
+						</div>-->
+					</div>
+					<div class="foot">
+						<p>版权所有 © 海外帮（天津）科技有限公司</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a href="#" class="cd-top">Top</a>
+		<div style="display:none">
+			<script>
+				var _hmt = _hmt || [];
+				(function() {
+					var hm = document.createElement("script");
+					hm.src = "https://hm.baidu.com/hm.js?58a9d7628f301212265b41f976e23080";
+					var s = document.getElementsByTagName("script")[0];
+					s.parentNode.insertBefore(hm, s);
+				})();
+			</script>
+		</div>
+		<script src="http://www.yitutech.com/statics/yitu/js/bootstrap.min.js"></script>
+		<script src="http://www.yitutech.com/statics/yitu/js/main.min.js"></script>
+	</body>
+
+</html>

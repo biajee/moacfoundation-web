@@ -1,0 +1,54 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Entrust/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Entrust/update')}" onsubmit="return checkForm(this)">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="hash" value="{$data.hash}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th>区域：</th><td><input type="text" class="edit" name="title" size="80" maxlength="50" value="{$data.title}" /></td></tr>
+        	<tr><th>户型：</th><td><input type="text" class="edit" name="bedroom" size="8" maxlength="8" value="{$data.bedroom}" /> 室 
+            <input type="text" class="edit" name="hall" size="8" maxlength="8" value="{$data.hall}" /> 厅
+            <input type="text" class="edit" name="bathroom" size="8" maxlength="8" value="{$data.bathroom}" /> 卫
+            </td></tr>
+            <tr><th>面积：</th><td><input type="text" class="edit"  name="grossarea" size="20" maxlength="50" value="{$data.grossarea}" /> 平米</td></tr>
+            <tr><th>金额：</th><td><input type="text" class="edit"  name="amount" size="20" maxlength="50" value="{$data.amount}" /> 万元</td></tr>
+            <tr><th>联系人：</th><td><input type="text" class="edit" id="contact" name="surname" size="80" maxlength="50" value="{$data.contact}" /></td></tr>
+            <tr><th>电话：</th><td><input type="text" class="edit" name="phone" size="80" maxlength="50" value="{$data.phone}" /></td></tr>
+            <tr><th>说明：</th><td><textarea class="memo" name="memo" cols="80" rows="3">{$data.memo}</textarea><p class="gray">不超过200字</p></td></tr>
+            <tr><th>申请时间：</th><td><input type="text" class="edit" name="addtime" size="20" maxlength="20" value="{$data.addtime|date='Y-m-d H:i:s',###}" /> <span class="gray">格式: 2014-10-23 12:02:12</span></td></tr>
+            <tr><th>状态：</th><td><select name="status">
+                <volist name="statusList" id="vo">
+                    <option value="{$key}" <if condition="$vo eq $data['status']">selected</if> >{$vo}</option>
+                </volist>
+            </select></td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script>
+$.extend(basePage, {
+    onInit: function() {
+        var myThis = this;
+        var hash = '{$data.hash}';
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            {ele:'input[name=surname]',datatype:'*', nullmsg:'请输入姓名'},
+        ]);
+    }
+});
+
+</script>
+</block>

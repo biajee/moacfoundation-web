@@ -1,0 +1,30 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em><a href="{:U('Order/add')}"><i class="fa fa-plus"></i>增加</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <div class="panel"><form method="get" action="{:U('Order/index')}">状态：<select name="supid"><option value="">请选择</option>
+            <volist name="orderstatus" id="vo">
+            	<option value="{$vo}" <if condition="$key eq $_GET['status']">selected</if>>{$vo}</option>
+            </volist>
+            </select>&nbsp;订单号：<input type="text" name="ordersn" class="edit" value="{:I('ordersn')}" />&nbsp;&nbsp;用户名：<input type="text" name="username" class="edit" value="{:I('username')}" />&nbsp;&nbsp;<button type="submit" class="button button-gray"><i class="fa fa-search"></i>搜索</button></form></div>
+        <form method="post" action="{:U('Order/batch')}">
+        <table class="listtable">
+            <tr><th style="width:80px;">编号</th><th style="width:150px;">订单号</th><th style="width:100px;">会员</th><th style="width:100px;">订购时间</th><th style="width:60px;">状态</th><th>操作</th></tr>
+            <tbody>
+            <volist name="list" id="item">
+            <tr><td><label><input type="checkbox" name="id[]" value="{$item.id}" /> {$item.id}</label></td><td><a href="{:U('Order/edit?id='.$item['id'])}">{$item.ordersn}</a></td><td>{$item.username}</td><td>{$item.addtime|date='Y-m-d H:i',###}</td><td>{$item.status}</td><td>&nbsp;<a href="{:U('Order/edit?id='.$item['id'])}"><i class="fa fa-edit"></i>编辑</a>&nbsp;&nbsp;<a href="{:U('Order/delete?id='.$item['id'])}" data-rel="delete"><i class="fa fa-remove"></i>删除</a></td></tr>
+            </volist>
+            <empty  name='list'>
+            <tr><td colspan="6">暂无信息</td></tr>
+            </empty>
+            </tbody>
+            <tfoot><tr><td><label><input type="checkbox" data-rel="selectall" /> 全选</label>&nbsp;&nbsp;</td><td colspan="5"><label><input type="radio" name="op" value="delete" /> 删除</label>&nbsp;&nbsp;<button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button></td></tr></tfoot>
+        </table>
+        </form>
+        <div class="pages">{$multi}</div>
+        </div>
+    </div>
+    
+</block>

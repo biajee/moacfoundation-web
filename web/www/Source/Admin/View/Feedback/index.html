@@ -1,0 +1,23 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <!--<div class="panel"><form method="get" action="{:U('Feedback/index')}">标题：<input type="text" name="keyword" class="edit" value="{:I('keyword')}" />&nbsp;&nbsp;<button type="submit" class="button button-gray"><i class="fa fa-search"></i>搜索</button></form></div>-->
+        <form method="post" action="{:U('Feedback/batch')}">
+        <table class="listtable">
+            <tbody>
+            <tr><th style="width:80px;">编号</th><th>内容</th><th style="widht:60px">联系人</th><th style="width:120px">电话</th><th style="width:300px;">Email</th><th style="width:112px;">发布时间</th><th style="width:60px;">状态</th><th style="width:120px;">操作</th></tr>
+            <volist name="list" id="item">
+            <tr><td><label><input type="checkbox" name="id[]" value="{$item.id}" /> {$item.id}</label></td><td>{$item.content}</td><td>{$item.surname}</td><td>{$item.mobile}</td><td>{$item.email}</td><td>{$item.addtime|date='Y-m-d H:i',###}</td><td><if condition="$item.status gt 0">显示<else />隐藏</if></td><td>&nbsp;<a href="{:U('Feedback/edit?id='.$item['id'])}" data-rel="dialog"><i class="fa fa-edit"></i>回复</a>&nbsp;&nbsp;<a href="{:U('Feedback/delete?id='.$item['id'])}" data-rel="delete"><i class="fa fa-remove"></i>删除</a></td></tr>
+            </volist>
+            </tbody>
+            <tfoot><tr><td><label><input type="checkbox" data-rel="selectall" /> 全选</label>&nbsp;&nbsp;</td><td colspan="7"><label><input type="radio" name="op" value="show" checked="checked" /> 显示</label>&nbsp;<input type="radio" name="op" value="hide" /> 隐藏</label>&nbsp;<label><input type="radio" name="op" value="delete" /> 删除</label>&nbsp;&nbsp;<button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button></td></tr></tfoot>
+        </table>
+        </form>
+        <div class="pages">{$multi}</div>
+        </div>
+    </div>
+
+</block>

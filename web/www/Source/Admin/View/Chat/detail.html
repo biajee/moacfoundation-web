@@ -1,0 +1,133 @@
+<extend name="Public:dialog" />
+<block name="content">
+    <div class="freebox">
+        <div class="freebox-head"><h3><i class="fa fa-edit"></i>会员详细</h3><em><a href="javascript:;" class="close"><i class="fa fa-close"></i></a></em></div>
+        <div class="freebox-body">
+            <div class="msglist">
+            </div>
+            <div class="msgform">
+                <input class="edit" type="text" name="message" size="60" /> <button class="button" id="btn-send">发送</button>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script type="text/template" id="message-left">
+        <div class="msglist-item">
+            <div class="msglist-item-hd">{{nickname}} {{timestr}}</div>
+            <div class="msglist-item-bd">{{content}}</div>
+        </div>
+    </script>
+    <script type="text/template" id="message-right">
+        <div class="msglist-item msglist-item-me">
+            <div class="msglist-item-hd">{{nickname}} {{timestr}}</div>
+            <div class="msglist-item-bd">{{content}}</div>
+        </div>
+    </script>
+    <script>
+        var contact = $.parseJSON('{$contact|json_encode}');
+        var member = {id: 10000, username:'我', nickname:'我'};
+        var lefttpl = '';
+        var righttpl = '';
+        var $chatlist = null;
+        var mainPage = $.extend(basePage,{
+            onInit: function() {
+                var that = this;
+                lefttpl = $('#message-left').html();
+                righttpl = $('#message-right').html();
+                $chatlist = $('.msglist');
+                this.getLatest();
+                $('#btn-send').click(function(){that.sendMessage();});
+            },
+            getLatest: function() {
+                var that = this;
+                var url = "{:U('Chat/latest')}";
+                var param = {cid: "{$Think.get.cid}"};
+                $.get(url, param, function(res){
+                    if (res.result == 0 && res.data != null) {
+                        var list = res.data;
+                        var item = null;
+                        var message;
+                        var $group;
+                        for (var i =0; i<list.length; i++) {
+                            item = list[i];
+                            $group = $('#' + item.group);
+                            if ($group.size() == 0) {
+                                $group = $(that.buildGroup(item));
+                                $chatlist.append($group);
+                            }
+                            message = that.buildMessage(item);
+                            $group.find('.msglist-group-bd').append(message);
+                        }
+                        setTimeout(function(){
+                            that.scrollToBottom('.msglist');
+                        }, 100);
+
+                    }
+                })
+            },
+            pull: function() {
+                var that = this;
+                var url = "{:U('Chat/pull')}";
+                var param = {cid: "{$Think.get.cid}"};
+                $.get(url, param, function(res){
+                    if (res.result == 0 && res.data != null) {
+                        var list = res.data;
+                        var item = null;
+                        var message;
+                        var $group;
+                        for (var i =0; i<list.length; i++) {
+                            item = list[i];
+                            $group = $('#' + item.group);
+                            if ($group.size() == 0) {
+                                $group = $(that.buildGroup(item));
+                                $chatlist.append($group);
+                            }
+                            message = that.buildMessage(item);
+                            $group.find('.msglist-group-bd').append(message);
+                        }
+                        setTimeout(function(){
+                            that.scrollToBottom();
+                        }, 100);
+                    }
+                })
+            },
+            buildGroup: function(item) {
+                var htm = '<div class="msglist-group" id="' + item.group + '"><div class="msglist-group-hd">' + item.datestr + '</div><div class="msglist-group-bd"></div></div>';
+                return htm;
+            },
+            buildMessage: function(data) {
+                var tpl = lefttpl;
+                var nickname = contact.nickname + '';
+                if (data.fromid == member.id) {
+                    tpl = righttpl;
+                    nickname = member.nickname;
+                }
+
+                if (nickname == '')
+                    nickname = '海外行用户';
+                htm = tpl.replace("{{content}}", data.content);
+                htm = htm.replace("{{nickname}}", nickname);
+                htm = htm.replace("{{timestr}}", data.timestr)
+                return htm;
+            },
+            sendMessage: function() {
+                var myThis = this;
+                var url = "{:U('Chat/save')}";
+                var content = $('[name=message]').val();
+                if (myThis.isEmpty(content)) {
+                    myThis.error('请输入信息内容');
+                    return;
+                }
+                var param = {toid: contact.id, toname: contact.nickname, content: content};
+                $.post(url, param, function(res) {
+                    if (res.result == 0) {
+                        $('[name=message]').val('');
+                        myThis.pull();
+                    }
+                })
+            }
+        });
+    </script>
+
+</block>

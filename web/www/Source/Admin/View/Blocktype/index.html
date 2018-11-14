@@ -1,0 +1,24 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em><a href="{:U('Blocktype/add')}"><i class="fa fa-plus"></i>增加</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form method="post" action="{:U('Blocktype/batch')}">
+        <table class="listtable">
+            <thead><tr><th style="width:80px;">编号</th><th style="width:120px;">名称</th><th style="width:300px;">标识</th><th>操作</th></tr></thead>
+            <tbody>
+            <volist name="list" id="item">
+            <tr><td><label><input type="checkbox" name="id[]" value="{$item.id}" /> {$item.id}</label></td><td><a href="{:U('Blocktype/edit?id='.$item['id'])}">{$item.title}</a></td><td>{$item.code}</td><td>&nbsp;<a href="{:U('Blocktype/edit?id='.$item['id'])}"><i class="fa fa-edit"></i>编辑</a>&nbsp;&nbsp;<a href="{:U('Blocktype/delete?id='.$item['id'])}" data-rel="delete"><i class="fa fa-remove"></i>删除</a></td></tr>
+            </volist>
+            <empty name="list">
+            <tr><td colspan="4"><p class="center">暂无信息</p></td></tr>
+            </empty>
+            </tbody>
+        </table>
+        </form>
+        <div class="pages">{$multi}</div>
+        </div>
+    </div>
+    
+</block>

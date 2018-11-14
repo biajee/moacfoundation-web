@@ -1,0 +1,22 @@
+<extend name="Public:dialog" />
+<block name="content">
+    <div class="freebox">
+        <div class="freebox-head"><h3><i class="fa fa-edit"></i>留言</h3><em><a href="javascript:;" class="close"><i class="fa fa-close"></i></a></em></div>
+        <div class="freebox-body">
+            <table class="listtable">
+                <thead>
+                <tr><th style="width:80px;">编号</th><th style="width:200px;">留言项标题</th><th>评论内容</th><th>状态</th><th style="width:120px;">发布时间</th></tr>
+                </thead>
+                <tbody>
+                <volist name="list" id="item">
+                    <tr><td><label> {$item.id}</label></td><td>{$item.itemtitle}</td><td>{$item.content}</td><td><empty name="item.status">未审核<else/>已审核</empty></td><td>{$item.addtime|date='Y-m-d H:i',###}</td></tr>
+                </volist>
+
+                </tbody>
+            </table>
+            <div class="pages">{$multi}</div>
+        </div>
+    </div>
+</block>
+<block name="script">
+</block>

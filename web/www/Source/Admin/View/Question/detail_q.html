@@ -1,0 +1,80 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Question/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <table class="formtable">
+            <input type="hidden" name="id" value="{$data.id}" />
+            <input type="hidden" name="hash" value="{$data.hash}" />
+            <tbody>
+            <tr><th style="width:120px;">问卷号：</th><td>{$id}</td>
+            </tr>
+            <tr><th>提交时间：</th><td>{$data.addtime|date='Y-m-d H:i:s',###}</td></tr>
+            <tr><th>问卷标题：</th><td>{$data.title}</td></tr>
+            <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+            <div class="panel">
+                    <table class="searchtable">
+                        <tbody>
+                        <tr>
+                            <td colspan="2">
+                            	<a href="{:U('Question/add_o?id='.$id)}">
+                            		<button class="button" type="button">+ 新增选项</button>
+                            	</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
+            <form method="post" action="{:U('Question/batch')}">
+                <table class="listtable">
+                    <thead>
+                    <tr>
+                    	<th style="width:100px;">编号</th>
+                        <th style="width:300px;">选项内容</th>
+                        <th style="width: 160px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="list" id="item">
+                        <tr>
+                            <td><label><input type="checkbox" name="id[]" value="{$item.id}"/> {$item.id}</label></td>
+                            <td>{$item.text}</td>
+                            <td>&nbsp;
+                                <a href="{:U('Question/delete_q?id='.$item['id'].'qid='.$id)}" data-rel="delete"><i class="fa fa-remove"></i>删除</a>&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                    </volist>
+                    <empty name="list">
+                        <tr>
+                            <td colspan="12"><p class="center">暂无信息</p></td>
+                        </tr>
+                    </empty>
+                    </tbody>
+                    <tfoot>
+                    <!--<tr>
+                        <td><label><input type="checkbox" data-rel="selectall"/> 全选</label>&nbsp;&nbsp;</td>
+                        <td colspan="11">
+                            <label><input type="radio" name="op" value="check" checked /> 审核</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="op" value="top"/> 置顶</label>&nbsp;
+                            <button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button>
+                        </td>
+                    </tr>-->
+                    </tfoot>
+                </table>
+            </form>
+            <div class="pages">{$multi}</div>
+        </div>
+    </div>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        </div>
+    </div>
+</block>
+<block name="script">
+</block>

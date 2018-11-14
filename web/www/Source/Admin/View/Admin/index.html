@@ -1,0 +1,19 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-wrench"></i>管理员设置</h3><em><a href="{:U('Admin/add')}"><i class="fa fa-refresh"></i>增加</a></em></block>
+<block name="content">
+<div class="modbox">
+    <div class="modbox-body">
+    <form id="mainform" method="post" action="{:U('Admin/batch')}">
+        <table class="listtable">
+            <tr><th style="width:60px;">编号</th><th style="width:300px;">用户名</th><th style="width:100px;">注册时间</th><th>操作</th></tr>
+            <tbody>
+            <volist name="list" id="vo">
+            <tr><td><label><input type="checkbox" name="id[]" value="{$vo.uid}" /> {$vo.uid}</label></td><td>{$vo.username}</td><td>{$vo.regtime|date='Y-m-d',###}</td><td><a href="{:U('Admin/edit?id='.$vo['uid'])}"><i class="fa fa-edit"></i>修改</a>&nbsp;&nbsp;<a href="{:U('Admin/delete?id='.$vo['uid'])}"><i class="fa fa-remove"></i>删除</a></td></tr>
+            </volist>
+            </tbody>
+        </table>
+        </form>
+    </div>
+</div>
+
+</block>

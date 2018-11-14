@@ -1,0 +1,44 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Insauth/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Insauth/update')}" onsubmit="return checkForm(this)">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="hash" value="{$data.hash}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th>昵称：</th><td>{$data.memname}</td></tr>
+        	<tr><th>机构名称：</th><td>{$data.surname}</td></tr>
+            <tr><th>对公账号：</th><td>{$data.publicaccount}</td></tr>
+            <tr><th>账户名：</th><td>{$data.accountname}</td></tr>
+            <tr><th>开户行：</th><td>{$data.bankname}</td></tr>
+            <tr><th>账户号：</th><td>{$data.accountno}</td></tr>
+            <tr><th>证件图片：</th><td><notempty name="data.image"><img src="{$data.image}" width="320" height="240" /></notempty></td></tr>
+            <tr><th>审核结果：</th><td><label><input type="radio" name="status" value="0" <eq name="data.status" value="0">checked</eq> /> 未审核</label> <label><input type="radio" name="status" value="1" <eq name="data.status" value="1">checked</eq> /> 通过</label> <label><input type="radio" name="status" value="2" <eq name="data.status" value="2">checked</eq> /> 未通过</label></td></tr>
+            <tr><th>审核说明</th><td><textarea class="memo" name="authmemo" cols="50" rows="3">{$data.authmemo}</textarea> </td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保 存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script>
+$.extend(basePage, {
+    onInit: function() {
+        var myThis = this;
+        var hash = '{$data.hash}';
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+    }
+});
+
+</script>
+</block>

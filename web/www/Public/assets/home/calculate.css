@@ -1,0 +1,59 @@
+.mainbox {width:740px;margin:0 auto; background-color:#fff; border:solid 1px #d0d0d0;padding:30px;background:#fbfbfb }
+    .mainbox-hd ul{border-bottom:solid 1px #d8d8d8}
+    .mainbox-hd li { float:left; width:170px; border:solid 1px #d8d8d8;border-bottom:none;margin-right:20px; font-size:14px; line-height:36px; text-align:center; }
+    .mainbox-hd li a { display:block; }
+    .mainbox-hd li.first { border-left:none; }
+    .mainbox-hd li.current {background:#d0121b; }
+    .mainbox-hd li.current a { color:#fff }
+    .mainbox-bd { padding:0 }
+    .mainbox-ft { padding:0 20px; line-height:60px; text-align:left; }
+    .mainbox-ft a { color:#01a0e9; }
+.mainbox-cont{width:580px;margin:0 auto}
+
+.formbox { width:440px; }
+.formbox input { vertical-align:middle; }
+.result{width:580px}
+.result .title{height:60px;line-height:60px;color:#999}
+.result .title span{color:#36a;font-size:26px;margin-right:20px}
+.res{width:580px;height:300px}
+.res .hktype{width:220px;float:left;margin-right:70px}
+.res .hktype .type{width:100%;height:40px;line-height:40px;color:#999;text-align:left}
+.res .hktype .type span{font-weight:bold;color:#000;margin-right:20px}
+
+
+.memo{width:100%;}
+.memo span{color:#d0121b;width:100%}
+.memo p{color:#999;line-height:25px}
+
+
+.tabs{margin-bottom:20px}
+.tabs li { float:left; width:150px; line-height:32px; text-align:center; }
+.tabs li i { display:inline-block; width:16px; height:16px; margin-right:3px; background:url(images/auth/icons.png) no-repeat left top; vertical-align:middle; zoom:1; }
+.tabs li .byaccount i { background-position:left top; }
+.tabs li.current .byaccount i { background-position:right top; }
+.tabs li .bymobile i { background-position:left bottom; }
+.tabs li.current .bymobile i { background-position:right bottom; }
+.tabs li.current a { color:#d0111b; }
+    
+.formtable{width:440px}
+.formtable tr{height:50px;line-height:50px}
+ .formtable th,
+    .formtable td { padding:5px 0; line-height:30px; }
+    .formtable th { padding:5px 20px; text-align:right;}
+    .formtable td.buttons { padding:20px 0; }
+.typetable{width:235px;border:solid 1px #d0d0d0}
+.typetable tr{height:50px;line-height:50px}
+ .typetable th,
+    .typetable td { padding:5px; line-height:30px;text-align:right;border:solid 1px #d0d0d0 }
+    .typetable th { width:70px;padding:5px 20px; text-align:right;background:#eee}
+    .typetable td.buttons { padding:20px 0; }
+	.typetable td span { color:#666; }
+
+.btn-login { width:195px; height:30px; background:#d0111b; border:none; color:#fff; text-align:center; }
+.edit{height:30px; border:solid 1px #d0d0d0; text-indent:5px;}
+.edit:focus { border-color:#d0111b; }
+
+.blank50{height:50px}
+.blank30{height:30px}
+.calfont{width:100%;height:50px;font-size:30px;line-height:20px;text-align:left}
+select{width:185px;height:30px;border:solid 1px #d0d0d0}

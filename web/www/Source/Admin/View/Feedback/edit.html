@@ -1,0 +1,28 @@
+<extend name="Public:dialog" />
+<block name="content">
+    <div class="freebox" style="width:480px">
+        <div class="freebox-head"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="javascript:;" class="close"><i class="fa fa-close"></i></a></em></div>
+        <div class="freebox-body">
+        <form id="mainform" method="post" action="{:U('Feedback/update')}">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <table class="freetable">
+            <input type="hidden" name="id" value="{$data.id}" />
+            <tbody>
+            <tr><th style="width:80px">标题：</th><td>{$data.title}</td></tr>
+            <tr><th>内容：</th><td>{$data.content}</td></tr>
+            <tr><th>公司：</th><td>{$data.company}</td></tr>
+            <tr><th>联系人：</th><td>{$data.surname}</td></tr>
+            <tr><th>电话：</th><td>{$data.phone}</td></tr>
+            <tr><th>QQ/Skype/微信：</th><td>{$data.im}</td></tr>
+            <tr><th>Email：</th><td>{$data.email}</td></tr>
+            <tr><th>发布时间：</th><td>{$data.addtime|date='Y-m-d H:i:s',###}</td></tr>
+            <tr><th>详细内容：</th><td><textarea class="memo" name="recontent" cols="50" rows="3">{$data.recontent}</textarea></td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button>&nbsp;&nbsp;<button type="button" class="button button-gray close"><i class="fa fa-close"></i>取消</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+</block>

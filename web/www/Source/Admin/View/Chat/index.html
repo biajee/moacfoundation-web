@@ -1,0 +1,41 @@
+<extend name="Public:base"/>
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em></em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+            <form method="post" action="{:U('Chat/batch')}">
+                <table class="listtable">
+                    <tbody>
+                    <tr>
+                        <th style="width:80px;">编号</th>
+                        <th style="width:120px;">会员</th>
+                        <th style="width:112px;">未读留言</th>
+                        <th>最新留言</th>
+                        <th style="width:300px;">操作</th>
+                    </tr>
+                    <volist name="list" id="item">
+                        <tr>
+                            <td><label><input type="checkbox" name="id[]" value="{$item.id}"/> {$item.id}</label></td>
+                            <td>{$item.other.username}</td>
+                            <td>{$item.noreadnum}</td>
+                            <td><notempty name="item.lastchattime">{$item.lastchattime|date='Y-m-d H:i',###}：{$item.lastmessage}</notempty></td>
+                            <td>&nbsp;<a href="{:U('Chat/detail?cid='.$item['otherid'])}" data-rel="dialog" data-options='{"width":"720px","height":"98%"}'><i class="fa fa-comment-o"></i>聊天</a>&nbsp;&nbsp;<!--<a
+                                    href="{:U('Friendlink/delete?id='.$item['id'])}" data-rel="delete"><i
+                                    class="fa fa-remove"></i>删除</a>--></td>
+                        </tr>
+                    </volist>
+                    <empty name="list">
+                        <tr>
+                            <td colspan="6"><p class="center">暂无信息</p></td>
+                        </tr>
+                    </empty>
+                    </tbody>
+                    <!--<tfoot><tr><td><label><input type="checkbox" data-rel="selectall" /> 全选</label>&nbsp;&nbsp;</td><td colspan="5"><label><input type="radio" name="op" value="show" checked="" /> 显示</label>&nbsp;<label><input type="radio" name="op" value="hide" /> 隐藏</label>&nbsp;<label><input type="radio" name="op" value="delete" /> 删除</label>&nbsp;&nbsp;<button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button></td></tr></tfoot>-->
+                </table>
+            </form>
+            <div class="pages">{$multi}</div>
+        </div>
+    </div>
+
+</block>

@@ -1,0 +1,13 @@
+@charset "utf-8";
+@import "common.css";
+body { background:url(images/loginbodybg.jpg) repeat-x center top;}
+#wrap {background:url(images/login.jpg) no-repeat center top;padding:0;}
+.logindiv {position:relative;margin:0 auto;width:800px;height:480px;}
+.logindiv form {position:absolute;left:80px;bottom:36px;width:640px; height:36px; text-align:center;}
+.logindiv form {height:32px;}
+.logindiv form {height:36px;font-size:14px;color:#555;font-weight:normal;}
+.logindiv .copyright { position:absolute;left:400px;top:365px;width:275px;height:32px;color:#f9f9f9;line-height:32px;text-align:center; }
+.edit { height:28px;line-height:28px;border:solid 1px #999999;background:#FFF;margin:2px;padding:0 2px; outline: none; }
+.edit:focus { border:solid 1px #01aaed; }
+.button { height:30px; background:#2b7dbc; border:none; padding:0 10px; color:#fff; cursor:pointer; }
+.button:hover { background:#6fb3e0; }

@@ -1,0 +1,124 @@
+<extend name="Public:base"/>
+<block name="navbar">
+	<h3><i class="fa fa-list"></i>{$caption}</h3><em>
+	<a href="{:U('Question/add')}"><i class="fa fa-plus"></i>增加问卷</a>&nbsp;&nbsp;</em></block>
+</block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+            <div class="panel">
+                <form method="get" action="{:U('Question/index')}">
+                    <table class="searchtable">
+                        <tbody>
+                        <!--<tr>
+                            <th>会员ID：</th>
+                            <td><input type="text" name="uid" class="edit" value="{:I('uid')}"/></td>
+                            <th>姓名：</th>
+                            <td colspan=""><input type="text" name="name" class="edit" value="{:I('name')}" size="36" placeholder="报名人姓名精准查询"/></td>
+                        </tr>-->
+                        <tr>
+                            <th>标题：</th>
+                            <td colspan=""><input type="text" name="title" class="edit" value="{:I('title')}" size="36" placeholder="标题模糊查询"/></td>
+                            <td colspan="2">
+                                <button type="reset" class="button button-gray">重 置</button>
+                                <button class="button" type="submit"><i class="fa fa-search"></i> 搜 索</button>
+                            </td>
+                            <!--<th>状态：</th>
+                            <td>
+                                <select name="status">
+                                    <option value="">选择</option>
+                                    <volist name="statusList" id="vo">
+                                        <option value="{$key}"
+                                        <if condition="($Think.get.status neq '') && ($key heq $_GET['status'])">
+                                            selected
+                                        </if>
+                                        >{$vo.title}</option>
+                                    </volist>
+                                </select>
+                            </td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <form method="post" action="{:U('Question/batch')}">
+                <table class="listtable">
+                    <thead>
+                    <tr>
+                    	<th style="width:100px;">编号</th>
+                        <th style="width:300px;">标题</th>
+                        <th style="width:90px;">功能页面链接</th>
+                        <th style="width:90px;">发布时间</th>
+                        <th style="width: 160px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="list" id="item">
+                        <tr>
+                            <td><label><input type="checkbox" name="id[]" value="{$item.id}"/> {$item.id}</label></td>
+                            <td>{$item.title}</td>
+                            <td>/question/index?id={$item.id}</td>
+                            <td>{$item.addtime|date='Y-m-d H:i:s',###}</td>
+                            <td>&nbsp;
+                                <a href="{:U('Question/detail?id='.$item['id'])}"><i class="fa fa-edit"></i>查看</a>&nbsp;&nbsp;
+                                <a href="{:U('Question/edit?id='.$item['id'])}"><i class="fa fa-edit"></i>编辑标题</a>&nbsp;&nbsp;
+                                <a href="{:U('Question/add_q?id='.$item['id'])}"><i class="fa fa-plus"></i>新增问题</a>&nbsp;&nbsp;
+                                <notempty name="perview.delete"><a href="{:U('Question/delete?id='.$item['id'])}" data-rel="delete"><i class="fa fa-remove"></i>删除</a></notempty>
+                            </td>
+                        </tr>
+                    </volist>
+                    <empty name="list">
+                        <tr>
+                            <td colspan="12"><p class="center">暂无信息</p></td>
+                        </tr>
+                    </empty>
+                    </tbody>
+                    <tfoot>
+                    <!--<tr>
+                        <td><label><input type="checkbox" data-rel="selectall"/> 全选</label>&nbsp;&nbsp;</td>
+                        <td colspan="11">
+                            <label><input type="radio" name="op" value="check" checked /> 审核</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="op" value="top"/> 置顶</label>&nbsp;
+                            <button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button>
+                        </td>
+                    </tr>-->
+                    </tfoot>
+                </table>
+            </form>
+            <div class="pages">{$multi}</div>
+        </div>
+    </div>
+
+</block>
+<block name="script">
+    <script>
+        $.extend(basePage, {
+            onInit: function () {
+                var that = this;
+                that.initSelect();
+            },
+            initSelect: function () {
+                var that = this;
+                that.districtList = {$districtList|json_encode};
+                that.realmList = {$realmList|json_encode};
+                var country = "{$Think.get.country}";
+                var city = "{$Think.get.city}";
+                var realm = "{$Think.get..realm}";
+                var realm2 = "{$Think.get..realm2}";
+                that.fillCountry('#sel-country', country);
+                that.fillCity('#sel-city', country, city);
+                that.fillRealm('#sel-realm', realm);
+                that.fillRealm2('#sel-realm2', realm, realm2);
+                $('#sel-country').change(function () {
+                    var country = this.options[this.selectedIndex].value;
+                    that.fillCity('#sel-city', country, '');
+                });
+                $('#sel-realm').change(function () {
+                    var realm = this.options[this.selectedIndex].value;
+                    that.fillRealm2('#sel-city', realm, '');
+                });
+            }
+        });
+    </script>
+</block>

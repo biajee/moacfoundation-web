@@ -1,0 +1,102 @@
+<extend name="Public:base" />
+<block name="style"><link rel="stylesheet" href="__CSS__/entrust.css" /> </block>
+<block name="main">
+	<div class="section">
+		<div class="crumbs">
+			当前位置：<volist name="crumbs" id="vo"><if condition="$key gt 0">&nbsp;&gt;&nbsp;</if><empty name="vo.url">{$vo.title}<else/><a href="{$vo.url}">{$vo.title}</a></empty></volist>
+		</div>
+		<div class="form">
+			<form id="mainform" method="post" action="{:U('Entrust/index')}">
+				<table class="formtable">
+					<tr>
+						<th colspan="2" class="info">房源基本信息</th>
+					</tr>
+					<tr>
+						<th style="width:80px"><em>*</em>小区名称</th>
+						<td><input type="text" name="title" class="edit" size="50"/></td>
+					</tr>
+					<tr>
+						<th><em>*</em>房屋户型</th>
+						<td>
+						<input type="text" class="edit" name="bedroom" size="7 " maxlength="2" value="" />&nbsp;室
+						<input type="text" class="edit" name="hall" size="7" maxlength="2" value="" />&nbsp;厅
+						<input type="text" class="edit" name="bathroom" size="7" maxlength="2" value="" />&nbsp;卫
+						<input type="text" class="edit" name="grossarea" size="7" maxlength="100" value="" />&nbsp;平米
+						<span class="Validform_checktip"></span>
+						</td>
+					</tr>
+					<tr>
+						<th><em>*</em>总价</th>
+						<td><input type="text" name="amount" class="edit" size="46"/>&nbsp;&nbsp;万</td>
+					</tr>
+					<tr>
+						<th colspan="2" class="info">联系方式</th>
+					</tr>
+					<tr>
+						<th><em>*</em>联系电话</th>
+						<td><input type="text" name="phone" class="edit" size="50"/></td>
+					</tr>
+					<tr>
+						<th><em>*</em>验证码</th>
+						<td><input type="text" name="checkcode" class="edit" size="35"/>&nbsp;&nbsp;<a class="btn-sms" href="javascript:;">发送验证码</a></td>
+					</tr>
+					<tr>
+						<th><em>*</em>联系人</th>
+						<td><input type="text" name="contact" class="edit" size="50"/></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td><input type="submit" value="确定" class="btn-ok" size="50"/></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+</block>
+<block name="script">
+	<script src="__LIB__/Validform_v5.3.2_min.js"></script>
+    <script>
+        Page.initValidate = function() {
+            var validform = $('#mainform').Validform({
+                tiptype: 3,
+              
+            });
+            var checkUrl = "{:U('Register/validname')}";
+            var smsUrl = "{:U('Register/validmobile')}"
+            var codeUrl = "{:U('Register/validcode')}"
+            validform.addRule([
+                {ele:'input[name=title]',datatype:'*2-20', errormsg:'姓名至少两个字符',nullmsg:'请输入姓名'},
+				{ele:'input[name=bedroom]',datatype:'n1-2', errormsg:'格式错误', nullmsg:'请输入室数'},
+				{ele:'input[name=hall]',datatype:'n1-2', errormsg:'格式错误', nullmsg:'请输入厅数'},
+				{ele:'input[name=bathroom]',datatype:'n1-2', errormsg:'格式错误', nullmsg:'请输入卫数'},
+				{ele:'input[name=grossarea]',datatype:'*1-6', errormsg:'格式错误', nullmsg:'请输入建筑面积'},
+				{ele:'input[name=amount]',datatype:'n1-10', errormsg:'格式错误', nullmsg:'请输入总价'},
+                {ele:'input[name=phone]',datatype:'n11-11', errormsg:'手机号格式错误', nullmsg:'请输入手机号'},
+                {ele:'input[name=checkcode]',datatype:'n6-6', ajaxurl:codeUrl, errormsg:'请输入6位验证码',errormsg:'请输入验证码'}
+            ]);
+        }
+        Page.initSms = function() {
+            $('.btn-sms').click(function() {
+                var url = "{:U('Plus/sms')}";
+                var mobile = $('[name=phone]').val();
+                mobile = $.trim(mobile);
+                if (mobile =='' || mobile.length != 11) {
+                    Page.showMessage('请输入有效的手机号');
+                    return;
+                }
+                var param = { hash:'{$hash}', mobile:mobile };
+                $.get(url, param, function(res){
+                    Page.showMessage(res.message);
+                })
+            });
+        }
+        Page.initControl = function() {
+            $('select').iSelect();
+        }
+        Page.initCompnent = function() {
+            this.initControl();
+            this.initValidate();
+            this.initSms();
+        }
+    </script>
+</block>

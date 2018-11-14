@@ -1,0 +1,22 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em><a href="{:U('Maillist/add')}"><i class="fa fa-plus"></i>增加</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form method="post" action="{:U('Maillist/batch')}">
+        <table class="listtable">
+            <tbody>
+            <tr><th style="width:80px;">编号</th><th style="width:120px;">姓名</th><th style="width:100px;">电话</th><th style="width:120px">邮件地址</th><th style="width:100px;">发布时间</th><th style="width:60px;">状态</th><th>操作</th></tr>
+            <volist name="list" id="item">
+            <tr><td><label><input type="checkbox" name="id[]" value="{$item.id}" /> {$item.id}</label></td><td>{$item.surname}</td><td>{$item.phone}</td><th>{$item.email}</th><td>{$item.addtime|date='Y-m-d H:i',###}</td><td>&nbsp;<a href="{:U('Maillist/edit?id='.$item['id'])}"><i class="fa fa-edit"></i>编辑</a>&nbsp;&nbsp;<a href="{:U('Maillist/delete?id='.$item['id'])}" data-rel="delete"><i class="fa fa-remove"></i>删除</a></td></tr>
+            </volist>
+            </tbody>
+            <tfoot><tr><td><label><input type="checkbox" data-rel="selectall" /> 全选</label>&nbsp;&nbsp;</td><td colspan="5"><label><input type="radio" name="op" value="delete" /> 删除</label>&nbsp;&nbsp;<button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button></td></tr></tfoot>
+        </table>
+        </form>
+        <div class="pages">{$multi}</div>
+        </div>
+    </div>
+    
+</block>

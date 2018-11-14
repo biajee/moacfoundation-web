@@ -1,0 +1,32 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Apply/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <table class="formtable">
+            <input type="hidden" name="id" value="{$data.id}" />
+            <input type="hidden" name="hash" value="{$data.hash}" />
+            <tbody>
+            <tr><th style="width:120px;">会员：</th><td>{$id}</td>
+            </tr>
+            <tr><th>提交时间：</th><td>{$data.firstdate}</td></tr>
+            <tr><th>标题：</th><td>{$data.title}</td></tr>
+            <tr><th>照片：</th><td><img src="{$data.avatar}"></img></td></tr>
+            <tr><th>姓名：</th><td>{$data.name}</td></tr>
+       		<tr><th>手机：</th><td>{$data.phone}</td></tr>
+       		<tr><th>成人票：</th><td>{$data.adult}</td></tr>
+       		<tr><th>儿童票：</th><td>{$data.c_ticket}</td></tr>
+       		<tr><th>应付金额：</th><td>{$data.payable}</td></tr>
+       		<tr><th>已付金额：</th><td>{$data.payed}</td></tr>
+       		<tr><th>备注：</th><td>{$data.remarks}</td></tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        </div>
+    </div>
+</block>
+<block name="script">
+</block>

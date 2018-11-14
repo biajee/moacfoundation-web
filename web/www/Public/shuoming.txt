@@ -1,0 +1,11 @@
+文件目录:\system\modules\mobile\ajax.action.php
+
+
+
+
+若PHP环境不支持PHP POST则用下面代码  直接替换文件
+
+必须开启;extension=php_openssl.dll 组件
+
+一般情况下在php.ini里边 把分号去掉  然重新启动IIS或者阿帕奇
+

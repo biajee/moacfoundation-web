@@ -1,0 +1,110 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Arctype/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Arctype/update')}">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="hash" value="{$data.hash}" />
+        <input type="hidden" name="oldupid" value="{$data.upid}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th style="width:120px;">上级栏目：</th><td><select name="upid"><option value="0">顶级栏目</option>
+            <volist name="typelist" id="vo">
+            <option value="{$vo.id}" <eq name="data.upid" value="$vo.id"> selected</eq>>{$vo.level|str_repeat='　',###}　├{$vo.title}</option>
+            </volist>
+            </select></td>
+            </tr>
+            <tr><th><em class="required">*</em>栏目名称：</th><td><input type="text" class="edit" name="title" value="{$data.title}" size="50" maxlength="50" /> </td></tr>
+            <tr><th><em class="required">*</em>栏目名称(副)：</th><td><input type="text" class="edit" name="subtitle" value="{$data.subtitle}" size="50" maxlength="50" /> </td></tr>
+            <tr><th>栏目标识：</th><td><input type="text" class="edit" name="code" value="{$data.code}" size="50" maxlength="50" /></td></tr>
+            <tr><th>栏目模型：</th><td><select name="model"><volist name="modellist" id="vo">
+            <option value="{$key}" <eq name="data.model" value="$key"> selected</eq>>{$vo}</option>
+            </volist></select></td></tr>
+        	<tr><th>封面模板：</th><td><input type="text" class="edit" name="indextpl" size="50" maxlength="100" value="{$data.indextpl}" /> <em>系统保留,可不设置</em></td></tr>
+        	<tr><th>列表模板：</th><td><input type="text" class="edit" name="listtpl" size="50" maxlength="100" value="{$data.listtpl}" /> <em>系统保留,可不设置</em></td></tr>
+        	<tr><th>列表条数：</th><td><input type="text" class="edit" name="pagesize" value="{$data.pagesize}" size="20" maxlength="20" /></td></tr>
+            <tr><th>详细模板：</th><td><input type="text" class="edit" name="detailtpl" size="50" maxlength="100" value="{$data.detailtpl}" /> <em>系统保留,可不设置</em></td></tr>
+        	<tr><th>链接类型：</th><td><select name="linktype"><volist name="linktypelist" id="vo"><option value="{$key}" <eq name="data.linktype" value="$key">selected</eq>>{$vo.title}</option></volist></select></td></tr>
+        	<tr><th>链接地址：</th><td><input type="text" class="edit" name="linktpl" size="50" maxlength="100" value="{$data.linktpl}" /> <span class="red">*</span><em>例如 News/index?cid={cid} 系统会替换{cid}替换为栏目编号</em></td></tr>
+        	<tr><th>SEO关键字：</th><td><input type="text" class="edit" name="seokey" size="50" maxlength="20" value="{$data.seokey}" /><span class="gray">不超过5o字</span></td></tr>
+            <tr><th>SEO描述：</th><td><input type="text" class="edit" name="seodesc" size="50" maxlength="50" value="{$data.seodesc}" /><span class="gray">不超过50字</span></td></tr>
+            <tr><th>排序：</th><td><input type="text" class="edit" name="sortno" size="8" maxlength="16" value="{$data.sortno}" /></td></tr>
+        	<tr><th>浏览数：</th><td><input type="text" class="edit" name="viewnum" size="50" maxlength="100" value="{$data.viewnum}" /></td></tr>
+            <tr><th>点赞数：</th><td><input type="text" class="edit" name="praisenum" size="50" maxlength="100" value="{$data.praisenum}" /></td></tr>
+            <tr><th>分享数：</th><td><input type="text" class="edit" name="sharenum" size="50" maxlength="100" value="{$data.sharenum}" /></td></tr>
+            <tr><th>其他选项：</th><td><label><input type="checkbox" name="ishidden" value="1" <eq name="data.ishidden" value="1"> checked</eq> /> 隐藏</label> <label><input type="checkbox" name="ismenu" value="1" <eq name="data.ismenu" value="1"> checked</eq> /> 菜单</label> <label><input type="checkbox" name="ishot" value="1" <eq name="data.ishot" value="1"> checked</eq> /> 推荐</label></td></tr>
+            <tr><th>栏目简介：</th><td><textarea class="memo" name="memo" cols="112" rows="3">{$data.memo}</textarea><p class="gray">不超过500字</p></td></tr>
+            <tr><th>栏目图标：</th><td><input type="text" class="edit" id="icon" name="icon" size="50" maxlength="200" value="{$data.icon}" /> <input type="button" id="uploadButton2" value="上传图片" /></td></tr>
+        	<tr><th>默认图片：</th><td><input type="text" class="edit" id="image" name="image" size="50" maxlength="200" value="{$data.image}" /> <input type="button" id="uploadButton" value="上传图片" /></td></tr>
+        	<tr><th>单页内容：</th><td><textarea class="memo" id="content" name="content" cols="112" rows="8">{$data.content}</textarea></td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+
+</block>
+<block name="script">
+<script src="__LIB__/kindeditor/kindeditor.js"></script>
+<script src="__LIB__/kindeditor/lang/zh-CN.js"></script>
+<script>
+$.extend(basePage,{
+    onInit: function() {
+        var editor;
+        var uploadbutton,uploadbutton2;
+        var K = KindEditor;
+        editor = K.create('#content', {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            urlType:'absolute',
+            uploadJson : "{:U('Misc/upload?hash='.$data['hash'])}",
+        });
+        uploadbutton = K.uploadbutton({
+            button : K('#uploadButton')[0],
+            fieldName : 'imgFile',
+            url : "{:U('Misc/upload?dir=image&hash='.$data['hash'])}",
+            afterUpload : function(data){
+                if (data.error==1)
+                    alert("上传错误:"+data.message);
+                else {
+                    $("#image").val(data.url);
+                }
+            },
+        });
+        uploadbutton.fileBox.change(function(e) {
+            uploadbutton.submit();
+        });
+        uploadbutton2 = K.uploadbutton({
+            button : K('#uploadButton2')[0],
+            fieldName : 'imgFile',
+            url : "{:U('Misc/upload?dir=image&hash='.$data['hash'])}",
+            afterUpload : function(data){
+                if (data.error==1)
+                    alert("上传错误:"+data.message);
+                else {
+                    $("#icon").val(data.url);
+                }
+            },
+        });
+        uploadbutton2.fileBox.change(function(e) {
+            uploadbutton2.submit();
+        });
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            {ele:'input[name=title]',datatype:'*', nullmsg:'请输入栏目名称'},
+            {ele:'input[name=sortno]',datatype:'n', nullmsg:'请输入排序值', errormsg:'必须为整数'},
+        ]);
+
+    }
+
+});
+</script>
+</block>

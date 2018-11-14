@@ -1,0 +1,30 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em><a href="{:U('Goods/add')}"><i class="fa fa-plus"></i>增加</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <div class="panel"><form method="get" action="{:U('Goods/index')}">供货商：<select name="supid"><option value="0">请选择</option>
+            <volist name="supplier" id="vo">
+            	<option value="{$vo.id}" <if condition="$vo['id'] eq $_GET['supid']">selected</if>>{$vo.title}</option>
+            </volist>
+            </select>&nbsp;OE编码：<input type="text" name="oe" class="edit" value="{:I('oe')}" />&nbsp;&nbsp;车型：<input type="text" name="brand" class="edit" value="{:I('brand')}" />&nbsp;&nbsp;<button type="submit" class="button button-gray"><i class="fa fa-search"></i>搜索</button></form></div>
+        <form method="post" action="{:U('Goods/batch')}">
+        <table class="listtable">
+            <tr><th style="width:80px;">编号</th><th style="width:150px;">名称</th><th style="width:100px;">供货商</th><th>出厂编码</th><th style="width:80px;">数量</th><th style="width:80px;">单价</th><th style="width:112px;">上架时间</th><th style="width:60px;">状态</th><th>操作</th></tr>
+            <tbody>
+            <volist name="list" id="item">
+            <tr><td><label><input type="checkbox" name="id[]" value="{$item.id}" /> {$item.id}</label></td><td><a href="{:U('Goods/edit?id='.$item['id'])}">{$item.title}</a></td><td>{$item.supplier.title}</td><td>{$item.faccode}</td><td>{$item.number}</td><td>{$item.price}<td>{$item.addtime|date='Y-m-d H:i',###}</td><td><if condition="$item.status eq 0">已下架<else />上架中</if></td><td>&nbsp;<a href="{:U('Goods/edit?id='.$item['id'])}"><i class="fa fa-edit"></i>编辑</a>&nbsp;&nbsp;<a href="{:U('Goods/delete?id='.$item['id'])}" data-rel="delete"><i class="fa fa-remove"></i>删除</a></td></tr>
+            </volist>
+            <empty  name='list'>
+            <tr><td colspan="9"><p class="center">暂无信息</p></td></tr>
+            </empty>
+            </tbody>
+            <tfoot><tr><td><label><input type="checkbox" data-rel="selectall" /> 全选</label>&nbsp;&nbsp;</td><td colspan="8"><label><input type="radio" name="op" value="hot" checked="" /> 推荐</label>&nbsp;<label><input type="radio" name="op" value="unhot" /> 取消推荐</label>&nbsp;<label><input type="radio" name="op" value="up" /> 上架</label>&nbsp;<label><input type="radio" name="op" value="down" /> 下架</label>&nbsp;<label><input type="radio" name="op" value="delete" /> 删除</label>&nbsp;&nbsp;<button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button></td></tr></tfoot>
+        </table>
+        </form>
+        <div class="pages">{$multi}</div>
+        </div>
+    </div>
+    
+</block>

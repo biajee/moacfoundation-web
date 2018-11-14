@@ -1,0 +1,260 @@
+<?php
+return array(
+    array(
+        'title'=>'常用功能',
+        'icon'=>'list',
+        'code'=>'home',
+        'link'=>'Home/index',
+        'submenu'=>array(
+            array(
+                'title'=>'管理首页',
+                'icon'=>'home',
+                'link'=>'Home/index',
+            ),
+            array(
+                'title'=>'网站设置',
+                'icon'=>'search',
+                'link'=>'Setting/index'
+            ),
+            array('title'=>'会员管理',
+                'icon' => 'user',
+                'link'=>'Member/index',
+            ),
+            array('title'=>'交易管理',
+                'icon' => 'shopping-cart',
+                'link'=>'Trade/index',
+            ),
+            array('title'=>'发布管理',
+                'icon' => 'newspaper-o',
+                'link'=>'Info/index',
+            ),
+            array('title'=>'在线客服',
+                'icon' => 'comments',
+                'link'=>'Chat/index',
+            ),
+            array('title'=>'报名管理',
+                'icon' => 'table',
+                'link'=>'Apply/index',
+            ),
+            array('title'=>'问卷管理',
+                'icon' => 'table',
+                'link'=>'Question/qa',
+            ),
+            
+        ),
+    ),
+    array(
+        'title'=>'系统管理',
+        'icon'=>'cogs',
+        'code'=>'system',
+        'link'=>'Setting/index',
+        'submenu'=>array(
+            array(
+                'title'=>'网站设置',
+                'icon'=>'search',
+                'link'=>'Setting/index'
+            ),
+            array('title'=>'角色管理',
+                  'icon'=>'graduation-cap',
+                  'link'=>'Role/index',
+                  'addon'=>array(
+                    'title'=>'增加',
+                    'link'=>'Role/add'
+                  ),
+            ),
+            array('title'=>'管理账号',
+                  'icon'=>'user-secret',
+                  'link'=>'Admin/index',
+                  'addon'=>array(
+                    'title'=>'增加',
+                    'link'=>'Admin/add'
+                  ),
+            ),
+            array('title'=>'管理日志',
+                  'icon'=>'keyboard-o',
+                  'link'=>'Adminlog/index',
+            ),
+            array('title'=>'缓存管理',
+                'icon'=>'refresh',
+                  'link'=>'Cache/index',
+            ),
+
+            array('title'=>'列表管理',
+                'icon'=>'list-ul',
+                'link'=>'List/index',
+            ),
+        ),
+    ),
+    array(
+        'title'=>'信息管理',
+        'icon'=>'list-alt',
+        'link'=>'Article/index',
+        'submenu'=>array(
+            array(
+                'title'=>'栏目管理',
+                'icon'=>'th',
+                'link'=>'Arctype/index',
+            ),
+            array(
+                'title'=>'文章管理',
+                'icon'=>'file-word-o',
+                'link'=>'Article/index'
+            ),
+            array(
+                'title'=>'领域信息',
+                'icon'=>'sitemap',
+                'link'=>'Realm/index',
+                'addon'=>array(
+                    'title'=>'增加',
+                    'link'=>'Realm/add'
+                  ),
+            ),
+            array(
+                'title'=>'地区信息',
+                'icon'=>'building-o',
+                'link'=>'District/index',
+                'addon'=>array(
+                    'title'=>'增加',
+                    'link'=>'District/add'
+                  ),
+            ),
+            array(
+                'title'=>'动态菜单',
+                'icon'=>'list',
+                'link'=>'Dynamiclink/index',
+                'addon'=>array(
+                    'title'=>'增加',
+                    'link'=>'Dynamiclink/add'
+                  ),
+            ),
+            array(
+                'title'=>'banner管理',
+                'icon'=>'list',
+                'link'=>'Banner/index',
+                'addon'=>array(
+                    'title'=>'增加',
+                    'link'=>'Banner/add'
+                  ),
+            ),
+            array(
+                'title'=>'发布类型管理',
+                'icon'=>'list',
+                'link'=>'Issuetype/index',
+                'addon'=>array(
+                    'title'=>'增加',
+                    'link'=>'Issuetype/add'
+                  ),
+            ),
+            array(
+                'title'=>'类型功能列表',
+                'icon'=>'list',
+                'link'=>'Action/index',
+                'addon'=>array(
+                    'title'=>'增加',
+                    'link'=>'Action/add'
+                  ),
+            ),
+            array(
+                'title'=>'问卷列表',
+                'icon'=>'list',
+                'link'=>'Question/index',
+                'addon'=>array(
+                    'title'=>'增加',
+                    'link'=>'Question/add'
+                  ),
+            ),
+        ),
+    ),
+    array(
+        'title' => '业务管理',
+        'icon' => 'suitcase',
+        'link' => 'Member/index',
+        'submenu' => array(
+            array('title'=>'会员管理',
+                'icon' => 'user',
+                'link'=>'Member/index',
+                'addon' => array('title'=>'增加','link'=>'Member/add')
+            ),
+            array('title'=>'个人认证',
+                'icon' => 'credit-card',
+                'link'=>'indauth/index',
+            ),
+            array('title'=>'机构认证',
+                'icon' => 'gift',
+                'link'=>'insauth/index',
+            ),
+            array('title'=>'交易管理',
+                'icon' => 'shopping-cart',
+                'link'=>'Trade/index',
+                ),
+
+            array('title'=>'发布管理',
+                'icon' => 'newspaper-o',
+                'link'=>'Info/index',
+                ),
+            array('title'=>'评论管理',
+                'icon'=>'comments',
+                'link'=>'Comment/index'),
+            array('title'=>'账户记录',
+                'icon' => 'credit-card',
+                'link'=>'Daybook/index',
+                ),
+            array('title'=>'积分记录',
+                'icon' => 'gift',
+                'link'=>'Credit/index',
+                ),
+
+            array('title'=>'留言反馈',
+                'icon'=>'comment-o',
+                'link'=>'Feedback/index'),
+            array('title'=>'在线客服',
+                'icon' => 'comments',
+                'link'=>'Chat/index',
+            ),
+            array('title'=>'发送通知',
+                'icon' => 'bullhorn',
+                'link'=>'Notify/index',
+            ),
+        ),
+    ),
+    array(
+        'title'=>'模块管理',
+        'icon'=>'th-large',
+        'link'=>'Block/index',
+        'submenu'=>array(
+            array('title'=>'版块组管理',
+                'icon'=>'columns',
+                'link'=>'Blocktype/index',
+                'addon'=>array('title'=>'增加','link'=>'Blocktype/add')),
+            array('title'=>'版块管理',
+                'icon'=>'th',
+                'link'=>'Block/index',
+                'addon'=>array('title'=>'增加','link'=>'Block/add')),
+            array('title'=>'广告组管理',
+                'icon'=>'columns',
+                'link'=>'Advtype/index',
+                'addon'=>array('title'=>'增加','link'=>'Advtype/add')),
+            array('title'=>'广告管理',
+                'icon'=>'buysellads',
+                'link'=>'Advert/index',
+                'addon'=>array('title'=>'增加','link'=>'Advert/add')),
+            array('title'=>'友情链接',
+                'icon'=>'link',
+                 'link'=>'Friendlink/index',
+                'addon'=>array('title'=>'增加','link'=>'Friendlink/add')),
+            array('title'=>'邮件列表',
+                'icon'=>'envelope-o',
+                 'link'=>'Maillist/index',
+                'addon'=>array('title'=>'增加','link'=>'Maillist/add')),
+            array('title'=>'留言反馈',
+                'icon'=>'comments',
+                'link'=>'Feedback/index'),
+            array('title'=>'招聘信息',
+                'icon'=>'user-plus',
+                'link'=>'Recruit/index'),
+            array('title'=>'投票管理',
+                'icon'=>'bar-chart',
+                'link'=>'Vote/index'),
+        ),
+    )
+);

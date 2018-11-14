@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html { width:640px; height:420px; margin:0; padding:0; }
+        body { font-size:12px; line-height:1.5em; color:#555; }
+        div { margin:0; padding:0; }
+        a { text-decoration: none; }
+        .wrap { padding:10px; }
+        #allmap {width: 100%;height: 366px;overflow: hidden;margin:0;font-family:"微软雅黑";}
+        #info { line-height:36px; }
+        .action { padding:5px; line-height:32px; text-align: center; }
+        .edit { height:24px; border:solid 1px #ddd; }
+        .button, button { height:28px; padding:0 10px; background:#ddd; border:none; box-shadow:0 1px 2px #999; }
+        .btn-search { height:24px; }
+        .btn-ok { background:#6fb3e0; }
+        #info .edit {  width:150px; }
+        .close { float:right; font-size:24px; line-height:30px; }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4wijIHhA4N71d3vDmL0b6IRa"></script>
+    <title>地图展示</title>
+</head>
+<body>
+<div class="wrap">
+    <div id="info"><input type="text" class="edit" name="keyword" value="天津" /> <input type="button" class="button btn-search" value="搜索">&nbsp;&nbsp;<span class="tip">地图上点击标注</span><a href="javascript:;" class="close" title="关闭">×</a></div>
+    <div id="allmap"></div>
+    <div class="action"><button type="button" class="btn btn-ok">确定</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-cancel">取消</button> </div>
+</div>
+</body>
+</html>
+<script src="__LIB__/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        // 百度地图API功能
+        var map = new BMap.Map("allmap");    // 创建Map实例
+        var marker = null;
+        var data = null;
+        <notempty name="data">
+        data = {$data|json_encode};
+        </notempty>
+        if (data != null) {
+            var curPoint = new BMap.Point(data.lng, data.lat);
+            map.centerAndZoom(curPoint, data.zoom);
+            marker = new BMap.Marker(curPoint);
+            map.addOverlay(marker);
+            marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+        } else {
+            map.centerAndZoom('天津', 11);
+        }
+        map.addControl(new BMap.ScaleControl());   //添加地图类型控件
+        map.addControl(new BMap.NavigationControl());
+        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+        map.addEventListener("click",function(e){
+            var zoom = map.getZoom();
+            data = {lng: e.point.lng, lat: e.point.lat, zoom: zoom};
+            var htm = '经度：' + e.point.lng + ' 纬度：' + e.point.lat + ' 缩放等级：' + zoom;
+            $('#info .tip').html(htm);
+            if (marker == null) {
+                marker = new BMap.Marker(e.point);
+                map.addOverlay(marker);
+            } else
+                marker.setPosition(e.point);
+        });
+        var local = new BMap.LocalSearch(map, {
+            renderOptions:{map: map}
+        });
+        $('.btn-search').click(function(){
+            var keyword = $('input[name="keyword"]').val();
+            if (keyword !='') {
+                local.search(keyword);
+            }
+        });
+        $('.btn-ok').click(function(){
+            if (data == null)
+                    return;
+            var win = window.parent;
+            win.onMarkOK(data);
+        });
+        $('.btn-cancel,.close').click(function(){
+            var win = window.parent;
+            win.onMarkCancel();
+        });
+    });
+
+</script>

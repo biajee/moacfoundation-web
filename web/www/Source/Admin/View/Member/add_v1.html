@@ -1,0 +1,49 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-wrench"></i>增加会员</h3><em><a href="{:U('Member/index')}"><i class="fa fa-list"></i>列表</a></em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-body">
+            <form id="mainform" method="post" action="{:U('Member/save')}">
+            <input type="hidden" name="id" value="" />
+            <table class="formtable">
+                <tbody>
+                <tr><th style="width:100px;">用户名：</th><td><input type="text" class="edit" id="username" name="username" value="{$data.username}" size="30" maxlength="20" /></td></tr>
+                <tr><th>密码：</th><td><input type="password" class="edit" id="password" name="password" size="30" maxlength="20" /> <em></em></td></tr>
+            	<tr><th>重复密码：</th><td><input type="password" class="edit" id="repassword" name="repassword" size="30" maxlength="100" value="" /></td></tr>
+                <tr>
+                    <th>国家区号：</th>
+                    <td><input type="text" class="edit" name="countrycode" value="" size="50"
+                               maxlength="100"/> <em>如+86</em> </td>
+                </tr>
+                <tr>
+                    <th>手机号：</th>
+                    <td><input type="text" class="edit" name="mobile" value="" size="50"
+                               maxlength="100"/> <em>不带区号</em> </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+                </tfoot>
+            </table>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script>
+$.extend(basePage, {
+    onInit: function() {
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        var checkUrl = "{:U('Member/check')}";
+        validform.addRule([
+            {ele:'input[name=username]',datatype:'*3-20', ajaxurl:checkUrl, nullmsg:'请输入用户名'},
+            {ele:'input[name=password]',datatype:'*3-20', nullmsg:'请输入密码'},
+            {ele:'input[name=repassword]',datatype:'*',recheck:'password',errormsg:'两次输入密码不一致'}
+        ]);
+    }
+});
+</script>
+</block>

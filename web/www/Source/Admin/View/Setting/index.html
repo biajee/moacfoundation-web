@@ -1,0 +1,37 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-wrench"></i>系统设置</h3><em></em></block>
+<block name="content">
+<form method="post" action="{:U('Setting/update')}">
+    <input type="hidden" name="type" value="{$type}" />
+    <div class="tabbox">
+        <div class="tabbox-head">
+            <ul class="clearfix">
+            <volist name="types" id="vo">
+                <li <if condition="$vo.id eq $type">class="current"</if>><a href="{:U('Setting/index?type='.$vo['id'])}">{$vo.title}</a></li>
+            </volist>
+            </ul>
+        </div>
+        <div class="tabbox-body">
+            <table class="formtable">
+                <tbody>
+                <volist name="list" id="vo">
+                <tr><th style="width:120px;">{$vo.title}：</th>
+                <td>
+                <switch name="vo.type">
+                <case value="text"><input type="text" class="edit" name="{$vo.var}" size="{$vo.size}" maxlength="{$vo.maxlen}" value="{$vo.val}" /></case>
+                <case value="textarea"><textarea name="{$vo.var}" class="memo" cols="80" rows="3">{$vo.val}</textarea></case>
+                <case value="radio"><label><input type="radio" name="{$vo.var}" value="1"<if condition="$vo.val eq 1"> checked</if>/> 是</label> <label><input type="radio" name="{$vo.var}" value="0"<if condition="$vo.val eq 0"> checked</if> /> 否</label></case>
+                <case value="radio1"><label><input type="radio" name="{$vo.var}" value="1"<if condition="$vo.val eq 1"> checked</if>/>每行三格</label> <label><input type="radio" name="{$vo.var}" value="2"<if condition="$vo.val eq 2"> checked</if> />纵向列表</label></case>
+                </switch> <em>{$vo.desc}</em>
+                </td>
+                </tr>
+                </volist>
+                </tbody>
+                <tfoot>
+                <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i> 保存</button></td></tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</form>
+</block>

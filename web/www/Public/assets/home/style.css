@@ -1,0 +1,279 @@
+.navbar-brand {
+	background: url('images/hiwibanglogo.png') no-repeat left center;
+	text-indent: -999em;
+	width: 173px;
+	background-size: contain;
+	margin-right: 20px;
+	margin-top: 26px;
+	height: 28px;
+}
+
+@media (min-width: 992px) {
+	.col-md-2 {
+		width: 20%;
+	}
+}
+
+.footer {
+	padding: 0;
+}
+
+.navbar-brand {
+	text-indent: 1em;
+	background: none;
+	color: #fff;
+	font-size: 22px;
+	font-family: -webkit-pictograph;
+}
+
+.coreindex .col-md-2 {
+	width: 20%;
+	padding-top: 35px;
+	padding-bottom: 15px;
+	margin-bottom: 20px;
+	border: 1px solid rgba(255, 255, 255, 0);
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-ms-transition: all .2s ease;
+	-o-transition: all .2s ease;
+	transition: all .2s ease;
+}
+
+.banner {
+	background: #0e0e0e url('images/lunbo2.jpg') no-repeat center top;
+}
+
+.column-case .banner .container {
+	background: none;
+}
+
+#caseScroll {
+	padding-bottom: 0;
+}
+
+.r_nav {
+	height: 190px;
+	width: 40px;
+	margin-top: -95px;
+	position: fixed;
+	top: 50%;
+	right: 20px;
+	z-index: 30;
+}
+
+.r_nav li {
+	height: 40px;
+	width: 40px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.keCon_icon {
+	background: rgba(0, 0, 0, 0.3);
+	display: block;
+	border-radius: 50%;
+	height: 40px;
+	cursor: pointer
+}
+
+.keCon_show {
+	width: 142px;
+	opacity: 1;
+	line-height: 40px;
+	color: #FFF;
+	height: 40px;
+	background: #004EA2;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding-left: 15px;
+	border-radius: 1.8em;
+	display: none;
+}
+
+.keCon_show a {
+	color: #FFFFFF;
+}
+
+.keCon_show img {
+	float: right;
+	border-radius: 50%;
+}
+
+
+/*.indexbanner .bd .f1 .f1-5 {
+	background: url(../img/lunbo1.png) no-repeat right top;
+    height: 694px;
+    top: 0px;
+    left: auto;
+    right: 0;
+    z-index: -2;
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    -webkit-animation: fadeInRight 0.5s linear 1s 1;
+    -moz-animation: fadeInRight 0.5s linear 1s 1;
+    -ms-animation: fadeInRight 0.5s linear 1s 1;
+    animation: fadeInRight 0.5s linear 1s 1;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}*/
+
+.indexbanner .bd .f1 {
+	background: url(images/lunbo2.jpg) no-repeat top;
+	z-index: -2;
+	background-size: contain;
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.indexbanner .bd .f7 {
+	background: url(images/lunbo4.jpg) no-repeat top;
+	z-index: -2;
+	background-size: contain;
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.indexbanner .bd .f3 {
+	background: url(images/lunbo5.jpg) no-repeat top;
+	z-index: -2;
+	background-size: contain;
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.indexbanner .bd .f4 {
+	background: url(../img/lunbo4.jpg) no-repeat top;
+	z-index: -2;
+	background-size: contain;
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.indexbanner .bd .f5 {
+	background: url(../img/lunbo5.jpg) no-repeat top;
+	z-index: -2;
+	background-size: contain;
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.indexbanner .bd .f1-2 span.f {
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+.intro-bd .txt {
+	background: none;
+}
+
+.glyphicon {
+	width: 30px;
+	height: 25px;
+	border-top: 4px solid #FFFFFF;
+	border-bottom: 4px solid #FFFFFF;
+	background-color: #FFFFFF;
+	padding: 6px 0;
+	background-clip: content-box;
+}
+
+.coreindex .li h3 {
+	line-height: 30px;
+	padding: 0;
+	font-size: 18px;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 100%;
+}
+
+.coreindex .li .content {
+	word-break: break-all;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.about-bd .txt {
+	padding: 42px 42px 42px 42px;
+}
+.txt p {
+	font-size: 18px;
+}
+.index_case .case_bd  ul li {
+	height:125px;
+	text-align: center;
+}
+.index_case .case_bd  ul li img {
+	height: 50px;
+	margin-bottom:8px;
+}
+.column-case .bd ul li {
+	height:125px;
+	text-align: center;
+}
+.column-case .bd ul li img {
+	height: 50px;
+	margin-bottom:8px;
+}
+.navbar-toggle {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.indexintro .hd li.on span, .index_case .hd li.on span{
+	font-size: 16px;
+}
+@media (min-width: 992px) {
+	.col-md-1 {
+		width: 13%;
+	}
+}
+
+@media (max-width: 768px) {
+	.index .coreindex .col-xs-6 {
+		margin-bottom: 0;
+		width: 100%;
+		-moz-border-radius: 20px;
+		-webkit-border-radius: 20px;
+		border-radius: 20px;
+		padding-top: 15px;
+		height: 250px;
+	}
+	.index .coreindex .li h3 {
+		line-height: 90px;
+		font-size: 14px;
+	}
+	.about-bd p {
+		font-size: 14px;
+	}
+	.navbar {
+		height: 50px;
+	}
+	.navbar-brand {
+		margin-top: 0;
+	}
+	.indexbanner {
+		height: 230px;
+	}
+	.indexbanner .bd .f4 .f1-3 {
+		top: auto;
+	}
+	.indexbanner .bd .f1-2,
+	.indexbanner .bd .f2 .f1-2,
+	.indexbanner .bd .f3 .f1-2,
+	.indexbanner .bd .f4 .f1-2 {
+		top: 45px;
+		font-size: 14px;
+	}
+	.column-case .bd ul li img {
+		width: 100%;
+	}
+}

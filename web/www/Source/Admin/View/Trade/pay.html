@@ -1,0 +1,57 @@
+<extend name="Public:dialog" />
+<block name="content">
+    <div class="freebox">
+        <div class="freebox-head"><h3><i class="fa fa-edit"></i>确认支付</h3><em><a href="javascript:;" class="close"><i class="fa fa-close"></i></a></em></div>
+        <div class="freebox-body">
+        <form id="mainform">
+            <input type="hidden" name="id" value="{$data.id}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th>服务名称：</th><td>{$data.title}</td></tr>
+            <tr><th>支付方式：</th><td><select name="paymethod">
+                <volist name="payList" id="vo">
+                    <option value="{$vo.key}">{$vo.title}</option>
+                </volist>
+            </select> </td></tr>
+            <tr><th>支付金额：</th><td><input type="text" class="edit" id="realpay" name="realpay" size="50" maxlength="10" value="{$data.amount}" /></td></tr>
+            <tr><th>支付时间：</th><td><input type="text" class="edit" name="paytime" size="20" maxlength="20" value="{$today|date='Y-m-d H:i:s',###}" /> <span class="gray">格式: 2014-10-23 12:02:12</span></td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="button" class="button" id="btn-submit"><i class="fa fa-save"></i>保存</button>&nbsp;&nbsp;<button type="button" class="button button-gray close"><i class="fa fa-close"></i>取消</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+
+</block>
+<block name="script">
+<script src="__LIB__/kindeditor/kindeditor.js"></script>
+<script src="__LIB__/kindeditor/lang/zh-CN.js"></script>
+<script>
+$.extend(basePage,{
+    onInit: function() {
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            {ele:'input[name=realpay]',datatype:'n', nullmsg:'请输入金额', errormsg:'必须为整数'},
+        ]);
+        $('#btn-submit').click(function(){
+            var param = $('#mainform').serializeArray();
+            var url = "{:U('Trade/paid')}";
+            $.post(url, param, function(res){
+                if (res.result == 0) {
+                    parent.$.freebox.close();
+                    parent.location.reload();
+                } else {
+                    alert(res.message);
+                }
+            });
+        });
+    }
+
+});
+</script>
+</block>

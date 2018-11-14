@@ -1,0 +1,14 @@
+.weui-verify-seccode {
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    height: 2em;
+    width: 50%;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+.weui-verify-img {
+    width:40%;
+    height:28px;
+    vertical-align: middle;
+}

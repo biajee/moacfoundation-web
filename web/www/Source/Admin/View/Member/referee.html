@@ -1,0 +1,22 @@
+<extend name="Public:dialog" />
+<block name="content">
+    <div class="freebox">
+        <div class="freebox-head"><h3><i class="fa fa-edit"></i>推荐</h3><em><a href="javascript:;" class="close"><i class="fa fa-close"></i></a></em></div>
+        <div class="freebox-body">
+            <table class="listtable">
+                <thead>
+                <tr><th>编号</th><th>用户名</th><th>手机号</th><th>Email</th><th>注册时间</th></tr>
+                </thead>
+                <tbody>
+                <volist name="list" id="item">
+                    <tr><td>{$item.id}</td><td>{$item.username}</td><td>{$item.mobile}</td><td>{$item.email}</td><td>{$item.addtime|date='Y-m-d H:i:s',###}</td></tr>
+                </volist>
+
+                </tbody>
+            </table>
+            <div class="pages">{$multi}</div>
+        </div>
+    </div>
+</block>
+<block name="script">
+</block>

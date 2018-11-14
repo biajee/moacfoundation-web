@@ -1,0 +1,11 @@
+.form{width:500px;margin-left:300px}
+.formtable{width:100%;margin:30px 0}
+.formtable tr{height:50px;line-height:50px}
+.formtable th{width:120px;padding-right:20px;text-align:right}
+.formtable td{width:320px}
+.formtable th.info{text-align:left;font-weight:bold}
+.formtable em{color:#d0121b}
+.formtable .edit{border:1px solid #d0d0d0;height:30px;text-indent: 5px}
+.formtable  .btn-sms{display:inline-block; width:90px; height:30px;background: #d0d0d0;color:#000;  text-align:center; line-height:30px;}
+.formtable .btn-sms:hover{background-color:#d0111b; border-color:#d0111b; color:#fff;}
+.formtable .btn-ok{background:#d0121b;color:#fff;text-align:center;border:none;width:100%;height:30px;line-height:30px}

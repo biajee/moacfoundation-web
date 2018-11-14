@@ -1,0 +1,30 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em><a href="{:U('Article/add')}"><i class="fa fa-plus"></i>增加</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <div class="panel"><form method="get" action="{:U('Article/index')}">栏目：<select name="catid"><option value="">选择栏目</option>
+            <volist name="typetree" id="vo">
+            <option value="{$vo.id}" <eq name="Think.get.catid" value="$vo.id"> selected</eq>>{$vo.level|str_repeat='　',###}　├{$vo.title}</option>
+            </volist>
+            </select>&nbsp;&nbsp;标题：<input type="text" name="keyword" class="edit" value="{:I('keyword')}" />&nbsp;&nbsp;<button type="submit" class="button button-gray"><i class="fa fa-search"></i>搜索</button></form></div>
+        <form method="post" action="{:U('Article/batch')}">
+        <table class="listtable">
+            <tbody>
+            <tr><th style="width:80px;">编号</th><th>标题</th><th style="width:80px;">栏目</th><th style="width:60px">排序</th><th style="width:112px;">发布时间</th><th style="width:120px">最后更新</th><th style="width:60px;">状态</th><th>操作</th></tr>
+            <volist name="list" id="item">
+            <tr><td><label><input type="checkbox" name="id[]" value="{$item.id}" /> {$item.id}</label></td><td><a href="{:U('Article/edit?id='.$item['id'])}">{$item.title}</a><if condition="$item.isgood gt 0"><span class="major">[荐]</span></if><if condition="$item.ishot gt 0"><span class="major">[荐]</span></if></td><td>{$item.catname}</td><td>{$item.sortno}</td><td>{$item.addtime|date='Y-m-d H:i',###}</td><td>{$item.addtime|date='Y-m-d H:i',###}<br/>{$item.lastadmname}</td><td><if condition="$item.status gt 0">显示<else />隐藏</if></td><td><a href="{:U('Article/edit?id='.$item['id'])}"><i class="fa fa-edit"></i>编辑</a>&nbsp;&nbsp;<a href="{:U('Article/delete?id='.$item['id'])}" data-rel="delete"><i class="fa fa-remove"></i>删除</a>&nbsp;&nbsp;<a href="{:U('/news/detail/'.$item['id'],null, true)}" title="右键复制链接地址" target="_blank"><i class="fa fa-bullhorn"></i>推广</a>&nbsp;&nbsp;<a href="{:U('Comment/index?catid=article&itemid='.$item['id'])}"><i class="fa fa-comment"></i>评论</a></td></tr>
+            </volist>
+            <empty name="list">
+            <tr><td colspan="8"><p class="center">暂无信息</p></td></tr>
+            </empty>
+            </tbody>
+            <tfoot><tr><td><label><input type="checkbox" data-rel="selectall" /> 全选</label>&nbsp;&nbsp;</td><td colspan="7"><!--<label><input type="radio" name="op" value="good" checked="" /> 推荐</label>&nbsp;<label><input type="radio" name="op" value="ungood" /> 取消推荐</label>&nbsp;<label><input type="radio" name="op" value="hot" /> 热门</label>&nbsp;<label><input type="radio" name="op" value="unhot" /> 取消热门</label>&nbsp;--><label><input type="radio" name="op" value="delete" /> 删除</label>&nbsp;&nbsp;<button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button></td></tr></tfoot>
+        </table>
+        </form>
+        <div class="pages">{$multi}</div>
+        </div>
+    </div>
+    
+</block>

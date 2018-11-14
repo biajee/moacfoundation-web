@@ -1,0 +1,59 @@
+<extend name="Public:dialog" />
+<block name="content">
+    <div class="freebox">
+        <div class="freebox-head"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="javascript:;" class="close"><i class="fa fa-close"></i></a></em></div>
+        <div class="freebox-body">
+        <form id="mainform" method="post" action="{:U('District/update')}">
+            <input type="hidden" name="id" value="{$data.id}" />
+            <input type="hidden" name="act" value="{$act}" />
+        <input type="hidden" name="oldupid" value="{$data.upid}" />
+        <input type="hidden" name="upid" value="{$data.upid}" />
+        <table class="formtable">
+            <tbody>
+            <!--<tr><th>编号：</th><td><input type="text" class="edit" name="id" value="{$data.id}" size="50" maxlength="50" /> </td></tr>-->
+            <tr><th style="width:60px"><em class="required">*</em>名称：</th><td><input type="text" class="edit" name="title" value="{$data.title}" size="50" maxlength="50" /> </td></tr>
+            <tr><th>首字母：</th><td><input type="text" class="edit" name="inital" value="{$data.inital}" size="50" maxlength="50" /></td></tr>
+            <tr><th>选项</th><td><label><input type="checkbox" name="ishot" value="1" <notempty name="data.ishot">checked</notempty> /> 热门</label></td></tr>
+            <tr><th>排序：</th><td><input type="text" class="edit" name="sortno" size="8" maxlength="16" value="{$data.sortno}" /></td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="button" class="button" id="btn-submit"><i class="fa fa-save"></i>保存</button>&nbsp;&nbsp;<button type="button" class="button button-gray close"><i class="fa fa-close"></i>取消</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+
+</block>
+<block name="script">
+<script>
+$.extend(basePage,{
+    onInit: function() {
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            //{ele:'input[name=id]',datatype:'n', nullmsg:'请输入编号'},
+            {ele:'input[name=title]',datatype:'*', nullmsg:'请输入名称'},
+            {ele:'input[name=sortno]',datatype:'n', nullmsg:'请输入排序值', errormsg:'必须为整数'},
+        ]);
+
+        $('#btn-submit').click(function(){
+            var param = $('#mainform').serializeArray();
+            var url = "{:U('District/update')}";
+            $.post(url, param, function(res){
+                if (res.result == 0) {
+                    parent.$.freebox.close();
+                    parent.onResult('edit', res.data);
+                } else {
+                    alert('');
+                }
+            });
+        });
+
+    }
+
+});
+</script>
+</block>

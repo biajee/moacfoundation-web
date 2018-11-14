@@ -1,0 +1,21 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em><a href="{:U('Role/add')}"><i class="fa fa-plus"></i>增加角色</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form method="post" action="{:U('Role/batch')}">
+        <table class="listtable">
+            <tbody>
+            <tr><th style="width:80px;">编号</th><th style="width:300px;">名称</th><th style="width:60px;">排序</th><th>操作</th></tr>
+            <volist name="list" id="item">
+            <tr><td><label><input type="checkbox" name="id[]" value="{$item.id}" /> {$item.id}</label></td><td>{$item.title}</td><td><input type="text" class="edit" name="sortno[{$item.id}]" size="8" value="{$item.sortno}" /></td><td>&nbsp;<a href="{:U('Role/edit?id='.$item['id'])}"><i class="fa fa-edit"></i>编辑</a>&nbsp;&nbsp;<a href="{:U('Role/delete?id='.$item['id'])}" data-rel="delete"><i class="fa fa-remove"></i>删除</a></td></tr>
+            </volist>
+            </tbody>
+            <tfoot><td><label><input type="checkbox" data-rel="selectall" /> 全选</label></td><td colspan="4">&nbsp;<button type="submit" class="button"><i class="fa fa-refresh"></i>更新排序</button></td></tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+    
+</block>

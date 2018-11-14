@@ -1,0 +1,80 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Trade/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <table class="formtable">
+            <tbody>
+            <tr><th>名称：</th><td>{$data.title}</td></tr>
+            <tr><th style="width:120px;">发起方：</th><td><if condition="$data.tradetype eq 'buy'">需求方<else/>服务方</if></td>
+            </tr>
+            <tr><th>需求方：</th><td><a href="{:U('Member/detail?id='.$data['buyerid'])}" data-rel="dialog">{$data.buyername}</a></td>
+            </tr>
+            <tr><th>服务方：</th><td><a href="{:U('Member/detail?id='.$data['sellerid'])}" data-rel="dialog">{$data.sellername}</a></td>
+            </tr>
+            <tr><th>价格：</th><td>{$data.amount}</td>
+            <tr><th>托管：</th><td>{$data.realpay}</td>
+            </tr>
+            <tr><th style="width:120px;">截止时间：</th><td>{$data.expire|date='Y-m-d',###}</td>
+            </tr>
+
+           <tr><th>发起时间：</th><td>{$data.addtime|date='Y-m-d H:i:s',###}</td></tr>
+       		<tr><th>详细内容：</th><td>{$data.content}</td></tr>
+            <tr><th style="width:120px;">状态：</th><td>{$data.statusstr}&nbsp;&nbsp;
+                <eq name="data.status" value="accepted"><a href="{:U('Trade/pay?id='.$data['id'])}" data-rel="dialog" data-options='{"width":"720","height":"98%"}'>支付(在线支付出现问题使用)</a></eq>
+                <eq name="data.status" value="inspected"><a  href="{:U('Trade/complate?id='.$data['id'])}" data-rel="dialog" data-options='{"width":"720","height":"98%"}'>完成交易(打款给服务方后使用)</a></eq>
+            </td>
+            </tr>
+            <notempty name="data.paytime">
+                <tr><th>托管款项：</th><td><p class="money">{$data.realpay}</p>{$data.paytime|date='Y-m-d H:i:s',###} </td></tr>
+            </notempty>
+            <notempty name="data.withdrawtime">
+                <tr><th>平台打款：</th><td><p class="money">{$data.realwithdraw}</p>{$data.withdrawtime|date='Y-m-d H:i:s',###} </td></tr>
+            </notempty>
+            <notempty name="data.logs">
+                <tr><th>交易记录：</th><td>
+                    <table class="minortable">
+                        <tr><th>时间</th><th>用户</th><th>操作</th><th>备注</th></tr>
+                        <volist name="data.logs" id="vo">
+                            <tr><td>{$vo.addtime|date='Y-m-d H:i',###}</td><td>{$vo.memname}</td><td>{$vo.actionstr}</td><td>{$vo.memo}</td></tr>
+                        </volist>
+                    </table>
+                </td></tr>
+            </notempty>
+            <notempty name="data.reviews">
+                <tr><th>交易评价：</th><td>
+                    <table class="minortable">
+                        <tr><th>时间</th><th>用户</th><th>评星</th><th>评价</th></tr>
+                        <volist name="data.reviews" id="vo">
+                            <tr><td>{$vo.addtime|date='Y-m-d H:i',###}</td><td>{$vo.memname}</td><td>{$vo.mark}</td><td>{$vo.content}</td></tr>
+                        </volist>
+                    </table>
+                </td></tr>
+            </notempty>
+            <notempty name="data.complains">
+                <tr><th>交易投诉：</th><td>
+                    <table class="minortable">
+                        <tr><th>时间</th><th>用户</th><th>内容</th></tr>
+                        <volist name="data.complains" id="vo">
+                            <tr><td>{$vo.addtime|date='Y-m-d H:i',###}</td><td>{$vo.memname}</td><td>{$vo.content}</td></tr>
+                        </volist>
+                    </table>
+                </td></tr>
+            </notempty>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script>
+        var mainPage = $.extend(basePage,{
+            onInit: function() {
+                var that = this;
+            }
+        });
+    </script>
+</block>

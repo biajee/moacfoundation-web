@@ -1,0 +1,33 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em><!--<a href="{:U('Indauth/add')}"><i class="fa fa-plus"></i>增加</a>&nbsp;&nbsp;--></em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+            <div class="panel"><form method="get" action="{:U('Indauth/index')}">
+
+                姓名：<input type="text" name="surname" class="edit" value="{:I('surname')}" />&nbsp;&nbsp;状态：<select name="status">
+                <option value="">选择</option>
+                <volist name="statusList" id="vo">
+                    <option value="{$key}" <if condition="$vo eq $_GET['status']">selected</if> >{$vo}</option>
+                </volist>
+            </select>&nbsp;&nbsp;<button type="submit" class="button button-gray"><i class="fa fa-search"></i>搜索</button></form></div>
+        <form method="post" action="{:U('Indauth/batch')}">
+        <table class="listtable">
+            <tbody>
+            <tr><th style="width:80px;">编号</th><th style="width:120px;">用户名</th><th style="width:100px;">姓名</th><th style="width:60px">身份证号</th><th style="width:60px">状态</th><th style="width:120px;">申请时间</th><th>操作</th></tr>
+            <volist name="list" id="item">
+            <tr><td><label><input type="checkbox" name="id[]" value="{$item.id}" /> {$item.id}</label></td><td>{$item.memname}</td><td>{$item.surname}</td><td>{$item.idcard}</td><td>{$statusList[$item['status']]}</td><td>{$item.addtime|date='Y-m-d H:i',###}</td><td>&nbsp;<a href="{:U('Indauth/edit?id='.$item['id'])}"><i class="fa fa-edit"></i>详情</a>&nbsp;&nbsp;<a href="{:U('Indauth/delete?id='.$item['id'])}" data-rel="delete"><i class="fa fa-remove"></i>删除</a></td></tr>
+            </volist>
+            <empty name="list">
+                <tr><td colspan="8" class="nodata">暂无数据</td> </tr>
+            </empty>
+            </tbody>
+            <tfoot><tr><td><label><input type="checkbox" data-rel="selectall" /> 全选</label>&nbsp;&nbsp;</td><td colspan="7"><label><input type="radio" name="op" value="delete" /> 删除</label>&nbsp;&nbsp;<button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button></td></tr></tfoot>
+        </table>
+        </form>
+        <div class="pages">{$multi}</div>
+        </div>
+    </div>
+    
+</block>

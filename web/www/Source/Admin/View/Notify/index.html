@@ -1,0 +1,134 @@
+<extend name="Public:base"/>
+<block name="navbar"><h3><i class="fa fa-wrench"></i>发送通知</h3><em></em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-body">
+            <div class="panel">
+                <form id="postform" >
+                    <table class="searchtable">
+                        <tr>
+                            <th>用户名：</th>
+                            <td><input type="text" class="edit" name="username" value="{$Think.get.username}"/>&nbsp;&nbsp;
+                            </td>
+                            <th>手机号：</th>
+                            <td><input type="text" class="edit" name="mobile" value="{$Think.get.mobile}"/>&nbsp;&nbsp;
+                            </td>
+                            <th>Email：</th><td><input type="text" class="edit" name="email" value="{$Think.get.email}"/></td>
+                            <th>昵称：</th><td><input type="text" class="edit" name="nickname" value="{$Think.get.nickname}"/></td>
+                        </tr>
+                        <tr>
+                            <th>国家/地区：</th>
+                            <td><select id="sel-country" name="country"></select></td>
+                            <th>城市：</th>
+                            <td><select id="sel-city" name="city"></select></td>
+                            <th>主要领域：</th>
+                            <td><select id="sel-realm" name="realm"></select></td>
+                        </tr>
+                        <tr>
+                            <th>类型：</th>
+                            <td><select name="mytype">
+                                <option value="">选择类型</option>
+                                <volist name="typeList" id="vo">
+                                    <option value="{$vo.key}"
+                                    <if condition="$Think.get.mytype eq $vo['key']">selected</if>
+                                    >{$vo.title}</option>
+                                </volist>
+                            </select></td>
+                            <th>实体：</th>
+                            <td><select name="entity">
+                                <option value="">选择实体</option>
+                                <volist name="entityList" id="vo">
+                                    <option value="{$vo.key}"
+                                    <if condition="$Think.get.entity eq $vo['key']">selected</if>
+                                    >{$vo.title}</option>
+                                </volist>
+                            </select></td>
+                            <th>关系：</th>
+                            <td><select name="relation">
+                                <option value="">选择关系</option>
+                                <volist name="relationList" id="vo">
+                                    <option value="{$vo.key}"
+                                    <if condition="$Think.get.relation eq $vo['key']">selected</if>
+                                    >{$vo.title}</option>
+                                </volist>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th>状态：</th>
+                            <td>
+                                <select name="status">
+                                    <option value="">全部</option>
+                                    <volist name="statusList" id="vo">
+                                        <option value="{$vo.key}"
+                                        <if condition="$Think.get.status eq $vo['key']">selected</if>
+                                        >{$vo.title}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr><th>主题：</th><td colspan="7"><input type="text" name="title" value="" class="edit" size="80" /> </td></tr>
+                        <tr><th>信息：</th><td colspan="7"><textarea name="message" class="memo" cols="80" rows="5"></textarea> </td></tr>
+                        <tfoot>
+                        <tr>
+                            <td colspan="8"><button type="reset" class="button button-gray">重 置</button><button class="button" type="submit"><i class="fa fa-search"></i> 发送通知</button></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script>
+        $.extend(basePage, {
+            loading: false,
+            onInit: function () {
+                var that = this;
+                that.initSelect();
+                that.initForm();
+            },
+            initSelect: function () {
+                var that = this;
+                that.districtList = {$districtList|json_encode};
+                that.realmList = {$realmList|json_encode};
+                var country = "{$Think.get.country}";
+                var city = "{$Think.get.city}";
+                var realm = "{$Think.get..realm}";
+                that.fillCountry('#sel-country', country);
+                that.fillCity('#sel-city', country, city);
+                that.fillRealm('#sel-realm', realm);
+                $('#sel-country').change(function () {
+                    var country = this.options[this.selectedIndex].value;
+                    that.fillCity('#sel-city', country, '');
+                });
+            },
+            initForm: function() {
+                var that = this;
+                $('#postform').submit(function(){
+                    if (that.loading) {
+                        return false;
+                    }
+                    var title = this.title.value;
+                    var message = this.message.value;
+                    if (title == '' || message == '') {
+                        that.error('请输入主题和信息');
+                        return false;
+                    }
+                    that.loading = true;
+                    var url = "{:U('Notify/send')}";
+                    var param = $('#postform').serializeArray();
+                    $.post(url, param, function(res){
+                        that.loading = false;
+                        if (res.result == 0) {
+                            that.success('发送完毕（' + res.data + ')');
+                        } else {
+                            that.error(res.message);
+                        }
+                    })
+                    return false;
+                });
+            }
+        });
+    </script>
+</block>

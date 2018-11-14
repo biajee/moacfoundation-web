@@ -1,0 +1,161 @@
+<extend name="Public:base" />
+<block name="navbar">
+    <h3>
+        <i class="fa fa-wrench"></i>{$caption}</h3>
+    <em>
+        <a href="{:U('Vote/index')}"><i class="fa fa-list"></i>列表</a>
+    </em>
+</block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-body">
+            <form id="mainform" method="post" action="{:U('Vote/update')}">
+                <input type="hidden" name="id" value="{$data.id}" />
+                <table class="formtable" width="100%">
+                    <tbody>
+                        <tr>
+                            <th>
+                                <em class="required">*</em>标题：</th>
+                            <td>
+                                <input type="text" class="edit" id="title" name="title" value="{$data.title}" size="30" maxlength="20" />
+                            </td>
+						</tr>
+						<tr>
+                            <th>类型：</th>
+                            <td>
+                                <label>
+                                    <input type="radio" name="style" value="1" <if condition="$data.style eq 1">checked</if>/> 单选</label>
+                                <label>
+                                    <input type="radio" name="style" value="0" <if condition="$data.style eq 0">checked</if>/> 多选</label>
+                            </td>
+                        </tr>
+                        <tr><th>发布时间：</th><td><input type="text" class="edit" name="addtime" size="20" maxlength="20" value="{$data.addtime|date='Y-m-d H:i:s',###}" /> <span class="gray">格式: 2014-10-23 12:02:12</span></td></tr>
+                        <tr>
+                            <th>
+                                投票人次：</th>
+                            <td>
+                                <input type="text" class="edit" name="votenum" value="{$data.votenum}" size="20" maxlength="20" />
+                            </td>
+						</tr>
+                        <tr>
+                            <th>说明：</th>
+                            <td>
+                                <textarea class="memo" id="memo" name="memo" cols="50" rows="3">{$data.memo}</textarea>
+                            </td>
+                        </tr>
+						<tr><th>状态：</th><td><label><input type="checkbox" name="status" value="1" <eq name="data.status" value="1"> checked</eq> /> 开启</label>
+                        <tr>
+                            <th>投票项：</th>
+                            <td colspan="3">
+                                <table id="itemlist" class="minortable">
+                                    <tr>
+                                        <th style="width:200px">标题</th>
+                                        <th style="width:100px">投票数</th>
+                                        <th style="width:80px">排序</th>
+                                        <th style="width:100px">操作</th>
+                                    </tr>
+                                    <volist name="itemList" id="v">
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="edit" name="item[{$v.id}][title]" value="{$v.title}" size="20" />
+                                            </td>
+                                            <td>
+                                                <input type="text" class="edit" name="item[{$v.id}][votenum]" value="{$v.votenum}" size="20" />
+                                            </td>
+                                            <td>
+                                                <input type="text" class="edit" name="item[{$v.id}][sortno]" value="{$v.sortno}" size="20" />
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" name="item[{$v.id}][del]" value="1" />删除</label>
+                                                <input type="hidden" name="item[{$v.id}][id]" value="{$v.id}" /></input>
+                                                </input>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="edit" name="newitem[0][title]" value="" size="20" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="edit" name="newitem[0][votenum]" value="0" size="20" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="edit" name="newitem[0][sortno]" value="0" size="20" />
+                                        </td>
+                                        <td>
+                                            <a href="javascript:;" class="removeline">移除</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <p>
+                                    <a href="javascript:;" class="addline">添加一行</a>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <button type="submit" class="button">
+                                    <i class="fa fa-save"></i>保存</button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="style">
+    <link href="__LIB__/kindeditor/themes/default/default.css" rel="stylesheet" type="text/css" />
+</block>
+<block name="script">
+    <script src="__LIB__/kindeditor/kindeditor.js"></script>
+    <script src="__LIB__/kindeditor/lang/zh-CN.js"></script>
+    <script type="text/plain" id="additemtpl">
+        <tr><td><input type="text" class="edit" name="newitem[{index}][title]" value="" size="20" /></td>
+        <td><input type="text" class="edit" name="newitem[{index}][votenum]" value="0" size="20" /></td>
+        <td><input type="text" class="edit" name="newitem[{index}][sortno]" value="0" size="20" /></td>
+        <td><a href="javascript:;" class="removeline">移除</a></td>
+        </tr>
+    </script>
+    <script>
+        var editPage = $.extend(basePage,{
+            newIndex: 0,
+            addnewitem: function() {
+              var myThis = this;
+              this.newIndex ++;
+              var tpl = $('#additemtpl').text();
+              var $line = $(tpl.replace('{index}', this.newIndex));
+              $line.find('.removeline').click(function(){
+                  $(this).parent().parent().remove();
+              });
+              $line.appendTo($('#itemlist tbody'));  
+            },
+            onInit: function() {
+                var myThis = this;
+                var hash = '{$data.hash}';
+                
+                $('.addline').click(function(){
+                    myThis.addnewitem();
+                });
+                //验证控件
+                var validform = $('#mainform').Validform({
+                    tiptype: 3,
+                    beforeSubmit: function() {
+                        var arr = [];
+                        $('input[name="depids[]"]:checked').each(function(){
+                            arr.push($(this).data('title'));
+                        });
+                        $('input[name=depnames]').val(arr.join(','));
+                    }
+                });
+                validform.addRule([
+                    {ele:'input[name=title]',datatype:'*2-50', errormsg:'请输入标题'},
+                    {ele:'input[name=votenum]',datatype:'n',nullmsg:'请输入投票人次', errormsg:'请输入一个整数'}
+                ]);
+            }
+        });
+    </script>
+</block>

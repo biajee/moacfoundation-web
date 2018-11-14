@@ -1,0 +1,49 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Withdraw/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Withdraw/update')}" onsubmit="return checkForm(this)">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="hash" value="{$data.hash}" />
+        <table class="formtable">
+            <tbody>
+        	<tr><th>姓名：</th><td><input type="text" class="edit" id="surname" name="surname" size="80" maxlength="50" value="{$data.surname}" /></td></tr>
+            <tr><th>银行：</th><td><input type="text" class="edit" name="bank" size="80" maxlength="50" value="{$data.bank}" /></td></tr>
+            <tr><th>卡号：</th><td><input type="text" class="edit" name="cardno" size="80" maxlength="50" value="{$data.cardno}" /></td></tr>
+            <tr><th>金额：</th><td><input type="text" class="edit"  name="money" size="80" maxlength="50" value="{$data.money}" /></td></tr>
+            <tr><th>申请时间：</th><td><input type="text" class="edit" name="addtime" size="20" maxlength="20" value="{$data.addtime|date='Y-m-d H:i:s',###}" /> <span class="gray">格式: 2014-10-23 12:02:12</span></td></tr>
+            <tr><th>状态：</th><td><select name="status">
+                <volist name="statusList" id="vo">
+                    <option value="{$key}" <if condition="$vo eq $data['status']">selected</if> >{$vo}</option>
+                </volist>
+            </select></td></tr>
+            <tr><th>进度：</th><td><input type="text" class="edit" name="progress" size="80" maxlength="50" value="{$data.progress}" /></td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script>
+$.extend(basePage, {
+    onInit: function() {
+        var myThis = this;
+        var hash = '{$data.hash}';
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            {ele:'input[name=surname]',datatype:'*', nullmsg:'请输入姓名'},
+        ]);
+    }
+});
+
+</script>
+</block>

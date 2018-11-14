@@ -1,0 +1,61 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Advtype/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Advtype/update')}" onsubmit="return checkForm(this)">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="hash" value="{$data.hash}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th><em class="required">*</em>名称：</th><td><input type="text" class="edit" name="title" value="{$data.title}" size="50" maxlength="50" /> </td></tr>
+            <tr><th>标识：</th><td><input type="text" class="edit" name="code" value="{$data.code}" size="50" maxlength="50" /> </td></tr>
+        	<tr><th>图片：</th><td><input type="text" class="edit" id="image" name="image" size="50" maxlength="200" value="{$data.image}" /> <input type="button" id="uploadButton" value="上传图片" /></td></tr>
+            <tr><th>简介：</th><td><input type="text" class="edit" name="memo" size="50" maxlength="50" value="{$data.memo}" /><span class="gray">简短描述</span></td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script src="__LIB__/kindeditor/kindeditor.js"></script>
+<script src="__LIB__/kindeditor/lang/zh-CN.js"></script>
+<link rel="stylesheet" href="__LIB__/kindeditor/themes/default/default.css" />
+<script>
+$.extend(basePage, {
+    onInit: function() {
+        var hash = '{$data.hash}';
+        var K = KindEditor;
+        var editor;
+        var uploadbutton;
+            uploadbutton = K.uploadbutton({
+                button : K('#uploadButton')[0],
+                fieldName : 'imgFile',
+                url : "{:U('Misc/upload?dir=image&hash='.$data['hash'])}",
+                afterUpload : function(data){
+                                    if (data.error==1)
+                                        alert("上传错误:"+data.message);
+                                    else {
+                                        $("#image").val(data.url);
+                                    }
+                            }
+            });
+            uploadbutton.fileBox.change(function(e) {
+                uploadbutton.submit();
+            });
+            //验证控件
+            var validform = $('#mainform').Validform({
+                tiptype: 3,
+            });
+            validform.addRule([
+                {ele:'input[name=title]',datatype:'*', nullmsg:'请输入标题'}
+            ]);
+    }
+});
+</script>
+</block>

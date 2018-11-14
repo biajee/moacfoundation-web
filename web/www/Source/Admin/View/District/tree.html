@@ -1,0 +1,6 @@
+<volist name="list" id="item">
+    <div class="node" id="node-{$item.id}" data-value='{$item|json_encode}'>
+        <div class="line"><div class="title">{$item.level|str_repeat='　　',###}<if condition="$item.level lt 3"><a href="javascript:;" class="act-expand" title="点击刷新子类型"><i class="fa fa-plus-square-o"></i></a></if> [{$item.id}]{$item.title}</div><div class="action">&nbsp;<if condition="$item.level lt 3"><a href="{:U('District/add')}?upid={$item.id}" class="act-add"  data-rel="dialog"><i class="fa fa-plus"></i>增加{$levellist[$item['level']+1]['title']}</a>&nbsp;&nbsp;</if><a href="{:U('District/edit')}?id={$item.id}" class="act-edit"  data-rel="dialog"><i class="fa fa-edit"></i>编辑</a>&nbsp;&nbsp;<a href="javascript:;" class="act-delete"><i class="fa fa-remove"></i>删除</a></div></div>
+        <div id="subnode-{$item.id}"></div>
+    </div>
+</volist>

@@ -1,0 +1,77 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Advert/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Advert/update')}" onsubmit="return checkForm(this)">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="hash" value="{$data.hash}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th style="width:120px;">分组：</th><td><select name="catid"><option value="0">顶级栏目</option>
+            <volist name="typelist" id="vo">
+            <option value="{$vo.id}" <eq name="data.catid" value="$vo.id"> selected=""</eq>>{$vo.title}</option>
+            </volist>
+            </select></td>
+            </tr>
+            <tr><th><em class="required">*</em>标题：</th><td><input type="text" class="edit" name="title" value="{$data.title}" size="50" maxlength="50" /> </td></tr>
+            <tr><th>标识：</th><td><input type="text" class="edit" name="code" value="{$data.code}" size="50" maxlength="50" /></td></tr>
+        	<tr><th>链接地址：</th><td><input type="text" class="edit" name="link" size="50" maxlength="100" value="{$data.link}" /></td></tr>
+        	<tr><th>广告图片：</th><td><input type="text" class="edit" id="image" name="image" size="50" maxlength="200" value="{$data.image}" /> <input type="button" id="uploadButton" value="上传图片" /></td></tr>
+        	<tr><th>发布时间：</th><td><input type="text" class="edit" name="addtime" size="20" maxlength="20" value="{$data.addtime|date='Y-m-d H:i:s',###}" /> <span class="gray">格式: 2014-10-23 12:02:12</span></td></tr>
+            <tr><th>说明：</th><td><input type="text" class="edit" name="memo" size="50" maxlength="50" value="{$data.memo}" /><span class="gray">简短描述，用于SEO</span></td></tr>
+            <tr><th>排序：</th><td><input type="text" class="edit" name="sortno" size="8" maxlength="16" value="{$data.sortno}" /></td></tr>
+        	<tr><th>是否显示：</th><td><label><input type="radio" name="status" value="1" <eq name="data.status" value="1"> checked</eq> />是</label><label><input type="radio" name="status" value="0" <eq name="data.status" value="0"> checked</eq> />否</label></td></tr>
+        	<tr><th>内容：</th><td><textarea class="memo" id="content" name="content" cols="112" rows="8">{$data.content}</textarea></td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script src="__LIB__/kindeditor/kindeditor.js"></script>
+<script src="__LIB__/kindeditor/lang/zh-CN.js"></script>
+<script>
+$.extend(basePage, {
+    onInit: function() {
+        var hash = '{$data.hash}';
+        var K = KindEditor;
+        var editor;
+        var uploadbutton;
+
+        editor = K.create('#content', {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            urlType:'absolute',
+            uploadJson : "{:U('Misc/upload?noscale=1&hash='.$data['hash'])}"
+        });
+        uploadbutton = K.uploadbutton({
+            button : K('#uploadButton')[0],
+            fieldName : 'imgFile',
+            url : "{:U('Misc/upload?dir=image&noscale=1&hash='.$data['hash'])}",
+            afterUpload : function(data){
+                if (data.error==1)
+                    alert("上传错误:"+data.message);
+                else 
+                    $("#image").val(data.url);
+            }
+        });
+        uploadbutton.fileBox.change(function(e) {
+            uploadbutton.submit();
+        });
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            {ele:'input[name=title]',datatype:'*', nullmsg:'请输入标题'}
+        ]);
+    }
+});
+</script>
+</block>

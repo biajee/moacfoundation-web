@@ -1,0 +1,258 @@
+<extend name="Public:base"/>
+<block name="navbar"><h3><i class="fa fa-wrench"></i>会员管理</h3><em><a href="{:U('Member/add')}"><i
+        class="fa fa-plus"></i>增加</a></em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-body">
+            <div class="panel">
+                <form method="get" action="{:U('Member/index')}">
+                    <table class="searchtable">
+                        <tr>
+                            <th>用户名：</th>
+                            <td><input type="text" class="edit" name="username" value="{$Think.get.username}"/>&nbsp;&nbsp;
+                            </td>
+                            <th>手机号：</th>
+                            <td><input type="text" class="edit" name="mobile" value="{$Think.get.mobile}"/>&nbsp;&nbsp;
+                            </td>
+                            <th>Email：</th><td><input type="text" class="edit" name="email" value="{$Think.get.email}"/></td>
+                            <th>昵称：</th><td><input type="text" class="edit" name="nickname" value="{$Think.get.nickname}"/></td>
+                        </tr>
+                        <tr>
+                            <th>国家/地区：</th>
+                            <td><select id="sel-country" name="country"></select></td>
+                            <th>城市：</th>
+                            <td><select id="sel-city" name="city"></select></td>
+                            <th>主要领域：</th>
+                            <td><select id="sel-realm" name="realm"></select></td>
+                        </tr>
+                        <tr>
+                            <th>类型：</th>
+                            <td><select name="mytype">
+                                <option value="">选择类型</option>
+                                <volist name="typeList" id="vo">
+                                    <option value="{$vo.key}"
+                                    <if condition="$Think.get.mytype eq $vo['key']">selected</if>
+                                    >{$vo.title}</option>
+                                </volist>
+                            </select></td>
+                            <th>实体：</th>
+                            <td><select name="entity">
+                                <option value="">选择实体</option>
+                                <volist name="entityList" id="vo">
+                                    <option value="{$vo.key}"
+                                    <if condition="$Think.get.entity eq $vo['key']">selected</if>
+                                    >{$vo.title}</option>
+                                </volist>
+                            </select></td>
+                            <th>关系：</th>
+                            <td><select name="relation">
+                                <option value="">选择关系</option>
+                                <volist name="relationList" id="vo">
+                                    <option value="{$vo.key}"
+                                    <if condition="$Think.get.relation eq $vo['key']">selected</if>
+                                    >{$vo.title}</option>
+                                </volist>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th>状态：</th>
+                            <td>
+                                <select name="status">
+                                    <option value="">全部</option>
+                                    <volist name="statusList" id="vo">
+                                        <option value="{$vo.key}"
+                                        <if condition="$Think.get.status eq $vo['key']">selected</if>
+                                        >{$vo.title}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                            <th>权限：</th>
+                            <td colspan="2">
+                                <label><input type="checkbox" name="denylogin" value="1"
+                                    <notempty name="Think.get.denylogin">checked</notempty>
+                                    /> 禁止登录</label>&nbsp;&nbsp;
+                                <label><input type="checkbox" name="denypublish" value="1"
+                                    <notempty name="Think.get.denypublish">checked</notempty>
+                                    /> 禁止发布</label>&nbsp;&nbsp;
+                                <label><input type="checkbox" name="denytrade" value="1"
+                                    <notempty name="Think.get.denytrade">checked</notempty>
+                                    /> 禁止交易</label>
+                            </td>
+                        </tr>
+                        <tfoot>
+                        <tr>
+                            <th>排序：</th>
+                            <td>
+                                <select name="order">
+                                    <volist name="orderList" id="vo">
+                                        <option value="{$vo.value}">{$vo.text}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                            <td colspan="4"><button type="reset" class="button button-gray">重 置</button><button class="button" type="submit"><i class="fa fa-search"></i> 搜 索</button></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </form>
+            </div>
+            <form method="post" action="{:U('Member/batch')}">
+                <table class="listtable">
+                    <tr>
+                        <th style="width:80px;">编号</th>
+                        <th>信息</th>
+                        <th style="width:120px">操作</th>
+                    </tr>
+                    <tbody>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td valign="top">
+                                <notempty name="vo.avatar">
+                                    <div><img src="{$vo.avatar}" width="60" height="60"/></div>
+                                </notempty>
+                                <label><input type="checkbox" name="id[]" value="{$vo.id}"/> {$vo.id}</label>
+                                <p>{$vo.statusstr}</p>
+                            </td>
+                            <td>
+                                <table class="layouttable">
+                                    <tr>
+                                        <th style="width:60px">用户名：</th>
+                                        <td style="width:120px">{$vo.username}</td>
+                                        <th style="width:60px">昵称：</th>
+                                        <td style="width:120px">{$vo.nickname}</td>
+                                        <th style="width:60px">手机号：</th>
+                                        <td style="width:120px">{$vo.countrycode} {$vo.mobile}</td>
+                                        <th style="width:60px">Email：</th>
+                                        <td>{$vo.email}</td>
+                                    </tr>
+                                    <tr>
+
+                                        <th>推荐人：</th>
+                                        <td><notempty name="vo.refereeid"><a href="{:U('Member/detail')}?id={$vo['refereeid']}" data-rel="dialog" data-options='{width:"100%",height:"100%"}'>{$vo.refereename}</a><else/>无</notempty></td>
+                                        <th>签名：</th>
+                                        <td colspan="5">{$vo.signature}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>类型：</th>
+                                        <td>{$vo.mytypestr}</td>
+                                        <th>实体：</th>
+                                        <td>{$vo.entitystr}</td>
+                                        <th>关系：</th>
+                                        <td colspan="3">{$vo.relationstr}</td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <th>领域：</th>
+                                        <td colspan="3">{$vo.realmstr}</td>
+                                        <th>地区：</th>
+                                        <td colspan="3">{$vo.countrystr} - {$vo.citystr}</td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <th>评级：</th>
+                                        <td>
+                                            {$vo.rating|str_repeat='★',###}{$vo.rating|str_repeat='☆',5-###}
+                                        </td>
+                                        <th>认证：</th>
+                                        <td colspan="5">
+                                            <notempty name="vo.ismobileauth">手机认证&nbsp;</notempty>
+                                            <notempty name="vo.isindauth">邮件认证&nbsp;</notempty>
+                                            <notempty name="vo.isindauth">个人认证&nbsp;</notempty>
+                                            <notempty name="vo.isinsauth">机构认证</notempty>
+                                            <notempty name="vo.isbankauth">银行认证</notempty>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>财富：</th>
+                                        <td colspan="7">积分({$vo.credit})</td>
+                                    </tr>
+                                    <tr>
+                                        <th>统计：</th>
+                                        <td colspan="7">
+                                            <a href="{:U('Info/index')}?uid={$vo.id}">发布({$vo.infonum})</a>&nbsp;&nbsp;
+                                            <a href="{:U('Trade/index')}?uid={$vo.id}">交易({$vo.tradenum})</a>&nbsp;&nbsp;
+                                            <a href="{:U('Member/review')}?uid={$vo.id}" data-rel="dialog" data-options='{ "width":"100%","height":"100%" }'>信誉({$vo.prestige})</a>&nbsp;&nbsp;
+                                            <a href="{:U('Member/referee')}?uid={$vo.id}" data-rel="dialog" data-options='{ "width":"100%","height":"100%" }'>推荐({$vo.invitenum})</a>&nbsp;&nbsp;
+                                            <a href="{:U('Member/comment')}?uid={$vo.id}" data-rel="dialog" data-options='{ "width":"100%","height":"100%" }'>评论({$vo.stats.reviewnum})</a>&nbsp;&nbsp;
+                                            <a href="{:U('Member/follow')}?uid={$vo.id}" data-rel="dialog" data-options='{ "width":"100%","height":"100%" }'>关注({$vo.stats.follownum})</a>&nbsp;&nbsp;
+                                            <a href="{:U('Member/funs')}?uid={$vo.id}" data-rel="dialog" data-options='{ "width":"100%","height":"100%" }'>粉丝({$vo.fansnum})</a>&nbsp;&nbsp;
+                                            收藏({$vo.stats.favnum})&nbsp;&nbsp;被收藏({$vo.stats.byfavnum})&nbsp;&nbsp;
+                                            <a href="{:U('Member/message')}?uid={$vo.id}" data-rel="dialog" data-options='{ "width":"100%","height":"100%" }'>聊天({$vo.stats.msgnum})</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th>登录次数</th>
+                                        <td>{$vo.logintimes}</td>
+                                        <th>最后登录：</th>
+                                        <td colspan="2">{$vo.lastlogin|date='Y-m-d H:i:s',###}</td>
+                                        <th>登录IP：</th>
+                                        <td colspan="2">{$vo.lastip}</td>
+                                    </tr>
+                                    <tr><th>备注</th><td colspan="7">{$vo.memo}</td></tr>
+                                </table>
+                            </td>
+                            <td>
+                                <ul><li><a href="{:U('Chat/detail')}?cid={$vo.id}" data-rel="dialog" data-options='{"width":"720px","height":"98%"}'><i class="fa fa-comments-o"></i>聊天</a></li>
+                                    <li><a href="{:U('Member/add?referee='.$vo['id'])}"><i class="fa fa-plus-circle"></i>推荐</a>
+                                    <li><a href="{:U('Member/edit?id='.$vo['id'])}"><i class="fa fa-edit"></i>修改</a>
+                                    </li>
+                                    <li><a href="{:U('Member/detail?id='.$vo['id'])}" data-rel="dialog"
+                                           data-options='{"width":"98%","height":"98%"}'><i
+                                            class="fa fa-list-alt"></i>查看</a></li>
+                                    <li><a href="{:U('Member/lock?id='.$vo['id'])}"><i class="fa fa-lock"></i>锁定</a></li>
+                                    <li><a href="{:U('Member/unlock?id='.$vo['id'])}"><i class="fa fa-unlock"></i>解锁</a></li>
+                                    <notempty name="perview.delete">
+                                    <li><a href="{:U('Member/delete?id='.$vo['id'])}"><i class="fa fa-remove"></i>删除</a></li>
+                                    </notempty>
+                                </ul>
+                                </ul></td>
+                        </tr>
+                    </volist>
+                    <if condition="empty($list)">
+                        <tr>
+                            <td colspan="9"><p class="center">暂无信息</p></td>
+                        </tr>
+                    </if>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td><label><input type="checkbox" data-rel="selectall"/> 全选</label>&nbsp;&nbsp;</td>
+                        <td colspan="2"><label><input type="radio" name="op" value="check" checked=""/> 审核</label>&nbsp;<label><input
+                                type="radio" name="op" value="lock"/> 锁定</label>&nbsp;<label><input
+                                type="radio" name="op" value="unlock"/> 解锁</label>&nbsp;<!--<label><input type="radio"
+                                                                                                    name="op"
+                                                                                                    value="delete"/> 删除</label>-->&nbsp;&nbsp;
+                            <button type="submit" class="button"><i class="fa fa-refresh"></i>批量操作</button>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </form>
+            <div class="pages">{$multi}</div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script>
+        $.extend(basePage, {
+            onInit: function () {
+                var that = this;
+                that.initSelect();
+            },
+            initSelect: function () {
+                var that = this;
+                that.districtList = {$districtList|json_encode};
+                that.realmList = {$realmList|json_encode};
+                var country = "{$Think.get.country}";
+                var city = "{$Think.get.city}";
+                var realm = "{$Think.get..realm}";
+                that.fillCountry('#sel-country', country);
+                that.fillCity('#sel-city', country, city);
+                that.fillRealm('#sel-realm', realm);
+                $('#sel-country').change(function () {
+                    var country = this.options[this.selectedIndex].value;
+                    that.fillCity('#sel-city', country, '');
+                });
+            }
+        });
+    </script>
+</block>

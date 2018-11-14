@@ -1,0 +1,58 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Block/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Block/update')}">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <table class="formtable">
+            <input type="hidden" name="id" value="{$data.id}" />
+            <input type="hidden" name="hash" value="{$data.hash}" />
+            <tbody>
+            <tr><th style="width:120px;">分组：</th><td><select name="catid"><option value="0">无</option>
+            <volist name="typelist" id="vo">
+            <option value="{$vo.id}" <eq name="data.catid" value="$vo.id"> selected=""</eq>>{$vo.level|str_repeat='　',###}　├{$vo.title}</option>
+            </volist>
+            </select></td>
+            </tr>
+            <tr><th><em class="required">*</em>标题：</th><td><input type="text" class="edit" name="title" value="{$data.title}" size="50" maxlength="50" /></td></tr>
+            <tr><th>编码：</th><td><input type="text" class="edit" name="code" value="{$data.code}" size="50" maxlength="50" /></td></tr>
+        	<tr><th>发布时间：</th><td><input type="text" class="edit" name="addtime" size="20" maxlength="20" value="{$data.addtime|date='Y-m-d H:i:s',###}" /> <span class="gray">格式: 2014-10-23 12:02:12</span></td></tr>
+       		<tr><th>详细内容：</th><td><textarea class="memo" id="content" name="content" cols="112" rows="10">{$data.content}</textarea></td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script src="__LIB__/kindeditor/kindeditor.js"></script>
+<script src="__LIB__/kindeditor/lang/zh-CN.js"></script>
+<script>
+$.extend(basePage, {
+    onInit: function() {
+        var hash = '{$data.hash}';
+        var K = KindEditor;
+        var editor;
+        var uploadbutton;
+        editor = K.create('#content', {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            urlType:'absolute',
+            uploadJson : '{:U('Misc/upload?hash='.$data['hash'])}'
+        });
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            {ele:'input[name=title]',datatype:'*', nullmsg:'请输入标题'}
+        ]);
+    }
+});
+</script>
+</block>

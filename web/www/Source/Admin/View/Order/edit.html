@@ -1,0 +1,83 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Order/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Order/update')}" onsubmit="return checkForm(this)">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th style="width:60px;">订单号：</th><td>{$data.ordersn}</td></tr>
+            <tr><th>订购日期：</th><td>{$data.addtime|date='Y-m-d',###}</td></tr>
+            <tr><th>会员信息：</th><td>
+                <table class="listtable">
+                <tr><th>用户名</th><th>公司</th><th>联系人</th><th>电话</th><th>手机</th><th>Email</th></tr>
+                <tr><td>{$data.user.username}</td>
+                <td>{$data.user.company}</td>
+                <td>{$data.user.contact}</td>
+                <td>{$data.user.phone}</td>
+                <td>{$data.user.mobile}</td>
+                <td>{$data.user.email}</td>
+                </tr>
+                </table>
+            </td></tr>
+            <tr><th>状态：</th><td><select name="status">
+                <volist name="orderstatus" id="vo">
+                <option value="{$key}" <if condition="$key eq $data['status']">selected</if>>{$vo}</option>
+                </volist>
+            </select></td></tr>
+            <tr><th>商品列表：</th><td>
+                <table class="listtable">
+                    <tr><th>编号</th><th>出厂编号</th><th>适用车型</th><th>供应商</th><th>编码</th><th>联系人</th><th>电话</th><th>手机</th><th>Email</th></tr>
+                    <volist name="detail" id="vo">
+                    <tr><td>{$i}</td><td>{$vo.faccode}</td><td>{$vo.title}</td><td>{$vo.supplier.title}</td><td>{$vo.supplier.code}</td><td>{$vo.supplier.contact}</td><td>{$vo.supplier.phone}</td><td>{$vo.supplier.mobile}</td><td>{$vo.supplier.email}</td></tr>
+                    </volist>
+                </table>
+            </td></tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script src="__LIB__/kindeditor/kindeditor.js"></script>
+<script src="__LIB__/kindeditor/lang/zh-CN.js"></script>
+<link rel="stylesheet" href="__LIB__/kindeditor/themes/default/default.css" />
+<script>
+function checkForm(f) {
+    var title = f.title.value;
+    if (title=='') {
+        alert('请输入标题');
+        return false;
+    }
+    return true;
+}
+function insertUpload(data) {
+	if (data.error==1)
+		alert("上传错误:"+data.message);
+	else {
+		$("#image").val(data.url);
+	}
+}
+var hash = '{$data.hash}';
+var editor;
+var uploadbutton;
+KindEditor.ready(function(K) {
+    uploadbutton = K.uploadbutton({
+		button : K('#uploadButton')[0],
+		fieldName : 'imgFile',
+		url : '{:U('Misc/upload?dir=image&hash='.$data['hash'])}',
+		afterUpload : insertUpload,
+	});
+	uploadbutton.fileBox.change(function(e) {
+		uploadbutton.submit();
+	});
+});
+
+</script>
+</block>

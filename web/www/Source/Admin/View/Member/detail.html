@@ -1,0 +1,50 @@
+<extend name="Public:dialog" />
+<block name="content">
+    <div class="freebox">
+        <div class="freebox-head"><h3><i class="fa fa-edit"></i>会员详细</h3><em><a href="javascript:;" class="close"><i class="fa fa-close"></i></a></em></div>
+        <div class="freebox-body">
+            <table class="formtable">
+                <tbody>
+                <tr><th style="width:80px;">会员：</th><td><notempty name="data.avatar"><img src="{$data.avatar}" width="60" height="60" /></notempty> {$data.username}</td></tr>
+                <tr><th>推荐人：</th><td>{$data.refereename}</td></tr>
+                <tr><th>签名：</th><td>{$data.signature}</td></tr>
+                <tr><th>昵称：</th><td>{$data.nickname}</td></tr>
+                <tr><th>评级：</th><td>{$data.rating|str_repeat='★',###}{$data.rating|str_repeat='☆',5-###}</td></tr>
+                <tr><th>类型：</th><td>{$data.mytypestr}</td></tr>
+                <tr><th>实体：</th><td>{$data.entitystr}</td></tr>
+                <tr><th>关系：</th><td>{$data.relationstr}</td></tr>
+                <tr><th>手机号：</th><td>{$data.mobile}</td></tr>
+                <tr><th>Email：</th><td>{$data.email}</td></tr>
+                <tr><th>微信：</th><td>{$data.wechat}</td></tr>
+                <tr><th>地区：</th><td>{$data.countrystr} {$data.citystr}</td></tr>
+                <tr><th>领域：</th><td>{$data.realmstr}</td></tr>
+                <tr><th>支付宝：</th><td><notempty name="data.onlnepay">
+                    <table class="minortable">
+                        <tr><th>姓名</th><th>账号</th></tr>
+                        <volist name="data.onlinepay" id="vo">
+                            <tr><td>{$data.accountname}</td><td>{$data.accountno}</td></tr>
+                        </volist>
+                    </table>
+                    <else/>
+                暂未绑定
+                </notempty></td></tr>
+                <tr><th>银行卡：</th><td><notempty name="data.bankcard">
+                    <table class="minortable">
+                        <tr><th>银行</th><th>姓名</th><th>账号</th><th>身份证号</th><th>手机号</th></tr>
+                        <volist name="data.bankcard" id="vo">
+                            <tr><td>{$data.cardtype}</td><td>{$data.surname}</td><td>{$data.cardno}</td><td>{$data.idcard}</td><th>{$data.mobile}</th></tr>
+                        </volist>
+                    </table>
+                    <else/>
+                    暂未绑定
+                </notempty></td></tr>
+                <tr><th>财富：</th><td>积分({$data.credit})</td></tr>
+                <tr><th>统计：</th><td>服务({$data.stats.servicenum})&nbsp;&nbsp;需求({$data.stats.tasknum})&nbsp;&nbsp;资讯({$data.stats.newsnum})&nbsp;&nbsp;交易({$data.stats.tradenum})&nbsp;&nbsp;评价({$data.stats.mark})&nbsp;&nbsp;推荐({$data.stats.refereenum})&nbsp;&nbsp;留言({$data.stats.reviewnum}) &nbsp;&nbsp;关注({$data.stats.follownum})&nbsp;&nbsp;粉丝({$data.stats.byfollownum})&nbsp;&nbsp;收藏({$data.stats.favnum})&nbsp;&nbsp;被收藏({$data.stats.byfavnum})&nbsp;&nbsp;聊天({$data.stats.msgnum})</td></tr>
+                <tr><th>备注：</th><td>{$data.memo}</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</block>
+<block name="script">
+</block>

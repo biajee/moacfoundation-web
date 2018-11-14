@@ -1,0 +1,43 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Maillist/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form id="mainform" method="post" action="{:U('Maillist/update')}" onsubmit="return checkForm(this)">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="hash" value="{$data.hash}" />
+        <table class="formtable">
+            <tbody>
+            <tr><th>姓名：</th><td><input type="text" class="edit" name="surname" value="{$data.surname}" size="50" maxlength="50" /> <em class="required">*</em></td></tr>
+        	<tr><th>电话：</th><td><input type="text" class="edit" name="phone" size="50" maxlength="100" value="{$data.phone}" /></td></tr>
+        	<tr><th>Email：</th><td><input type="text" class="edit" id="email" name="email" size="50" maxlength="200" value="{$data.email}" /></td></tr>
+        	<tr><th>发布时间：</th><td><input type="text" class="edit" name="addtime" size="20" maxlength="20" value="{$data.addtime|date='Y-m-d H:i:s',###}" /> <span class="gray">格式: 2014-10-23 12:02:12</span></td></tr>
+            
+            </tbody>
+            <tfoot>
+            <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+            </tfoot>
+        </table>
+        </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+<script>
+$.extend(basePage, {
+    onInit: function() {
+        var myThis = this;
+        var hash = '{$data.hash}';
+        //验证控件
+        var validform = $('#mainform').Validform({
+            tiptype: 3,
+        });
+        validform.addRule([
+            {ele:'input[name=surname]',datatype:'*', nullmsg:'请输入姓名'},
+        ]);
+    }
+});
+
+</script>
+</block>
