@@ -12,7 +12,7 @@ return array(
 	),
     'DEFAULT_FILTER' => '',
     'DB_TYPE'=>'mysql',
-    'DB_HOST'=>'127.0.0.1', 
+    'DB_HOST'=>'loaclhost', 
     'DB_NAME'=>'moac',
     'DB_USER'=>'moac',
     'DB_PWD'=>'moac@123',
@@ -24,7 +24,7 @@ return array(
 		array('127.0.0.1', 11211, 0)
 	),
 	//安全相关
-	'APP_KEY'=>'##hiwibang**',
+	'APP_KEY'=>'',
 	//微信支付配置
     'WXPAY_CONFIG'=>array(
         'APPID' => '',
