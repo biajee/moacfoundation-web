@@ -12,7 +12,7 @@ return array(
 	),
     'DEFAULT_FILTER' => '',
     'DB_TYPE'=>'mysql',
-    'DB_HOST'=>'loaclhost', 
+    'DB_HOST'=>'127.0.0.1', 
     'DB_NAME'=>'moac',
     'DB_USER'=>'moac',
     'DB_PWD'=>'moac@123',
