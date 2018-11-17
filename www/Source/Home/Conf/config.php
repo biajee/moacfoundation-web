@@ -9,11 +9,17 @@ return array(
         ':channel/:cid\d' => ':1/index',
         ':channel/detail/:id\d' => ':1/detail'
     ),
+    //语言包
+    'LANG_SWITCH_ON'    => true,        //开启多语言支持开关
+    'VAR_LANGUAGE' => 'lang',
+    'DEFAULT_LANG'        => 'zh-cn',    // 默认语言
+    'LANG_AUTO_DETECT'    => false,    // 自动侦测语言
+    'LANG_LIST' => 'zh-cn,en-us',
     //模板变量
     'TMPL_PARSE_STRING' => array(
         '__LIB__' => __ROOT__ . '/assets/lib',
         '__IMG__'    => __ROOT__ . '/assets/home/images',
-        '__CSS__'    => __ROOT__ . '/assets/home',
+        '__CSS__'    => __ROOT__ . '/assets/home/css',
         '__JS__'     => __ROOT__ . '/assets/home/js',
     ),
 	/* 后台错误页面模板 */

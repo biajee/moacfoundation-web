@@ -10,9 +10,9 @@
 <link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="./favicon.ico">
 <link rel="icon" sizes="192x192" href="./favicon-192.png">
 <link rel="apple-touch-icon-precomposed" sizes="180x180" href="./favicon-180.png">
-<link rel="stylesheet" href="assets/home/css/animate.css">
-<link rel="stylesheet" href="assets/home/css/style.css">
-<script type="text/javascript" src="assets/home/js/jquery.js"></script>
+<link rel="stylesheet" href="__CSS__/animate.css">
+<link rel="stylesheet" href="__CSS__/style.css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
 </head>
 <body>
 <div class="header ca" id="header">
@@ -65,10 +65,13 @@
 							<div class="cl">
 								<ul class="menu">
 									<li class="current-menu-item">
-										<a href="index.html">Home</a>
+										<a href="{:U('Index/index')}">{$Think.lang.nav_home}</a>
 									</li>
 									<li class="">
-										<a href="resource_news.html">Resources</a>
+										<a href="{:U('Ambassadors/ambassadors')}">Ambassadors</a>
+									</li>
+									<li class="">
+										<a href="{:U('Resources/resource_news')}">Resources</a>
 									</li>
 									<li class="">
 										<a href="https://developer.moac.io/" target="_blank">Developers</a>
@@ -77,19 +80,28 @@
 										<a href="https://www.candydrop.io/moac" target="_blank">Bounty</a>
 									</li>-->
 									<li class="">
-										<a href="faq.html">FAQs</a>
+										<a href="{:U('Faq/faq')}">FAQs</a>
 									</li>
 									<li class="">
-										<a href="community.html">Community</a>
+										<a href="{:U('Community/community')}">Community</a>
 									</li>
 								</ul>
 							</div>
 							<span class="pa mousewith" style="border-bottom:3px solid #333;left:0;bottom:0;"></span>
 						</div>
 					</div>
-					<!--<div class="dc wn w5 pr25 pl25">
-						<span class="icon icon-language am"></span><span class="am ml10 f18">EN</span>
-					</div>-->
+					<if condition="$langset eq zh-cn">
+						<div class="dc wn w5 pr25 pl25">
+							<a href="/?lang=en-us">
+							<span class="icon icon-language am"></span><span class="am ml10 f18">EN</span>
+							</a>
+						</div>
+						<div class="dc wn w5 pr25 pl25">
+							<a href="/?lang=zh-cn">
+							<span class="icon icon-language am"></span><span class="am ml10 f18">中文</span>
+							</a>
+						</div>
+					</if>
 				</div>
 			</div>
 		</div>
@@ -134,47 +146,47 @@
 			</div>
 			<div class="moac-multi-lev pr cabox" style="height:600px;">
 				<div class="lev1 pa lev" style="bottom:0;left:50%;margin-left:-182px;width:365px;">
-					<img src="assets/home/images/moac_lev1_01.png" style="left:0;bottom:0;" class="w100x pa lev1-01">
-					<img src="assets/home/images/moac_lev1_02.png" style="left:0;bottom:0;" class="w100x pa lev1-02">
-					<img src="assets/home/images/moac_lev1_03.png" style="left:0;bottom:0;" class="w100x pa lev1-03">
+					<img src="__IMG__/moac_lev1_01.png" style="left:0;bottom:0;" class="w100x pa lev1-01">
+					<img src="__IMG__/moac_lev1_02.png" style="left:0;bottom:0;" class="w100x pa lev1-02">
+					<img src="__IMG__/moac_lev1_03.png" style="left:0;bottom:0;" class="w100x pa lev1-03">
 				</div>
 				<div class="lev2 pa lev" style="bottom:60px;left:50%;margin-left:-250px;width:444px;">
-					<img src="assets/home/images/moac_lev2_01.png" style="left:0;bottom:0;" class="w100x pa lev2-01">
-					<img src="assets/home/images/moac_lev2_02.png" style="left:0;bottom:0;" class="w100x pa lev2-02">
-					<img src="assets/home/images/moac_lev2_03.png" style="left:0;bottom:0;" class="w100x pa lev2-03">
-					<img src="assets/home/images/moac_lev2_04.png" style="left:0;bottom:0;" class="w100x pa lev2-04">
-					<img src="assets/home/images/moac_lev2_05.png" style="left:0;bottom:0;" class="w100x pa lev2-05">
+					<img src="__IMG__/moac_lev2_01.png" style="left:0;bottom:0;" class="w100x pa lev2-01">
+					<img src="__IMG__/moac_lev2_02.png" style="left:0;bottom:0;" class="w100x pa lev2-02">
+					<img src="__IMG__/moac_lev2_03.png" style="left:0;bottom:0;" class="w100x pa lev2-03">
+					<img src="__IMG__/moac_lev2_04.png" style="left:0;bottom:0;" class="w100x pa lev2-04">
+					<img src="__IMG__/moac_lev2_05.png" style="left:0;bottom:0;" class="w100x pa lev2-05">
 				</div>
 				<div class="lev3 pa lev" style="bottom:120px;left:50%;margin-left:-300px;width:445px;">
-					<img src="assets/home/images/moac_lev3_01.png" style="left:0;bottom:0;" class="w100x pa lev3-01">
-					<img src="assets/home/images/moac_lev3_02.png" style="left:0;bottom:0;" class="w100x pa lev3-02">
-					<img src="assets/home/images/moac_lev3_03.png" style="left:0;bottom:0;" class="w100x pa lev3-03">
-					<img src="assets/home/images/moac_lev3_05.png" style="left:0;bottom:0;" class="w100x pa lev3-05">
-					<img src="assets/home/images/moac_lev3_04.png" style="left:0;bottom:0;" class="w100x pa lev3-04">
-					<img src="assets/home/images/moac_lev3_06.png" style="left:0;bottom:0;" class="w100x pa lev3-06">
-					<img src="assets/home/images/moac_lev3_07.png" style="left:0;bottom:0;" class="w100x pa lev3-07">
+					<img src="__IMG__/moac_lev3_01.png" style="left:0;bottom:0;" class="w100x pa lev3-01">
+					<img src="__IMG__/moac_lev3_02.png" style="left:0;bottom:0;" class="w100x pa lev3-02">
+					<img src="__IMG__/moac_lev3_03.png" style="left:0;bottom:0;" class="w100x pa lev3-03">
+					<img src="__IMG__/moac_lev3_05.png" style="left:0;bottom:0;" class="w100x pa lev3-05">
+					<img src="__IMG__/moac_lev3_04.png" style="left:0;bottom:0;" class="w100x pa lev3-04">
+					<img src="__IMG__/moac_lev3_06.png" style="left:0;bottom:0;" class="w100x pa lev3-06">
+					<img src="__IMG__/moac_lev3_07.png" style="left:0;bottom:0;" class="w100x pa lev3-07">
 				</div>
 				<div class="lev4 pa lev" style="bottom:240px;left:50%;margin-left:-300px;width:446px;">
-					<img src="assets/home/images/moac_lev4_01.png" style="left:0;bottom:0;" class="w100x pa lev4-01">
-					<img src="assets/home/images/moac_lev4_02.png" style="left:0;bottom:0;" class="w100x pa lev4-02">
-					<img src="assets/home/images/moac_lev4_03.png" style="left:0;bottom:0;" class="w100x pa lev4-03">
+					<img src="__IMG__/moac_lev4_01.png" style="left:0;bottom:0;" class="w100x pa lev4-01">
+					<img src="__IMG__/moac_lev4_02.png" style="left:0;bottom:0;" class="w100x pa lev4-02">
+					<img src="__IMG__/moac_lev4_03.png" style="left:0;bottom:0;" class="w100x pa lev4-03">
 				</div>
 				<div class="lev5 pa lev" style="bottom:400px;left:50%;margin-left:-230px;width:366px;">
-					<img src="assets/home/images/moac_lev5_01.png" style="left:0;bottom:0;" class="w100x pa lev5-01">
-					<img src="assets/home/images/moac_lev5_02.png" style="left:0;bottom:0;" class="w100x pa lev5-02">
-					<img src="assets/home/images/moac_lev5_03.png" style="left:0;bottom:0;" class="w100x pa lev5-03">
+					<img src="__IMG__/moac_lev5_01.png" style="left:0;bottom:0;" class="w100x pa lev5-01">
+					<img src="__IMG__/moac_lev5_02.png" style="left:0;bottom:0;" class="w100x pa lev5-02">
+					<img src="__IMG__/moac_lev5_03.png" style="left:0;bottom:0;" class="w100x pa lev5-03">
 				</div>
 				<div class="lev6 pa lev" style="bottom:290px;left:50%;margin-left:-205px;width:263px;">
-					<img src="assets/home/images/moac_lev6_01.png" style="left:0;bottom:0;" class="w100x pa lev6-01">
-					<img src="assets/home/images/moac_lev6_02.png" style="left:0;bottom:0;" class="w100x pa lev6-02">
+					<img src="__IMG__/moac_lev6_01.png" style="left:0;bottom:0;" class="w100x pa lev6-01">
+					<img src="__IMG__/moac_lev6_02.png" style="left:0;bottom:0;" class="w100x pa lev6-02">
 				</div>
-				<img src="assets/home/images/txt-lev1-01.png" style="left:760px;bottom:30px;width:343px;" class="pa txt-lev1-01">
-				<img src="assets/home/images/txt-lev2-01.png" style="left:-45px;bottom:22px;width:389px;" class="pa txt-lev2-01">
-				<img src="assets/home/images/txt-lev2-02.png" style="left:760px;bottom:285px;width:333px;" class="pa txt-lev2-02">
-				<img src="assets/home/images/txt-lev2-03.png" style="left:760px;bottom:365px;width:384px;" class="pa txt-lev2-03">
-				<img src="assets/home/images/txt-lev3-01.png" style="left:-50px;bottom:210px;width:479px;" class="pa txt-lev3-01">
-				<img src="assets/home/images/txt-lev4-01.png" style="left:-30px;bottom:400px;width:428px;" class="pa txt-lev4-01">
-				<img src="assets/home/images/txt-lev5-01.png" style="left:750px;bottom:510px;width:403px;" class="pa txt-lev5-01">
+				<img src="__IMG__/txt-lev1-01.png" style="left:760px;bottom:30px;width:343px;" class="pa txt-lev1-01">
+				<img src="__IMG__/txt-lev2-01.png" style="left:-45px;bottom:22px;width:389px;" class="pa txt-lev2-01">
+				<img src="__IMG__/txt-lev2-02.png" style="left:760px;bottom:285px;width:333px;" class="pa txt-lev2-02">
+				<img src="__IMG__/txt-lev2-03.png" style="left:760px;bottom:365px;width:384px;" class="pa txt-lev2-03">
+				<img src="__IMG__/txt-lev3-01.png" style="left:-50px;bottom:210px;width:479px;" class="pa txt-lev3-01">
+				<img src="__IMG__/txt-lev4-01.png" style="left:-30px;bottom:400px;width:428px;" class="pa txt-lev4-01">
+				<img src="__IMG__/txt-lev5-01.png" style="left:750px;bottom:510px;width:403px;" class="pa txt-lev5-01">
 			</div>
 		</div>
 	</div>
@@ -186,17 +198,17 @@
 				<div class="dc w33x at">
 					<div class="green f28 pb15" data-speed-y="-2">Scalability</div>
 					<div class="gray-light f16 pb30" data-speed-y="-3">BlockChain Sharding</div>
-					<img src="assets/home/images/001.png" width="300">
+					<img src="__IMG__/001.png" width="300">
 				</div>
 				<div class="dc w33x at">
 					<div class="green f28 pb15">Independence</div>
 					<div class="gray-light f16 pb30">MicroChain Smart Contract</div>
-					<img src="assets/home/images/002.png" width="230">
+					<img src="__IMG__/002.png" width="230">
 				</div>
 				<div class="dc w33x at">
 					<div class="green f28 pb15">Interoperability</div>
 					<div class="gray-light f16 pb30">Cross-Chain Capabilities</div>
-					<img src="assets/home/images/003.png" width="400">
+					<img src="__IMG__/003.png" width="400">
 				</div>
 			</div>
 		</div>
@@ -599,15 +611,15 @@ $(".ok").on("click",function(){
 .bx1 .bx-controls{bottom:-20px;}
 .bx1 .bx-pager{text-align: right;padding-right: 30px;}
 .bx1 .bg1{
-	background:#1a1a1a url(assets/home/images/indexbanner1.jpg) no-repeat 0% 100%;
+	background:#1a1a1a url(__IMG__/indexbanner1.jpg) no-repeat 0% 100%;
 	background-size:auto 100%;
 }
 .bx1 .bg2{
-	background:#1a1a1a url(assets/home/images/indexbanner2.jpg) no-repeat 50% 50%;
+	background:#1a1a1a url(__IMG__/indexbanner2.jpg) no-repeat 50% 50%;
 	background-size:auto 100%;
 }
 .bx1 .bg3{
-	background:#1a1a1a url(assets/home/images/indexbanner1.jpg) no-repeat 0% 100%;
+	background:#1a1a1a url(__IMG__/indexbanner1.jpg) no-repeat 0% 100%;
 	background-size:auto 100%;
 }
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
@@ -616,15 +628,15 @@ only screen and (-o-min-device-pixel-ratio: 3/2),
 only screen and (min-device-pixel-ratio: 1.5),
 (min-resolution: 192dpi) {
 	.bx1 .bg1 {
-		background:#1a1a1a url(assets/home/images/indexbanner1@2x.jpg) no-repeat 0% 100%;
+		background:#1a1a1a url(__IMG__/indexbanner1@2x.jpg) no-repeat 0% 100%;
 		background-size:auto 100%;
 	}
 	.bx1 .bg2 {
-		background:#1a1a1a url(assets/home/images/indexbanner2@2x.jpg) no-repeat 50% 50%;
+		background:#1a1a1a url(__IMG__/indexbanner2@2x.jpg) no-repeat 50% 50%;
 		background-size:auto 100%;
 	}
 	.bx1 .bg3 {
-		background:#1a1a1a url(assets/home/images/indexbanner1@2x.jpg) no-repeat 0% 100%;
+		background:#1a1a1a url(__IMG__/indexbanner1@2x.jpg) no-repeat 0% 100%;
 		background-size:auto 100%;
 	}
 }
@@ -776,10 +788,10 @@ $("#white-img").on("mouseleave",function(){
 		<div class="dt">
 			<div class="dc at">
 				<div class="pb15">
-					<span class="ab fb">MOAC </span><a href="resource.html" class="f12 ml10">Resources</a><a href="/developer" class="f12 ml10">Developers</a><a href="faq.html" class="f12 ml10">FAQ</a><!--<a href="#" class="f12 ml10">Mining</a><a href="#" class="f12 ml10">Team</a>-->
+					<span class="ab fb">MOAC </span><a href="{:U('Resources/resource')}" class="f12 ml10">Resources</a><a href="/developer" class="f12 ml10">Developers</a><a href="{:U('Faq/faq')}" class="f12 ml10">FAQ</a><!--<a href="#" class="f12 ml10">Mining</a><a href="#" class="f12 ml10">Team</a>-->
 				</div>
 				<div class="pb15">
-					<span class="ab fb">LEGAL</span><a href="terms_of_use.html" class="f12 ml10">Terms of Use</a><a href="cookie_policy.html" class="f12 ml10">Cookie Policy</a><a href="privacy_policy.html" class="f12 ml10">Privacy Policy</a>
+					<span class="ab fb">LEGAL</span><a href="{:U('About/terms_of_use')}" class="f12 ml10">Terms of Use</a><a href="{:U('About/cookie_policy')}" class="f12 ml10">Cookie Policy</a><a href="{:U('About/privacy_policy')}" class="f12 ml10">Privacy Policy</a>
 				</div>
 				<div class="pt35 f12">Copyright &copy; MOAC Team 2018 | All rights reserved</div>
 			</div>

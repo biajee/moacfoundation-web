@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
-class IndexController extends BaseController {
-    public function index(){
+class FaqController extends BaseController {
+    public function faq(){
         //显示模板
         $this->display();
     }

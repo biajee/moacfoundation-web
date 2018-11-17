@@ -25,11 +25,17 @@ class BaseController extends Controller {
         }
         $this->refer = $this->getRefer();
         $this->assign('refer', $this->refer);
+        //语言包功能
+        $lang = cookie('think_lang');
+        if (empty($lang))
+            $lang = 'zh-cn';
+        $this->assign('langset', $lang);
         //初始化工作
         $this->cacheSvc = D('Cache','Service');
         $this->arctypeSvc = D('Arctype','Service');
         //系统设置
         $this->setting = $this->cacheSvc->getData('SettingMap');
+//      $this->setting = array_change_key_case($this->setting,  CASE_LOWER);
         C($this->setting);
         $this->assign('setting', $this->setting);
         //初始化页面相关
@@ -135,9 +141,12 @@ class BaseController extends Controller {
         }
     }
     protected function display($templateFile='',$charset='',$contentType='',$content='',$prefix='') {
-        $this->assign('crumbs', $this->crumbs);
-    	$this->assign('page', $this->page);
-    	parent::display($templateFile,$charset,$contentType,$content,$prefix);
+        $this->assign('channel', $this->channel);
+        $this->assign('page', $this->page);
+        $this->assign('needshare', $this->needshare);
+        $this->assign('share', $this->share);
+        $this->assign('lang', array_change_key_case(L(), CASE_LOWER));
+        parent::display($templateFile,$charset,$contentType,$content,$prefix);
     }
     
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
-class IndexController extends BaseController {
-    public function index(){
+class AmbassadorsController extends BaseController {
+    public function ambassadors(){
         //显示模板
         $this->display();
     }
