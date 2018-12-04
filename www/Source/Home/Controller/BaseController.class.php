@@ -8,6 +8,7 @@ class BaseController extends Controller {
     protected $crumbs = array();
     protected $setting = array();
     protected $member = array();
+    protected $lang = '';
     protected $refer = '';
     protected function _initialize() {
         //会员信息
@@ -26,10 +27,32 @@ class BaseController extends Controller {
         $this->refer = $this->getRefer();
         $this->assign('refer', $this->refer);
         //语言包功能
-        $lang = cookie('think_lang');
-        if (empty($lang))
-            $lang = 'zh-cn';
-        $this->assign('langset', $lang);
+        $this->lang = cookie('think_language');
+    	if(empty($this->lang)){
+    		$lang=substr($_SERVER["HTTP_ACCEPT_LANGUAGE"],0,5);
+		    if(preg_match("/zh-c/i",$lang)){
+		        $this->lang = 'zh-cn';
+		    }else if(preg_match("/zh/i",$lang)){
+		        $this->lang = 'zh-cn';
+		    }else if(preg_match("/en/i",$lang)){
+		        $this->lang = 'en-us';
+		    }else if(preg_match("/fr/i",$lang)){
+		        $this->lang = 'en-us';
+		    }else if(preg_match("/de/i",$lang)){
+		        $this->lang = 'en-us';
+		    }else if(preg_match("/jp/i",$lang)){
+		        $this->lang = 'en-us';
+		    }else if(preg_match("/ko/i",$lang)){
+		        $this->lang = 'en-us';
+		    }else if(preg_match("/es/i",$lang)){
+		        $this->lang = 'en-us';
+		    }else if(preg_match("/sv/i",$lang)){
+		        $this->lang = 'en-us';
+		    }else{
+		        $this->lang = 'en-us';
+		    }
+    	}
+    	$this->assign('langset', $this->lang);
         //初始化工作
         $this->cacheSvc = D('Cache','Service');
         $this->arctypeSvc = D('Arctype','Service');

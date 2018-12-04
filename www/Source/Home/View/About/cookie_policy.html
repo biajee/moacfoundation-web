@@ -65,34 +65,41 @@
 							<div class="cl">
 								<ul class="menu">
 									<li class="">
-										<a href="{:U('Index/index')}">Home</a>
+										<a href="{:U('Index/index')}">{$Think.lang.nav_home}</a>
 									</li>
 									<li class="">
-										<a href="{:U('Ambassadors/ambassadors')}">Ambassadors</a>
+										<a href="{:U('Ambassadors/ambassadors')}">{$Think.lang.nav_ambassadors}</a>
 									</li>
 									<li class="">
-										<a href="{:U('Resources/resource_news')}">Resources</a>
+										<a href="{:U('Resources/resource_news')}">{$Think.lang.nav_resources}</a>
 									</li>
 									<li class="">
-										<a href="https://developer.moac.io/" target="_blank">Developers</a>
+										<a href="https://developer.moac.io/" target="_blank">{$Think.lang.nav_developers}</a>
 									</li>
 									<!--<li class="">
 										<a href="https://www.candydrop.io/moac" target="_blank">Bounty</a>
 									</li>-->
 									<li class="">
-										<a href="{:U('Faq/faq')}">FAQs</a>
+										<a href="{:U('Faq/faq')}">{$Think.lang.nav_faqs}</a>
 									</li>
 									<li class="">
-										<a href="{:U('Community/community')}">Community</a>
+										<a href="{:U('Community/community')}">{$Think.lang.nav_community}</a>
 									</li>
 								</ul>
 							</div>
 							<span class="pa mousewith" style="border-bottom:3px solid #333;left:0;bottom:0;"></span>
 						</div>
 					</div>
-					<!--<div class="dc wn w5 pr25 pl25">
-						<span class="icon icon-language am"></span><span class="am ml10 f18">EN</span>
-					</div>-->
+					<div style="line-height: 45px; height: 45px;">
+					<ul id="language" class="jsSelect">
+						<li>
+							<a href="/?lang=en-us" class="s"><i class="flag-en-us"></i>{$Think.lang.lang_en}</a>
+						</li>
+						<li>
+							<a href="/?lang=zh-cn"> <i class="flag-zh-cn"></i>{$Think.lang.lang_zh}</a>
+						</li>
+					</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -103,27 +110,27 @@
 	<div class="box al firstScreen pt100">
 		<div class="bg-black-light ptb15 pubdate">
 			<div class="wrap w1100">
-				<div class="f20 fb">MOAC</div>
-				<div class="f16 pt10">MDRANGER EDITED THIS PAGE 17 DAYS AGO · 10 REVISIONS</div>
+				<div class="f20 fb">{$Think.lang.cookie_moac}</div>
+				<div class="f16 pt10">{$Think.lang.cookie_moac_text}</div>
 			</div>
 		</div>
 	</div>
 	<div class="box bg-gray-light">
 		<div class="wrap">
-			<div class="f36 fb ac pt85 pb35">Cookie Policy</div>
+			<div class="f36 fb ac pt85 pb35">{$Think.lang.cookie_title}</div>
 			<div class="lh1x2 ac pb25 bb" style="border-color:#333;">
-				INFORMATION ABOUT OUR USE OF COOKIES
+				{$Think.lang.cookie_title_span}
 			</div>
 			<div class="p20 ptb40 article">
-				<p>Our websites use cookies to distinguish you from other users of our websites. This helps us to provide you with a good experience when you browse our websites and also allows us to improve our sites. By continuing to browse the sites, you are agreeing to our use of cookies. A cookie is a small file of letters and numbers that we store on your browser or the hard drive of your computer if you agree. Cookies contain information that is transferred to your computer’s hard drive. We use the following cookies:</p>
+				<p>{$Think.lang.cookie_text1}</p>
 				<ul>
-					<li><strong>Strictly necessary cookies.</strong> These are cookies that are required for the operation of our websites. They include, for example, cookies that enable you to log into secure areas of our websites, use a shopping cart or make use of e-commerce payment processing services.</li>
-					<li><strong>Analytical/performance cookies.</strong> They allow us to recognise and count the number of visitors and to see how visitors move around our websites when they are using it. This helps us to improve the way our websites work, for example, by ensuring that users are finding what they are looking for easily.</li>
-					<li><strong>Functionality cookies.</strong> These cookies are used to recognise you when you return to our websites. They enable us to personalise our content for you, greet you by name and remember your preferences (for example, your choice of language or region).</li>
-					<li><strong>Targeting cookies.</strong> These cookies record your visit to our websites, the pages you have visited and the links you have followed.</li>
+					<li><strong>{$Think.lang.cookie_text2}</strong> {$Think.lang.cookie_text3}</li>
+					<li><strong>{$Think.lang.cookie_text4}</strong> {$Think.lang.cookie_text5}</li>
+					<li><strong>{$Think.lang.cookie_text6}</strong> {$Think.lang.cookie_text7}</li>
+					<li><strong>{$Think.lang.cookie_text8}</strong> {$Think.lang.cookie_text9}</li>
 				</ul>
-				<p>You can block cookies by activating the setting on your browser that allows you to refuse the setting of all or some cookies. However, if you use your browser settings to block all cookies (including essential cookies), you may not be able to access all or parts of our site.</p>
-				<p>Except for essential cookies, all cookies will expire after two years.</p>
+				<p>{$Think.lang.cookie_text10}</p>
+				<p>{$Think.lang.cookie_text11}</p>
 			</div>
 			<div class="bt ptb30 mt150" id="faq16">
 				<div class="dt ac">
@@ -197,19 +204,19 @@
 			<div class="dc at">
 				<div class="pb15">
 					<!--<span class="ab fb">SELECT A LANGUAGE</span><a href="#" class="f12 ml10">English</a><a href="#" class="f12 ml10 mr40">简体中文</a>-->
-					<span class="ab fb">MOAC</span><a href="{:U('Resources/resource')}" class="f12 ml10">Resources</a><a href="{:U('Faq/faq')}" class="f12 ml10">FAQ</a><!--<a href="#" class="f12 ml10">Developers</a><a href="#" class="f12 ml10">Mining</a><a href="#" class="f12 ml10">Team</a>-->
+					<span class="ab fb">MOAC </span><a href="{:U('Resources/resource')}" class="f12 ml10">{$Think.lang.nav_resources}</a><a href="/developer" class="f12 ml10">{$Think.lang.nav_developers}</a><a href="{:U('Faq/faq')}" class="f12 ml10">{$Think.lang.nav_faqs}</a><!--<a href="#" class="f12 ml10">Mining</a><a href="#" class="f12 ml10">Team</a>-->
 				</div>
 				<div class="pb15">
-					<span class="ab fb">LEGAL</span><a href="{:U('About/terms_of_use')}" class="f12 ml10">Terms of Use</a><a href="{:U('About/cookie_policy')}" class="f12 ml10">Cookie Policy</a><a href="{:U('About/privacy_policy')}" class="f12 ml10">Privacy Policy</a>
+					<span class="ab fb">{$Think.lang.nav_foot_legal}</span><a href="{:U('About/terms_of_use')}" class="f12 ml10">{$Think.lang.nav_foot_term}</a><a href="{:U('About/cookie_policy')}" class="f12 ml10">{$Think.lang.nav_foot_cookie}</a><a href="{:U('About/privacy_policy')}" class="f12 ml10">{$Think.lang.nav_foot_privacy}</a>
 				</div>
 				<!--<div class="pb15">
 					<span class="ab fb">HELP</span><a href="#" class="f12 ml10">Support Center</a><a href="#" class="f12 ml10">Contact Us</a>
 				</div>-->
-				<div class="pt35 f12">Copyright &copy; MOAC Team 2018 | All rights reserved</div>
+				<div class="pt35 f12">Copyright &copy; MOAC Team 2018 | {$Think.lang.nav_foot_reserved}</div>
 			</div>
 			<div class="dc at">
 				<div class="pb15">
-					<span class="ab fb">CONTACT US</span>
+					<span class="ab fb">{$Think.lang.nav_foot_contact}</span>
 				</div>
 				<div class="pb10">
 					<div class="btn-contact openlink2 new" url="mailto:info@moac.io"><span class="icon icon-email am"></span><span class="am ml15">info@moac.io</span></div>
@@ -237,5 +244,6 @@
 	</div>
 </div>-->
 <div class="back-top ico ico-back-top dn animated"></div>
+<script type="text/javascript" src="__JS__/common.js"></script>
 </body>
 </html>

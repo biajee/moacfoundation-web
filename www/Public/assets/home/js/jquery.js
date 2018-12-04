@@ -1843,5 +1843,6 @@ var loadScript = ( function() {
     };
 }());
 if(JH.browserandroid()||JH.browserios()||JH.browserwx()){
-	window.location.href = "m/";
+	var host = window.location.host;
+	window.location.href = "http://"+host+"/wap/";
 }

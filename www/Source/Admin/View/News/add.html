@@ -1,0 +1,212 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('News/index')}"><i class="fa fa-list"></i>List</a>&nbsp;&nbsp;</block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <form method="post" action="{:U('News/save')}">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <table class="formtable">
+            <input type="hidden" name="id" value="{$data.id}" />
+            <input type="hidden" name="hash" value="{$data.hash}" />
+                <tr>
+                    <th>
+                        标&nbsp;&nbsp;题
+                    </th>
+                    <td>
+                        <input type="text" name="title" placeholder="" class="edit" size="80" value="{$data.title}"  />
+                    </td>
+                </tr>
+                <!--<tr>
+                    <th>内容描述</th>
+                    <td>
+                        <textarea name="content" id="content" class="memo" style="height:200px; width:720px; border:0;" placeholder="内容描述...">{$data.content}</textarea>
+                    </td>
+                </tr>-->
+            <tr><th>默认图片：</th><td><input type="text" class="edit" id="image" name="image" size="80" maxlength="200" value="{$data.image}" /> <input type="button" id="uploadButton" value="上传图片" /></td></tr>
+            <tr>
+                    <th>
+                                                链接
+                    </th>
+                    <td>
+                        <input type="text" name="url" placeholder="" class="edit" size="80" value="{$data.url}"  />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                       	 时间
+                    </th>
+                    <td>
+                        <input type="text" name="addtime" placeholder="" class="edit" size="80" value="{$data.addtime}"  />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                       	语言
+                    </th>
+                    <td>
+                        <select name="lang">
+                        	<option value ="0" <if condition="$data.lang eq 0">selected</if>>未选择</option>
+						  <option value ="1" <if condition="$data.lang eq 1">selected</if>>中文</option>
+						  <option value ="2" <if condition="$data.lang eq 2">selected</if>>English</option>
+						</select>
+                    </td>
+                </tr>
+                <tfoot>
+                <tr><td colspan="2"><button type="submit" class="button"><i class="fa fa-save"></i>保存</button></td></tr>
+                </tfoot>
+            </table>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script src="__LIB__/kindeditor/kindeditor.js"></script>
+    <script src="__LIB__/kindeditor/lang/zh-CN.js"></script>
+    <link rel="stylesheet" href="__LIB__/kindeditor/themes/default/default.css" />
+    <script>
+        var mainPage = $.extend(basePage, {
+            onInit: function () {
+                var that = this;
+                //验证控件
+                var validform = $('#mainform').Validform({
+                    tiptype: 3,
+                });
+                that.initUpload();
+                that.initSelect();
+                that.initPreview('images');
+                that.initEditor();
+                that.initSearchMember();
+            },
+            initSelect: function () {
+                var that = this;
+                that.districtList = {$districtList|json_encode};
+                that.realmList = {$realmList|json_encode};
+                var country = "{$data.country}";
+                var city = "{$data.city}";
+                var realm = "{$data.realm}";
+                var realm2 = "{$data.realm2}";
+                that.fillCountry('#sel-country', country);
+                that.fillCity('#sel-city', country, city);
+                that.fillRealm('#sel-realm', realm);
+                that.fillRealm2('#sel-realm2', realm2);
+                $('#sel-country').change(function () {
+                    var country = this.options[this.selectedIndex].value;
+                    that.fillCity('#sel-city', country, '');
+                });
+                $('#sel-realm').change(function () {
+                    var realm = this.options[this.selectedIndex].value;
+                    that.fillRealm2('#sel-realm2', realm, '');
+                });
+            },
+            initEditor: function() {
+                var editor;
+                var K = KindEditor;
+                editor = K.create('#content', {
+                    filterMode: false,
+                    resizeType : 1,
+                    allowPreviewEmoticons : false,
+                    urlType:'absolute',
+                    uploadJson : "{:U('Misc/upload')}?hash={$data.hash}"
+                });
+            },
+            initUpload: function() {
+                var K = KindEditor;
+                uploadbutton = K.uploadbutton({
+                    button : K('#uploadButton')[0],
+                    fieldName : 'imgFile',
+                    url : "{:U('Misc/upload?dir=image&hash='.$data['hash'])}",
+                    afterUpload : function(data){
+                        if (data.error==1)
+                            alert("上传错误:" + data.message);
+                        else {
+                            $("#image").val(data.url);
+                        }
+                    }
+                });
+                uploadbutton.fileBox.change(function(e) {
+                    uploadbutton.submit();
+                });
+            },
+            setDefaultImage: function(obj) {
+                var $item = $(obj).parent().parent();
+                var $img = $item.find('img');
+                var url = $img.attr('src');
+                $('#image').val(url);
+            },
+            delImage: function(obj) {
+                var $item = $(obj).parent().parent();
+                var $img = $item.find('img');
+                var url = $img.attr('src');
+                var images = $('#images').val();
+                images = images.replace(','+ url, '');
+                images = images.replace(url + ',', '');
+                $('#images').val(images);
+                $item.remove();
+            },
+            initPreview: function(id) {
+                var images = $('#'+id).val();
+                var arr = null;
+                var htm = "";
+//              if (images!='') {
+//                  arr = images.split(',');
+//                  for(i=0;i<arr.length;i++) {
+//                      htm += '<li><img src="' + arr[i] + '" /><p><a href="javascript:;" onclick="mainPage.setDefaultImage(\''+arr[i]+'\')">默认</a></p></li>';
+//                  }
+//                  $('#pre-' + id).html(htm);
+//              }
+            },
+            initSearchMember: function() {
+            	var type = $('.sel-type option:selected').val();
+            		if(type == 'service'){
+            			$('.service').css('display','');
+            		}else{
+            			$('.service').css('display','none');
+            			var price_0 = '';
+            			$('input[name=adult_price]').val(price_0);
+            			$('input[name=c_ticket_price]').val(price_0);
+            			$('input[name=adult_price_p]').val(price_0);
+            			$('input[name=c_ticket_price_p]').val(price_0);
+            		}
+            	$('.sel-type').on('change',function(){
+            		var isgoods = $('.sel-type option:selected').attr('data-isgoods');
+            		var type = $('.sel-type option:selected').val();
+            		if(type == 'service'){
+            			$('.service').css('display','');
+            		}else{
+            			$('.service').css('display','none');
+            			var price_0 = '';
+            			$('input[name=adult_price]').val(price_0);
+            			$('input[name=c_ticket_price]').val(price_0);
+            			$('input[name=adult_price_p]').val(price_0);
+            			$('input[name=c_ticket_price_p]').val(price_0);
+            		}
+            		if(isgoods == 1){
+            			$('.goods').css('display','');
+            		}else{
+            			$('.goods').css('display','none');
+            			var price_0 = '';
+            			$('input[name=goods_price]').val(price_0);
+            		}
+            	});
+                $('#search-button').click(function(){
+                    var keyword = $('#search-keyword').val();
+                    if (keyword != '') {
+                        var url = "{:U('Member/search')}";
+                        var param = {q: keyword}
+                        $.post(url, param, function(res){
+                            if (res.result == 0 && res.data != null) {
+                                var data = res.data;
+                                $('[name=memid]').val(data.id);
+                                $('[name=memname]').val(data.username);
+                                $('#txt-username').html(data.username + '(' + data.nickname + ')');
+                            } else {
+                                $('#txt-username').html('未找到');
+                            }
+                        })
+                    }
+            });
+            }
+        });
+    </script>
+</block>

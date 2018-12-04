@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
-class IndexController extends BaseController {
-    public function index(){
+class CommunityController extends BaseController {
+    public function community(){
     	$lang = cookie('think_lang');
 //  	var_dump($lang);exit;
         //显示模板
