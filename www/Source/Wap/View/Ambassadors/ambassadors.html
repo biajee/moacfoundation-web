@@ -42,7 +42,7 @@
 					<a href="{:U('Resources/resource_news')}">{$Think.lang.nav_resources}</a>
 				</li>
 				<li class="menu-item">
-					<a href="https://developer.moac.io/">Developers</a>
+					<a href="https://developer.moac.io/">{$Think.lang.nav_developers}</a>
 				</li>
 				<!--<li class="menu-item">
 					<a href="https://www.candydrop.io/moac">Bounty</a>
@@ -62,12 +62,12 @@
 	<div class="box pt100 bg-gray plr20">
 		<div class="wrap">
 			<div class="f18 fb lh1x2 pb20">
-				The MOAC Ambassadors Plan:
+				{$Think.lang.ambassadors_title1}
 			</div>
-			<div class="f12 pb30 fb">Nov. 15, 2018</div>
-			<div class="fb f14 pb20">Sub-title</div>
+			<div class="f12 pb30 fb">{$Think.lang.ambassadors_date}</div>
+			<div class="fb f14 pb20">{$Think.lang.ambassadors_title2}</div>
 			<div class="article">
-				<p>To be filled.</p>
+				<p>{$Think.lang.ambassadors_title2_text}</p>
 
 			</div>
 <!-- 			<div class="f16 fb pb10 pt50">MOAC WHITEPAPER</div>
@@ -179,19 +179,19 @@
 			<div class="dc at pr10">
 				<div class="">
 					<span class="ab fb">MOAC</span>
-					<a href="resource.html" class="f10 ml10">Resources</a>
-					<a href="https://developer.moac.io/" class="f10 ml10">Developers</a>
-					<a href="faq.html" class="f10 ml10">FAQ</a>					
+					<a href="{:U('Resources/resource_news')}" class="f10 ml10">{$Think.lang.nav_resources}</a>
+					<a href="https://developer.moac.io/" class="f10 ml10">{$Think.lang.nav_developers}</a>
+					<a href="{:U('Faq/faq')}" class="f10 ml10">{$Think.lang.nav_faqs}</a>					
 				</div>
 			</div>
 		</div>
 		<div class="dt f12 lh2x">
 			<div class="dc at pr10">
 				<div class="pb15">
-					<span class="ab fb">LEGAL</span>
-					<a href="terms_of_use.html" class="f10 ml10">Terms of Use</a>
-					<a href="cookie_policy.html" class="f10 ml10">Cookie Policy</a>
-					<a href="privacy_policy.html" class="f10 ml10">Privacy Policy</a>
+					<span class="ab fb">{$Think.lang.nav_foot_legal}</span>
+					<a href="{:U('About/terms_of_use')}" class="f10 ml10">{$Think.lang.nav_foot_term}</a>
+					<a href="{:U('About/cookie_policy')}" class="f10 ml10">{$Think.lang.nav_foot_cookie}</a>
+					<a href="{:U('About/privacy_policy')}" class="f10 ml10">{$Think.lang.nav_foot_privacy}</a>
 				</div>
 			</div>
 		</div>
@@ -205,7 +205,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="ptb20 f10 ac">Copyright &copy; MOAC Team 2018 | All rights reserved</div>
+		<div class="ptb20 f10 ac">Copyright &copy; MOAC Team 2018 | {$Think.lang.nav_foot_reserved}</div>
 	</div>
 </div>
 </div>
