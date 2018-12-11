@@ -93,6 +93,14 @@
 							<span class="pa mousewith" style="border-bottom:3px solid #03C0B7;left:0;bottom:0;"></span>
 						</div>
 					</div>
+					<ul id="language" class="jsSelect">
+						<li>
+							<a href="{:U('Index/index')}?lang=en-us" class="s"><i class="flag-en-us"></i>{$Think.lang.lang_en}</a>
+						</li>
+						<li>
+							<a href="{:U('Index/index')}?lang=zh-cn"> <i class="flag-zh-cn"></i>{$Think.lang.lang_zh}</a>
+						</li>
+					</ul>
 					<!--<div class="dc wn w5 pr25 pl25">
 						<span class="icon icon-language am"></span><span class="am ml10 f18">EN</span>
 					</div>-->
@@ -455,5 +463,6 @@ $(window).scroll(function(){
 </div>
 </div>
 <div class="back-top ico ico-back-top dn animated"></div>
+<script type="text/javascript" src="__JS__/common.js"></script>
 </body>
 </html>

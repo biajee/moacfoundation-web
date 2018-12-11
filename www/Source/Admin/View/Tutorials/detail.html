@@ -1,0 +1,31 @@
+<extend name="Public:base" />
+<block name="navbar"><h3><i class="fa fa-edit"></i>{$caption}</h3><em><a href="{:U('Tutorials/index')}"><i class="fa fa-list"></i>列表</a>&nbsp;&nbsp;</block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <table class="formtable">
+            <input type="hidden" name="id" value="{$data.id}" />
+            <input type="hidden" name="hash" value="{$data.hash}" />
+            <tbody>
+            <tr><th style="width:120px;">会员：</th><td>{$data.memname}</td>
+            </tr>
+            <tr><th>标题：</th><td>{$data.title}</td></tr>
+            <tr><th>领域：</th><td>{$data.realmstr}</td></tr>
+            <tr><th>领域细分：</th><td>{$data.realm2str}</td></tr>
+            <tr><th>国家/地区：</th><td>{$data.countrystr}</td></tr>
+            <tr><th>城市：</th><td>{$data.citystr}</td></tr>
+            <tr><th>截止日期：</th><td>{$data.addtime|date='Y-m-d',###}</td></tr>
+           <tr><th>发布时间：</th><td>{$data.addtime|date='Y-m-d H:i:s',###}</td></tr>
+            <tr><th>浏览量：</th><td>{$data.viewnum}</td></tr>
+       		<tr><th>详细内容：</th><td>{$data.content}</td></tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        </div>
+    </div>
+</block>
+<block name="script">
+</block>

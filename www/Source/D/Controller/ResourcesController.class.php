@@ -4,7 +4,7 @@ class ResourcesController extends BaseController {
     public function resource_video(){
 		$where1['lang'] = array('neq',2);//英文
 		$where2['lang'] = array('neq',1);//中文
-    	$model = M('Events');
+    	$model = M('Tutorials');
     	$en = $model->where($where1)->order('id desc')->select();
     	$zh = $model->where($where2)->order('id desc')->select();
     	$this->assign('data1',$en);
@@ -19,7 +19,7 @@ class ResourcesController extends BaseController {
     	}else{
     		$where['lang'] = array('neq',2);
     	}
-    	$model = M('Events');
+    	$model = M('Tutorials');
     	$data = $model->where($where)->order('id desc')->select();
     	$this->assign('data',$data);
         //显示模板

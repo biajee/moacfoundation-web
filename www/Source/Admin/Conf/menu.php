@@ -27,6 +27,10 @@ return array(
                 'icon' => 'newspaper-o',
                 'link'=>'Events/index',
             ),
+            array('title'=>'Tutorials',
+                'icon' => 'newspaper-o',
+                'link'=>'Tutorials/index',
+            ),
 //          array(
 //              'title'=>'网站设置',
 //              'icon'=>'search',

@@ -1,0 +1,92 @@
+<extend name="Public:base"/>
+<block name="navbar"><h3><i class="fa fa-list"></i>{$caption}</h3><em>
+    <a href="{:U('Tutorials/add')}"><i class="fa fa-plus"></i>Add Tutorials</a>&nbsp;&nbsp;</em></block>
+<block name="content">
+    <div class="modbox">
+        <div class="modbox-head"></div>
+        <div class="modbox-body">
+            <div class="panel">
+                <form method="get" action="{:U('Tutorials/index')}">
+                    <table class="searchtable">
+                        <tbody>
+                        <tr>
+                            <th>标题：</th>
+                            <td><input type="text" name="title" class="edit" value="{:I('title')}"/></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <button type="reset" class="button button-gray">重 置</button>
+                                <button class="button" type="submit"><i class="fa fa-search"></i> 搜 索</button>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </form>
+            </div>
+            <form method="post" action="{:U('Tutorials/batch')}">
+                <table class="listtable">
+                    <thead>
+                    <tr>
+                        <th style="width:80px;">编号</th>
+                        <th style="width:300px;">标题</th>
+                        <th style="width:300px;">发布时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="list" id="item">
+                        <tr>
+                            <td><label><input type="checkbox" name="id[]" value="{$item.id}"/> {$item.id}</label></td>
+                            <td><a href="{:U('Tutorials/detail?id='.$item['id'])}">{$item.title}</a></td>
+                            <td>{$item.addtime|date='Y-m-d H:i',###}</td>
+                            <td>&nbsp;<a href="{:U('Tutorials/edit?id='.$item['id'])}"><i class="fa fa-edit"></i>修改</a>&nbsp;&nbsp;
+                                <notempty name="perview.delete"><a href="{:U('Tutorials/del?id='.$item['id'])}" data-rel="delete"><i class="fa fa-remove"></i>删除</a></notempty>
+                            </td>
+                        </tr>
+                    </volist>
+                    <empty name="list">
+                        <tr>
+                            <td colspan="12"><p class="center">暂无信息</p></td>
+                        </tr>
+                    </empty>
+                    </tbody>
+                </table>
+            </form>
+            <div class="pages">{$multi}</div>
+        </div>
+    </div>
+
+</block>
+<block name="script">
+    <script>
+        $.extend(basePage, {
+            onInit: function () {
+                var that = this;
+                that.initSelect();
+            },
+            initSelect: function () {
+                var that = this;
+                that.districtList = {$districtList|json_encode};
+                that.realmList = {$realmList|json_encode};
+                var country = "{$Think.get.country}";
+                var city = "{$Think.get.city}";
+                var realm = "{$Think.get.realm}";
+                var realm2 = "{$Think.get.realm2}";
+                that.fillCountry('#sel-country', country);
+                that.fillCity('#sel-city', country, city);
+                that.fillRealm('#sel-realm', realm);
+                that.fillRealm2('#sel-realm2', realm, realm2);
+                $('#sel-country').change(function () {
+                    var country = this.options[this.selectedIndex].value;
+                    that.fillCity('#sel-city', country, '');
+                });
+                $('#sel-realm').change(function () {
+                    var realm = this.options[this.selectedIndex].value;
+                    that.fillRealm2('#sel-city', realm, '');
+                });
+            }
+        });
+    </script>
+</block>
