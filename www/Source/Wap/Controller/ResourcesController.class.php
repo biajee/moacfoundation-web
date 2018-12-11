@@ -6,15 +6,27 @@ class ResourcesController extends BaseController {
         $this->display();
     }
     public function resource_news(){
+    	$lang = $this->lang;
+    	if($lang == 'zh-cn'){
+    		$where['lang'] = array('neq',1);
+    	}else{
+    		$where['lang'] = array('neq',2);
+    	}
     	$model = M('News');
-    	$data = $model->where()->select();
+    	$data = $model->where($where)->order('id desc')->select();
     	$this->assign('data',$data);
         //显示模板
         $this->display();
     }
     public function resource_events(){
+    	$lang = $this->lang;
+    	if($lang == 'zh-cn'){
+    		$where['lang'] = array('neq',1);
+    	}else{
+    		$where['lang'] = array('neq',2);
+    	}
     	$model = M('Events');
-    	$data = $model->where()->select();
+    	$data = $model->where($where)->order('id desc')->select();
     	$this->assign('data',$data);
         //显示模板
         $this->display();

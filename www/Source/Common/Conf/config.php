@@ -2,7 +2,7 @@
 return array(
     'LOG_RECORD' => false,
     //系统配置
-	'MODULE_ALLOW_LIST'    =>    array('Admin','Wap','Home'),
+	'MODULE_ALLOW_LIST'    =>    array('Admin','Wap','Home','D','Dm'),
 	'DEFAULT_MODULE'       =>    'Home',
 	'MODULE_DENY_LIST'   => array('Common'),
     'URL_MODEL'=>2,
