@@ -24,7 +24,8 @@
 		</div>
 		<div class="dc ac openlink pl15" url="index.html"><span class="icon icon-logo am"></span></div>
 		<div class="dc w60 ac language">
-			<!--<span class="icon icon-language am"></span><span class="am ml5 f12">EN</span>-->
+			<if condition="$langset eq 'en-us'"><a href="{:U('Index/index')}?lang=zh-cn"><span class="icon icon-language am"></span><span class="am ml5 f12">{$Think.lang.lang_wap_zh}</span></a></if>
+			<if condition="$langset eq 'zh-cn'"><a href="{:U('Index/index')}?lang=en-us"><span class="icon icon-language am"></span><span class="am ml5 f12">{$Think.lang.lang_wap_en}</span></a></if>
 		</div>
 	</div>
 </div>
