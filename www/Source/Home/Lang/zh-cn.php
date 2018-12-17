@@ -6,6 +6,7 @@ return array(
     //导航栏nav
     'nav_home' => '主页',
     'nav_ambassadors' => '推广大使',
+    'nav_moodada' => '链问',
     'nav_resources' => '资源',
     'nav_developers' => '开发者',
     'nav_faqs' => '常见问题',
