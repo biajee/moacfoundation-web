@@ -13,7 +13,7 @@ return array(
     //语言包
     'LANG_SWITCH_ON'    => true,        //开启多语言支持开关
     'VAR_LANGUAGE' => 'lang',
-    'DEFAULT_LANG'        => 'zh-cn',    // 默认语言
+    'DEFAULT_LANG'        => 'en-us',    // 默认语言
     'LANG_AUTO_DETECT'    => false,    // 自动侦测语言
     'LANG_LIST' => 'zh-cn,en-us',
     //模板变量
