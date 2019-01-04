@@ -10,9 +10,10 @@
 <link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="./favicon.ico">
 <link rel="icon" sizes="192x192" href="./favicon-192.png">
 <link rel="apple-touch-icon-precomposed" sizes="180x180" href="./favicon-180.png">
-<link rel="stylesheet" href="__CSS__/animate.css">
-<link rel="stylesheet" href="__CSS__/style.css">
-<script type="text/javascript" src="__JS__/jquery.js"></script>
+<link rel="stylesheet" href="./public/css/animate.css">
+<link rel="stylesheet" href="./public/css/style.css">
+<script type="text/javascript" src="./public/js/jquery.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
 <div class="header ca" id="header">
@@ -67,11 +68,10 @@
 									<li class="">
 										<a href="{:U('Index/index')}">{$Think.lang.nav_home}</a>
 									</li>
-									<li class="current-menu-item">
+<!-- 									<li class="">
 										<a href="{:U('Ambassadors/ambassadors')}">{$Think.lang.nav_ambassadors}</a>
 									</li>
-
-									<li class="">
+ -->									<li class="current-menu-item">
 										<a href="{:U('MooDada/moodada')}">{$Think.lang.nav_moodada}</a>
 									</li>
 									<li class="">
@@ -80,9 +80,6 @@
 									<li class="">
 										<a href="https://developer.moac.io/" target="_blank">{$Think.lang.nav_developers}</a>
 									</li>
-									<!--<li class="">
-										<a href="https://www.candydrop.io/moac" target="_blank">Bounty</a>
-									</li>-->
 									<li class="">
 										<a href="{:U('Faq/faq')}">{$Think.lang.nav_faqs}</a>
 									</li>
@@ -112,47 +109,71 @@
 <div class="page">
 <div class="main">
 	<div class="box pt120 bg-gray">
-		<div class="wrap">
-			<div class="f36 fb lh1x2 pb20">
-				{$Think.lang.ambassadors_title1}
+		<div class="moodadawrap">
+			<div class="f36 fb lh1x2 pb20 moodadatitle">
+				<img src="public/images/lianweniclauncher.png" class="moodadaicon" alt="">MooDada 链问
 			</div>
-			<div class="f12 pb60 fb">{$Think.lang.ambassadors_date}</div>
-			<div class="fb f24 pb40">{$Think.lang.ambassadors_title2}</div>
-			<div class="article f14">
-				<p>{$Think.lang.ambassadors_title2_text}</p>
+
+			<div class="f12 pb60 fb"></div>
+			<div class="fb f22 pb40">Example of a Large-Scale Decentralized Collaboration</div>
+			<div class="article f18">
+				<p>Blockchain Revolution is all about collaboration. And, MooDada is an example of how Large-Scale Decentralized Collaboration could be done using MOAC MicroChain Technology.</p>
+
+				<p><img src="public/images/lianwen1.png" class="moodadaimg1" alt=""></p>
 
 			</div>
-<!-- 			<div class="f28 fb pb10 pt100">MOAC WHITEPAPER</div>
-			<div class="f16 gray pb20">April 2018</div>
-			<div class="abtn-black large w250 openlink new" url="https://github.com/MOACChain/moac-core/raw/master/doc/MOAC%20-%20White%20Paper_%20v1.0%20-%20050218.pdf">
+			<div class="fb f22 pb40 pt20">Stores of Time Sensitive Information</div>
+			<div class="article f18">
+				<p>Be it a realtime match score of a Champions League game, or the best place in Stadium to wait for Steven Curry's signature, you can always find an answer here in MooDada. Also, if you know the answer to the question, you can earn yourself a chicken dinner as well.</p>
+
+				<p>
+					<div class="moodadascreencontainer">
+						<img src="public/images/lianwenscreen1.jpeg" class="moodadascreenfl" alt="">
+						<img src="public/images/lianwenscreen3.jpeg" class="moodadascreenfr" alt="">
+					</div>
+				</p>
+			</div>
+
+			<div class="fb f22 pt60 pb10">Real Decentralized</div>
+			<div class="article f18">
+				<p><ul class="moodadaul">
+						<li class="">
+							A complete blockchain wallet: supports MOAC coin, ERC token, and MicroChain tokens.
+						</li>
+						<li class="current-menu-item">
+							No fees for end-user: no token is needed to start to use the DApp.
+						</li>
+						<li class="">
+							No Backend: all information is on-chain and transparent.
+						</li>
+						<li class="">
+							No Centralized Admin: arbitration and management is done through the community with token incentive.
+						</li>
+					</ul></p>
+
+				<p>
+				</p>
+			</div>
+
+			<div class="f24 fb pb10 pt100">MooDada (链问) DApp Download</div>
+			<div class="f24 fb pb10 pt20">Android Testnet</div>
+			<div class="f16 gray pb20">Nov. 12 2018</div>
+			<div class="abtn-black large w250 openlink2link new" url="https://fir.im/moodada">
 				<span>
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.41 34.43" width="20" height="20" class="am mr5">
-						<defs>
-							<style>
-								.abtn-black .cls-1 {
-									fill: #fff;
-									fill-rule: evenodd;
-								}
-								.abtn-black:hover .cls-1 {
-									fill: #000;
-									fill-rule: evenodd;
-								}
-							</style>
-						</defs>
-						<g>
-							<g>
-								<path class="cls-1" d="M6.27,26.92C2.54,29.7,0,33.65,1,34.27l-.88-.44c-.51-.63.65-4,6.16-6.91Z"/>
-								<path class="cls-1" d="M34.25,23.8C36.16,19.74,20.47,20.35,9,25.67c8.92-3.43,25.44-4.91,25.25-1.87Z"/>
-								<path class="cls-1" d="M16.5,2.18c.43-2.25-.68-2.17-1-2.17h-.7c-.38,0-.73.31-.9.93-1.08,4.06.89,14.36,6.43,19.13,4.89,4.21,13.4,6.13,13.74,4.1-1.77.85-8.41-1.29-12.88-4.85C15.93,15,13.67,4.29,14.81,1a2.21,2.21,0,0,1,.51-.81,2.39,2.39,0,0,1,1.18,2Z"/>
-								<path class="cls-1" d="M16.41,2.83a51.42,51.42,0,0,1-5.32,17.34c-4.95,10-8.57,14.64-11,13.66l.86.44c1.89,1,5.36-2.21,11.12-13.31,4.44-8.56,4.2-13,4.32-18.13Z"/>
-							</g>
-						</g>
-					</svg>
-					PDF | DOWNLOAD
+					<i class="fab fa-android"></i>
+					3rd Party Download
 				</span>
-			</div> -->
+			</div>
+			<div class="f24 fb pb10 pt20">Android Mainnet</div>
+			<div class="f16 gray pb20">Nov. 15 2018</div>
+			<div class="abtn-black large w250 openlink2link new" url="uploads/Moodada1.0.0.apkl">
+				<span>
+					<i class="fab fa-android"></i>
+					Download
+				</span>
+			</div>
 			<div class="pt100 ac">
-				<img src="__IMG__/011.png">
+				<img src="public/images/011.png">
 			</div>
 			<div class="bt ptb30">
 				<div class="dt ac">
@@ -172,7 +193,7 @@
 						<div class="btn-community openlink2 new" url="https://www.facebook.com/moacchain/"><span class="icon icon-community-facebook am"></span><span class="am ml10">Facebook</span></div>
 					</div>
 					<div class="dc">
-						<div class="btn-community openlink2 new" url="https://www.linkedin.com/company/moac-chain/"><span class="icon icon-community-in am"></span><span class="am ml10">Linkedin</span></div>
+						<div class="btn-community openlink2 new" url="https://www.linkedin.com/company/moac-chain/"><span class="icon icon-community-in am"></span><span class="am ml10">in</span></div>
 					</div>
 					<div class="dc">
 						<div class="btn-community openlink2 new" url="http://t.me/moacblockchain"><span class="icon icon-community-moacwebsite am"></span><span class="am ml10 di">Telegram</span></div>
@@ -212,16 +233,20 @@
 		<div class="dt">
 			<div class="dc at">
 				<div class="pb15">
-					<span class="ab fb">MOAC </span><a href="{:U('Resources/resource')}" class="f12 ml10">{$Think.lang.nav_resources}</a><a href="/developer" class="f12 ml10">{$Think.lang.nav_developers}</a><a href="{:U('Faq/faq')}" class="f12 ml10">{$Think.lang.nav_faqs}</a><!--<a href="#" class="f12 ml10">Mining</a><a href="#" class="f12 ml10">Team</a>-->
+					<!--<span class="ab fb">SELECT A LANGUAGE</span><a href="#" class="f12 ml10">English</a><a href="#" class="f12 ml10 mr40">简体中文</a>-->
+					<span class="ab fb">MOAC</span><a href="resource.html" class="f12 ml10">Resources</a><a href="faq.html" class="f12 ml10">FAQ</a><!--<a href="#" class="f12 ml10">Developers</a><a href="#" class="f12 ml10">Mining</a><a href="#" class="f12 ml10">Team</a>-->
 				</div>
 				<div class="pb15">
-					<span class="ab fb">{$Think.lang.nav_foot_legal}</span><a href="{:U('About/terms_of_use')}" class="f12 ml10">{$Think.lang.nav_foot_term}</a><a href="{:U('About/cookie_policy')}" class="f12 ml10">{$Think.lang.nav_foot_cookie}</a><a href="{:U('About/privacy_policy')}" class="f12 ml10">{$Think.lang.nav_foot_privacy}</a>
+					<span class="ab fb">LEGAL</span><a href="terms_of_use.html" class="f12 ml10">Terms of Use</a><a href="cookie_policy.html" class="f12 ml10">Cookie Policy</a><a href="privacy_policy.html" class="f12 ml10">Privacy Policy</a>
 				</div>
-				<div class="pt35 f12">Copyright &copy; MOAC Team 2018 | {$Think.lang.nav_foot_reserved}</div>
+				<!--<div class="pb15">
+					<span class="ab fb">HELP</span><a href="#" class="f12 ml10">Support Center</a><a href="#" class="f12 ml10">Contact Us</a>
+				</div>-->
+				<div class="pt35 f12">Copyright &copy; MOAC Team 2018 | All rights reserved</div>
 			</div>
 			<div class="dc at">
 				<div class="pb15">
-					<span class="ab fb">{$Think.lang.nav_foot_contact}</span>
+					<span class="ab fb">CONTACT US</span>
 				</div>
 				<div class="pb10">
 					<div class="btn-contact openlink2 new" url="mailto:info@moac.io"><span class="icon icon-email am"></span><span class="am ml15">info@moac.io</span></div>
@@ -249,6 +274,5 @@
 	</div>
 </div>-->
 <div class="back-top ico ico-back-top dn animated"></div>
-<script type="text/javascript" src="__JS__/common.js"></script>
 </body>
 </html>
