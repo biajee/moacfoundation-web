@@ -3521,3 +3521,11 @@ background-position: 54px -30px;
 .flag-za{background-position:-108px -1612px} 
 .flag-zm{background-position:-108px -1643px} 
 .flag-zw{background-position:-108px -1674px} 
+
+.moodadatitle{margin-top: 10px;}
+.moodadaicon{float: right; margin-top: -21px; height: 180px; width: 180px;}
+.moodadascreencontainer{margin-left: 100px; margin-right: 100px;}
+.moodadascreenfl{float: left; width: 350px; }
+.moodadascreenfr{float: right; width: 350px; }
+.moodadaimg1{height: 640px; width: 640px;}
+.moodadawrap{margin:0 auto; text-align:left; position:relative; width: 1024px;}
