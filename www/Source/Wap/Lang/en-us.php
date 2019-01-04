@@ -8,7 +8,7 @@ return array(
     //导航栏nav
     'nav_home' => 'Home',
     'nav_ambassadors' => 'Ambassadors',
-    'nav_Moodada' => 'Moodada',
+    'nav_moodada' => 'Moodada',
     'nav_resources' => 'Resources',
     'nav_developers' => 'Developers',
     'nav_faqs' => 'FAQs',
