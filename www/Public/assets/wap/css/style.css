@@ -3149,3 +3149,9 @@ textarea.text-02::-webkit-input-placeholder{
     width: 50px !important;;
     height: 50px !important;;
 }
+
+.moodadatitle{margin-top: 10px;}
+.moodadaicon{float: right; margin-top: -21px; height: 80px; width: 80px;}
+.moodadascreencontainer{}
+.moodadascreenfl{width: 200px; }
+.moodadascreenfr{width: 200px; }

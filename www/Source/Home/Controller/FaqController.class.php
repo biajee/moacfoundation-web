@@ -7,3 +7,4 @@ class FaqController extends BaseController {
     }
     
 }
+
