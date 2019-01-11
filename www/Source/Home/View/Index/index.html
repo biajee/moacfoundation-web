@@ -144,7 +144,7 @@
 			<div class="f36 ac pt60 pb120 fb black-light cab" data-cab='{"start":{"x":0,"y":50,"opacity":0},"end":{"x":0,"y":0,"opacity":1},"duration":0.6,"delay":0,"loop":false,"one":false}'>{$Think.lang.index_moac_newsletter}</div>
 			<div class="wrap w900 cab" data-cab='{"start":{"x":0,"y":50,"opacity":0},"end":{"x":0,"y":0,"opacity":1},"duration":0.6,"delay":0.2,"loop":false,"one":false}'>
 				<div class="dt">
-					<div class="dc pr"><input type="text" placeholder="{$Think.lang.index_moac_email}" name="userEmail" class="text-02 brr0 large pl100 email"><span class="icon icon-email2 pa" style="left:35px;top:12px;"></span></div>
+					<div class="dc pr"><input type="text" placeholder="{$Think.lang.index_moac_email}" name="email" class="text-02 brr0 large pl100 email"><span class="icon icon-email2 pa" style="left:35px;top:12px;"></span></div>
 					<div class="dc w400 wn pl20"><div class="abtn-black w100x large ok"><span>{$Think.lang.index_moac_newsletter_sub}</span></div></div>
 				</div>
 				<div class="check-cue pt10">&nbsp;</div>
@@ -560,7 +560,7 @@ $(".ok").on("click",function(){
 		$("#form-email .check-cue").html('<div class="red animated fadeInUp">Please enter a valid email address.</div>');
 	}else{
 		var post = $("#form-email").serializeObject();
-		JH.load.jsonPOST2("http://52.37.81.169:3000/users/",function(d){
+		JH.load.jsonPOST2("https://www.moac.io/emails",function(d){
 			if(!d.error){
 				$("#form-email .check-cue").html('<div class="green animated fadeInUp">Your subscription to our list has been confirmed. Thank you!</div>');
 			}else{
