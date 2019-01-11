@@ -29,6 +29,7 @@ return array(
     'index_ban_text1' => '多层区块链架构',
     'index_ban_text2' => '服务于商业应用',
     'index_ban_btn' => '加入我们的电报群',
+    'index_ban_more' => '更多加入方式',
     //主体介绍部分
     'index_moac' => '这里是墨客',
     'index_moac_introduce' => '创新性的多层区块链架构',

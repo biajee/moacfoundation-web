@@ -31,6 +31,7 @@ return array(
     'index_ban_text1' => 'MULTI-LAYER BLOCKCHAIN ARCHITECTURE',
     'index_ban_text2' => 'FOR COMMERCIAL APPLICATIONS',
     'index_ban_btn' => 'JOIN OUR TELEGRAM',
+    'index_ban_more' => 'MORE WAYS',
     //主体介绍部分
     'index_moac' => 'THIS IS MOAC',
     'index_moac_introduce' => 'Multi-Layer Blockchain Architecture (Innovation)',
