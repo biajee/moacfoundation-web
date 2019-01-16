@@ -518,7 +518,7 @@ $(".ok").on("click",function(){
 		$("#form-email .check-cue").html('<div class="red animated fadeInUp">Please enter a valid email address.</div>');
 	}else{
 		var post = $("#form-email").serializeObject();
-		JH.load.jsonPOST2("https://www.moac.io/emails",function(d){
+		JH.load.jsonPOST2("http://moacfoundation.org/emails",function(d){
 			if(!d.error){
 				$("#form-email .check-cue").html('<div class="green animated fadeInUp">Your subscription to our list has been confirmed. Thank you!</div>');
 			}else{
@@ -695,7 +695,7 @@ $("#white-img").on("touchend",function(){
 					<div class="btn-contact openlink new" url="mailto:info@moac.io"><span class="icon icon-email am"></span><span class="am ml5">info@moac.io</span></div>
 				</div>
 				<div class="di ml15">
-					<div class="btn-contact openlink new" url="https://www.moac.io"><span class="icon icon-www am"></span><span class="am ml5">www.moac.io</span></div>
+					<div class="btn-contact openlink new" url="http://moacfoundation.org"><span class="icon icon-www am"></span><span class="am ml5">moacfoundation.org</span></div>
 				</div>
 			</div>
 		</div>
