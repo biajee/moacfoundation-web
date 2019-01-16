@@ -32,6 +32,7 @@ class ResourcesController extends BaseController {
         $this->display();
     }
     public function resource_Whitepaper(){
+    	var_dump('true');exit;
         //显示模板
         $this->display();
     }
