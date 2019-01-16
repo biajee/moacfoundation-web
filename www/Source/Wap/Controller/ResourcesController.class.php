@@ -33,19 +33,19 @@ class ResourcesController extends BaseController {
     }
     public function resource_Whitepaper(){
         //显示模板
-        $this->display();
+        $this->display('resource_Whitepaper');
     }
     public function resource_MainNet(){
         //显示模板
-        $this->display();
+        $this->display('resource_MainNet');
     }
     public function resource_TestNet(){
         //显示模板
-        $this->display();
+        $this->display('resource_TestNet');
     }
     public function resource_MoacComparison(){
         //显示模板
-        $this->display();
+        $this->display('resource_MoacComparison');
     }
     
 }
