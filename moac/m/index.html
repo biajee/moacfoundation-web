@@ -552,7 +552,7 @@ $(".ok").on("click",function(){
 		$("#form-email .check-cue").html('<div class="red animated fadeInUp">Please enter a valid email address.</div>');
 	}else{
 		var post = $("#form-email").serializeObject();
-		JH.load.jsonPOST2("http://52.37.81.169:3000/users/",function(d){
+		JH.load.jsonPOST2("https://www.moac.io/emails",function(d){
 			if(!d.error){
 				$("#form-email .check-cue").html('<div class="green animated fadeInUp">Your subscription to our list has been confirmed. Thank you!</div>');
 			}else{
